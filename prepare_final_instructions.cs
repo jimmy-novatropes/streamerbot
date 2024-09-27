@@ -37,7 +37,7 @@ public class CPHInline
             // Log and process the first command from commandOrder
             CPH.LogInfo("Regular command: " + string.Join(", ", firstCommand));
             CPH.SendMessage($"Now serving ~ frequency {firstCommand[2]} Hz with color {firstCommand[1]} for user {firstCommand[0]}.");
-            PH.SetGlobalVar("current_user", firstCommand[0]);
+            CPH.SetGlobalVar("current_user", firstCommand[0]);
             CPH.SetGlobalVar("current_color", firstCommand[1]);
             CPH.SetGlobalVar("current_frequency", firstCommand[2]);
             // Remove the first item from the commandOrder list
