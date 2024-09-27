@@ -96,6 +96,10 @@ public class CPHInline
                     // Update the existing entry if the user is found
                     targetOrder[i][1] = color;
                     targetOrder[i][2] = stringFrequency;
+                    if (bits > 0)
+                    {
+                        targetOrder[i][3] = bits.ToString();
+                    }
                     userFound = true;
                     break;
                 }
