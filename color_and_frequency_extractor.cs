@@ -13,6 +13,7 @@ public class CPHInline
         if (chatMessage.Split(' ')[0].Equals("position", StringComparison.OrdinalIgnoreCase))
         {
             CPH.LogInfo("The first word is 'position'.");
+
             // Retrieve the existing lists for both 'priority_order' and 'order'
             var priorityOrder = CPH.GetGlobalVar<List<List<string>>>("priority_order") ?? new List<List<string>>();
             var commandOrder = CPH.GetGlobalVar<List<List<string>>>("order") ?? new List<List<string>>();
@@ -100,6 +101,10 @@ public class CPHInline
                     {
                         targetOrder[i][3] = bits.ToString();
                     }
+
+                    // Send an update message since the user is being updated
+                    CPH.SendMessage($"Updating data for {userName}: {frequency} Hz with color {color}.");
+                    
                     userFound = true;
                     break;
                 }
@@ -110,6 +115,16 @@ public class CPHInline
             {
                 var newCommand = new List<string> { userName, color, stringFrequency };
                 targetOrder.Add(newCommand);
+
+                // Send a message for new entries
+                if (bits > 0)
+                {
+                    CPH.SendMessage($"[Priority] Processing frequency {frequency} Hz with color {color} from {userName} (bits: {bits}).");
+                }
+                else
+                {
+                    CPH.SendMessage($"Processing frequency {frequency} Hz with color {color} from {userName}.");
+                }
             }
 
             // Log the updated lists for debugging purposes
@@ -129,23 +144,50 @@ public class CPHInline
             CPH.SetGlobalVar("priority_order", priorityOrder);
             CPH.SetGlobalVar("order", commandOrder);
 
-            // Send a message indicating where the command was processed from
-            if (bits > 0)
-            {
-                CPH.SendMessage($"[Priority] Processing frequency {frequency} Hz with color {color} from {userName} (bits: {bits}).");
-            }
-            else
-            {
-                CPH.SendMessage($"Processing frequency {frequency} Hz with color {color} from {userName}.");
-            }
+            // Call the method to only set the next user if necessary
+            SetNextUserIfAvailable(priorityOrder, commandOrder);
+
+            // Update the count of users in both queues
+            CPH.SetGlobalVar("priority_queue_count", priorityOrder.Count);
+            CPH.SetGlobalVar("regular_queue_count", commandOrder.Count);
 
             CPH.Wait(2000);
         }
         else
         {
+            
             CPH.LogInfo($"Root: Message from {userName}: '{chatMessage}' does not match the expected format.");
         }
         return true;
+    }
+
+    private void SetNextUserIfAvailable(List<List<string>> priorityOrder, List<List<string>> commandOrder)
+    {
+        // Retrieve the current user to check if we need to set the next one
+        var currentUser = CPH.GetGlobalVar<string>("current_user");
+
+        // Combine both lists to process them as a single queue
+        List<List<string>> combinedQueue = new List<List<string>>();
+        combinedQueue.AddRange(priorityOrder);
+        combinedQueue.AddRange(commandOrder);
+
+        // Check for the next user only if the current user is already set
+        if (!string.IsNullOrEmpty(currentUser) && combinedQueue.Count > 1)
+        {
+            // The next user is the one after the current one (if available)
+            var nextUser = combinedQueue[0];
+            // var nextUser = combinedQueue[1];
+            CPH.SetGlobalVar("next_user", nextUser[0]);
+            CPH.SetGlobalVar("next_color", nextUser[1]);
+            CPH.SetGlobalVar("next_frequency", nextUser[2]);
+        }
+        else
+        {
+            // If no next user is available, clear the next user info
+            CPH.SetGlobalVar("next_user", null);
+            CPH.SetGlobalVar("next_color", null);
+            CPH.SetGlobalVar("next_frequency", null);
+        }
     }
 
     private bool TryParseFrequencyAndColor(string message, out int frequency, out string color)
@@ -233,7 +275,6 @@ public class CPHInline
             return false;
         }
 
-        // CPH.SendMessage($"Processing frequency {frequency} Hz with color {color}.");
         return true;
     }
 }
