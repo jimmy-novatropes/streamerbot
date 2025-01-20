@@ -20,11 +20,15 @@ public class CPHInline
         CPH.TryGetArg("eventSource", out string eventSource);
         CPH.TryGetArg("bits", out int bits);
 
+//        CPH.SendMessage($"Received message: {chatMessage} from {userName} (source: {eventSource}) with bits: {bits}");
 
         if (chatMessage.IndexOf("Processing", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("Now Serving", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("found in", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("position", StringComparison.OrdinalIgnoreCase) >= 0 ||
+            chatMessage.IndexOf("does not match the expected format", StringComparison.OrdinalIgnoreCase) >= 0 ||
+            chatMessage.IndexOf("Updating data for", StringComparison.OrdinalIgnoreCase) >= 0 ||
+            chatMessage.IndexOf("is the timer active?", StringComparison.OrdinalIgnoreCase) >= 0 ||
             eventSource != "twitch")
         {
             return true;
@@ -122,6 +126,7 @@ public class CPHInline
         }
         else
         {
+            CPH.SendMessage($"Sorry {userName}, the message '{chatMessage}' does not match the expected format.");
             CPH.LogInfo($"Root: Message from {userName}: '{chatMessage}' does not match the expected format.");
         }
         return true;

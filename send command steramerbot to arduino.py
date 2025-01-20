@@ -92,7 +92,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Replace with your Arduino's serial port (on Windows it might be COM3, COM4, etc.)
-SERIAL_PORT = 'COM1'  # Replace with the correct COM port for the FTDI
+SERIAL_PORT = 'COM3'  # Replace with the correct COM port for the FTDI
 BAUD_RATE = 9600  # Ensure this matches the baud rate in your Arduino sketch
 
 # Dictionary to map color names to RGB values
@@ -122,6 +122,7 @@ color_counter_vals = {
 def color_to_rgb_string(color):
     """Convert color name to RGB string. Return None if the color is not recognized."""
     rgb = color_counter_vals.get(color.lower())
+    print("RGB:", rgb)
     return rgb
     # if rgb:
     #     return f"{rgb[0]},{rgb[1]},{rgb[2]}"
@@ -135,11 +136,13 @@ def send_command_to_arduino(frequency, color):
         # Set up the serial connection
         with serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=10) as ser:
             logging.info(f"Opened serial connection on {SERIAL_PORT} at {BAUD_RATE} baud")
+            print(f"Opened serial connection on {SERIAL_PORT} at {BAUD_RATE} baud")
 
             # Convert color to RGB string
             rgb_string = color_to_rgb_string(color)
             if not rgb_string:
                 logging.error("Invalid color. Command not sent.")
+                print("Invalid color. Command not sent.")
                 return  # If the color is invalid, don't send the command
 
             # Format the message to be sent to the Arduino
@@ -165,14 +168,30 @@ def log_and_send_message(frequency, color):
     logging.info(f"Script started with frequency: {frequency} and color: {color}")
     send_command_to_arduino(frequency, color)
     logging.info("Script completed.")
+    print("Script completed.")
 
+
+# if __name__ == "__main__":
+#     # Check if both arguments are provided
+#     if len(sys.argv) > 2:
+#         frequency = sys.argv[1]  # First argument
+#         color = sys.argv[2]  # Second argument
+#         log_and_send_message(frequency, color)
+#     else:
+#         logging.error("Not enough arguments provided!")
 
 if __name__ == "__main__":
-    # Check if both arguments are provided
-    if len(sys.argv) > 2:
-        frequency = sys.argv[1]  # First argument
-        color = sys.argv[2]  # Second argument
-        log_and_send_message(frequency, color)
-    else:
-        logging.error("Not enough arguments provided!")
+    while True:
+        # Get user input
+        frequency = input("Enter frequency (or type 'exit' to quit): ")
+        if frequency.lower() == 'exit':
+            print("Exiting program.")
+            break  # Exit the loop
 
+        color = input("Enter color (or type 'exit' to quit): ")
+        if color.lower() == 'exit':
+            print("Exiting program.")
+            break  # Exit the loop
+
+        # Call function with user inputs
+        log_and_send_message(frequency, color)
