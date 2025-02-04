@@ -7,9 +7,9 @@ HOST = "localhost"
 PORT = 65432  # Same as in arduino_server.py
 
 
-def send_to_server(frequency, color):
-    """Sends frequency and color command to the always-running Python server."""
-    data = {"frequency": frequency, "color": color}
+def send_to_server(rpm, color, direction):
+    """Sends rpm and color command to the always-running Python server."""
+    data = {"rpm": rpm, "color": color, "direction": direction}
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.connect((HOST, PORT))
@@ -20,11 +20,12 @@ def send_to_server(frequency, color):
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Usage: python streamerbot_handler.py <frequency> <color>")
+        print("Usage: python streamerbot_handler.py <rpm> <color>")
         sys.exit(1)
     print(sys.argv)
 
-    frequency = sys.argv[1]
+    rpm = sys.argv[1]
     color = sys.argv[2]
+    direction = sys.argv[3]
 
-    send_to_server(frequency, color)
+    send_to_server(rpm, color, direction)

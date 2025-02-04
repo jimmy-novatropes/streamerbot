@@ -1,0 +1,203 @@
+2025-02-03 16:05:16,953 - INFO - Received response: 
+2025-02-03 16:09:21,028 - INFO - Received response: Received frequency: 88
+Received counter_val: 767
+Counter value: 767
+Command received
+2025-02-03 16:09:59,476 - INFO - Received response: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command rec
+2025-02-03 16:10:12,018 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command receiv
+2025-02-03 16:10:31,331 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Comman
+2025-02-03 16:10:44,009 - INFO - Received response: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command rece
+2025-02-03 16:10:53,788 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command receive
+2025-02-03 16:11:07,737 - INFO - Received response: Received frequency: 60
+Received counter_val: 1023
+Counter value: 1023
+Command recei
+2025-02-03 16:11:18,488 - INFO - Received response: Received frequency: 60
+Received counter_val: 511
+Counter value: 511
+Comm
+2025-02-03 16:11:28,674 - ERROR - Invalid color: purple. Command not sent.
+2025-02-03 16:11:41,958 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Com
+2025-02-03 16:12:06,849 - INFO - Received response: Received frequency: 60
+Received counter_val: 1
+Counter value: 1
+Command received
+2025-02-03 17:31:06,048 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Command rece
+2025-02-03 17:31:18,606 - INFO - Received response: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command
+2025-02-03 17:31:30,219 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command rece
+2025-02-03 17:31:38,189 - INFO - Received response: Received frequency: 60
+Received counter_val: 511
+Counter value: 511
+Command recei
+2025-02-03 17:31:55,784 - INFO - Received response: Received frequency: 60
+Received counter_val: 1023
+Counter value: 1023
+Comm
+2025-02-03 17:32:06,512 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command rece
+2025-02-03 17:32:15,159 - INFO - Received response: Received frequency: 60
+Received counter_val: 1
+Counter value: 1
+Command received
+2025-02-03 17:34:50,602 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Comman
+2025-02-03 17:35:53,877 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command re
+2025-02-03 17:36:23,844 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Comma
+2025-02-03 17:42:58,512 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command re
+2025-02-03 17:43:50,154 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command rece
+2025-02-03 17:48:31,312 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command r
+2025-02-03 17:49:44,238 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command
+2025-02-03 17:51:13,304 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Com
+2025-02-03 17:51:59,391 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Com
+2025-02-03 17:52:28,416 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Comm
+2025-02-03 17:59:52,172 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+2025-02-03 18:00:21,282 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command received
+2025-02-03 18:08:00,672 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command rec
+2025-02-03 18:21:19,873 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command receiv
+2025-02-03 18:21:40,313 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command
+2025-02-03 18:22:20,961 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command recei
+2025-02-03 18:22:33,847 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Comman
+2025-02-03 18:23:36,488 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command receiv
+2025-02-03 18:23:51,557 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Command r
+2025-02-03 18:24:14,016 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command receiv
+2025-02-03 18:25:12,823 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command r
+2025-02-03 18:26:04,343 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Command received
+2025-02-03 18:40:51,901 - INFO - Received response: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command rece
+2025-02-03 19:21:42,226 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Command
+2025-02-03 19:23:24,258 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Command rec
+2025-02-03 19:24:23,440 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Comm
+2025-02-03 19:30:19,682 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Comm
+2025-02-03 19:32:40,717 - INFO - Received response: Received frequency: 60
+Received counter_val: 1535
+Counter value: 1535
+Com
+2025-02-03 19:33:29,319 - INFO - Received response: Received frequency: 90
+Received counter_val: 1535
+Counter value: 1535
+Com
+2025-02-03 19:37:33,073 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Command
+2025-02-03 19:40:55,241 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Command rec
+2025-02-03 19:44:15,646 - INFO - Received response: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Command received
+2025-02-04 16:09:57,169 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 767
+Counter value: 767
+Com
+2025-02-04 16:09:57,274 - INFO - Received response from Arduino 2: Duty Cycle: 10.27
+OCR2B:       26

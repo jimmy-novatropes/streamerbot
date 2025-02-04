@@ -20,9 +20,9 @@ public class CPHInline
         CPH.TryGetArg("eventSource", out string eventSource);
         CPH.TryGetArg("bits", out int bits);
 
-//        CPH.SendMessage($"Received message: {chatMessage} from {userName} (source: {eventSource}) with bits: {bits}");
+        //CPH.SendMessage($"Received message: {chatMessage} from {userName} (source: {eventSource}) with bits: {bits}");
 
-        if (chatMessage.IndexOf("Processing", StringComparison.OrdinalIgnoreCase) >= 0 ||
+        if (chatMessage.IndexOf("Adding ", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("Now Serving", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("found in", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("position", StringComparison.OrdinalIgnoreCase) >= 0 ||
@@ -40,14 +40,14 @@ public class CPHInline
             return false;
         }
 
-        if (TryParseRPMAndColor(chatMessage, out int rpm, out string color))
+        if (TryParseRPMAndColor(chatMessage, out int rpm, out string color, out string direction))
         {
-            if (!ProcessRPMAndColor(rpm, color, userName))
+            if (!ProcessRPMAndColor(rpm, color, userName, direction))
             {
                 return false;
             }
 
-            CPH.LogInfo($"Root: Extracted rpm: {rpm} Hz, color: {color}");
+            CPH.LogInfo($"Root: Extracted rpm: {rpm} , color: {color}");
             string stringRPM = rpm.ToString();
 
             // Retrieve the existing list of lists for both 'priority_order' and 'order'
@@ -68,13 +68,14 @@ public class CPHInline
                     // Update the existing entry if the user is found
                     targetOrder[i][1] = color;
                     targetOrder[i][2] = stringRPM;
+                    targetOrder[i][3] = direction;
                     if (bits > 0)
                     {
-                        targetOrder[i][3] = bits.ToString();
+                        targetOrder[i][4] = bits.ToString();
                     }
 
                     // Send an update message since the user is being updated
-                    CPH.SendMessage($"Updating data for {userName}: {rpm} Hz with color {color}.");
+                    CPH.SendMessage($"Updating data for {userName} RPM:{rpm}, color:{color}, direction: {direction}.");
 
                     userFound = true;
                     break;
@@ -84,17 +85,17 @@ public class CPHInline
             // If the user was not found, add a new entry to the target list
             if (!userFound)
             {
-                var newCommand = new List<string> { userName, color, stringRPM };
+                var newCommand = new List<string> { userName, color, stringRPM, direction };
                 targetOrder.Add(newCommand);
 
                 // Send a message for new entries
                 if (bits > 0)
                 {
-                    CPH.SendMessage($"[Priority] Processing rpm {rpm} Hz with color {color} from {userName} (bits: {bits}).");
+                    CPH.SendMessage($"[Priority] Adding {userName} to queue with rpm {rpm}, color {color} and direction {direction} (bits: {bits}).");
                 }
                 else
                 {
-                    CPH.SendMessage($"Processing rpm {rpm} Hz with color {color} from {userName}.");
+                    CPH.SendMessage($"Adding {userName} to queue with rpm {rpm}, color {color} and direction {direction}.");
                 }
             }
 
@@ -151,6 +152,7 @@ public class CPHInline
             CPH.SetGlobalVar("next_user", nextUser[0]);
             CPH.SetGlobalVar("next_color", nextUser[1]);
             CPH.SetGlobalVar("next_rpm", nextUser[2]);
+            CPH.SetGlobalVar("next_direction", nextUser[3]);
         }
         else
         {
@@ -158,87 +160,46 @@ public class CPHInline
             CPH.SetGlobalVar("next_user", null);
             CPH.SetGlobalVar("next_color", null);
             CPH.SetGlobalVar("next_rpm", null);
+            CPH.SetGlobalVar("next_direction", null);
         }
     }
 
-    private bool TryParseRPMAndColor(string message, out int rpm, out string color)
+    private bool TryParseRPMAndColor(string message, out int rpm, out string color, out string direction)
     {
         rpm = 0;
         color = string.Empty;
+        string rpmStr = "";
+        direction = "";
 
         message = message.Replace(",", " ");
         string[] words = message.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        //CPH.SendMessage($"{words.Length}}");
+        if (words.Length == 2){
 
-        if (words.Length >= 2)
-        {
-            string rpmStr = "";
-            int index = 0;
+            rpmStr = words[0];
+            color = words[1];
+            int.TryParse(rpmStr, out rpm);
+            direction = "same";
 
-            while (index < words.Length)
-            {
-                string word = words[index].ToLower();
-
-                if (word.Contains("hz"))
-                {
-                    word = word.Replace("hz", "").Trim();
-
-                    if (!string.IsNullOrEmpty(word))
-                    {
-                        rpmStr += word;
-                    }
-
-                    index++;
-                    break;
-                }
-                else if (int.TryParse(word, out _))
-                {
-                    rpmStr += word;
-                    index++;
-                }
-                else
-                {
-                    if (word == "hz")
-                    {
-                        index++;
-                        break;
-                    }
-                    else
-                    {
-                        CPH.LogWarn($"Parsing: Unexpected word '{word}' in rpm part.");
-                        return false;
-                    }
-                }
-            }
-
-            if (int.TryParse(rpmStr, out rpm))
-            {
-                if (index < words.Length)
-                {
-                    color = string.Join(" ", words, index, words.Length - index).Trim().ToLower();
-                    return true;
-                }
-                else
-                {
-                    CPH.LogWarn("Parsing: No color specified.");
-                    return false;
-                }
-            }
-            else
-            {
-                CPH.LogWarn($"Parsing: Could not parse rpm '{rpmStr}' as an integer.");
-                return false;
-            }
+            return true;
         }
-        else
-        {
-            return false;
+        else if (words.Length > 2){
+
+            rpmStr = words[0];
+            color = words[1];
+            int.TryParse(rpmStr, out rpm);
+            direction = words[2];
+
+            return true;
         }
+        return false;
+
     }
 
-    private bool ProcessRPMAndColor(int rpm, string color, string userName)
+    private bool ProcessRPMAndColor(int rpm, string color, string direction, string userName)
     {
         string[] supportedColors = { "red", "green", "blue", "yellow", "purple", "cyan", "magenta", "white" };
-        CPH.LogInfo($"-------------------------Processing rpm {rpm} Hz with color {color}.");
+        CPH.LogInfo($"-----Adding  rpm {rpm}  with color {color} and direction {direction} for {userName}-------");
 
         if (!Array.Exists(supportedColors, c => c.Equals(color, StringComparison.OrdinalIgnoreCase)))
         {
