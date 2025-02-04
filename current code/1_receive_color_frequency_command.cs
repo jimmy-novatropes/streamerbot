@@ -1,10 +1,10 @@
 /*
 This C# code defines a command handler that processes chat commands, primarily focused on identifying a user’s position in
-priority or regular queues, and parsing frequency and color information. The `Execute` method first verifies input arguments
+priority or regular queues, and parsing rpm and color information. The `Execute` method first verifies input arguments
 (`message`, `userName`, `eventSource`, and `bits`). If the chat command starts with "position," the handler checks both
 `priorityOrder` and `commandOrder` queues for the user and provides a position update. It also handles custom commands involving
-frequency and color, where valid data is extracted and stored or updated in the appropriate queue (`priorityOrder` if bits are used).
-The code includes helper functions for frequency and color validation, logs the updated queue lists, sets the next user,
+rpm and color, where valid data is extracted and stored or updated in the appropriate queue (`priorityOrder` if bits are used).
+The code includes helper functions for rpm and color validation, logs the updated queue lists, sets the next user,
 and dynamically updates queue counts.
 */
 
@@ -40,15 +40,15 @@ public class CPHInline
             return false;
         }
 
-        if (TryParseFrequencyAndColor(chatMessage, out int frequency, out string color))
+        if (TryParseRPMAndColor(chatMessage, out int rpm, out string color))
         {
-            if (!ProcessFrequencyAndColor(frequency, color, userName))
+            if (!ProcessRPMAndColor(rpm, color, userName))
             {
                 return false;
             }
 
-            CPH.LogInfo($"Root: Extracted frequency: {frequency} Hz, color: {color}");
-            string stringFrequency = frequency.ToString();
+            CPH.LogInfo($"Root: Extracted rpm: {rpm} Hz, color: {color}");
+            string stringRPM = rpm.ToString();
 
             // Retrieve the existing list of lists for both 'priority_order' and 'order'
             var commandOrder = CPH.GetGlobalVar<List<List<string>>>("order") ?? new List<List<string>>();
@@ -67,14 +67,14 @@ public class CPHInline
                 {
                     // Update the existing entry if the user is found
                     targetOrder[i][1] = color;
-                    targetOrder[i][2] = stringFrequency;
+                    targetOrder[i][2] = stringRPM;
                     if (bits > 0)
                     {
                         targetOrder[i][3] = bits.ToString();
                     }
 
                     // Send an update message since the user is being updated
-                    CPH.SendMessage($"Updating data for {userName}: {frequency} Hz with color {color}.");
+                    CPH.SendMessage($"Updating data for {userName}: {rpm} Hz with color {color}.");
 
                     userFound = true;
                     break;
@@ -84,17 +84,17 @@ public class CPHInline
             // If the user was not found, add a new entry to the target list
             if (!userFound)
             {
-                var newCommand = new List<string> { userName, color, stringFrequency };
+                var newCommand = new List<string> { userName, color, stringRPM };
                 targetOrder.Add(newCommand);
 
                 // Send a message for new entries
                 if (bits > 0)
                 {
-                    CPH.SendMessage($"[Priority] Processing frequency {frequency} Hz with color {color} from {userName} (bits: {bits}).");
+                    CPH.SendMessage($"[Priority] Processing rpm {rpm} Hz with color {color} from {userName} (bits: {bits}).");
                 }
                 else
                 {
-                    CPH.SendMessage($"Processing frequency {frequency} Hz with color {color} from {userName}.");
+                    CPH.SendMessage($"Processing rpm {rpm} Hz with color {color} from {userName}.");
                 }
             }
 
@@ -102,13 +102,13 @@ public class CPHInline
             CPH.LogInfo("Priority Order:");
             foreach (var command in priorityOrder)
             {
-                CPH.LogInfo($"User: {command[0]}, Color: {command[1]}, Frequency: {command[2]}");
+                CPH.LogInfo($"User: {command[0]}, Color: {command[1]}, RPM: {command[2]}");
             }
 
             CPH.LogInfo("Regular Order:");
             foreach (var command in commandOrder)
             {
-                CPH.LogInfo($"User: {command[0]}, Color: {command[1]}, Frequency: {command[2]}");
+                CPH.LogInfo($"User: {command[0]}, Color: {command[1]}, RPM: {command[2]}");
             }
 
             // Update the global variables for both lists
@@ -143,27 +143,27 @@ public class CPHInline
         combinedQueue.AddRange(commandOrder);
 
         // Check for the next user only if the current user is already set
-        if (!string.IsNullOrEmpty(currentUser) && combinedQueue.Count > 1)
+        if (!string.IsNullOrEmpty(currentUser) && combinedQueue.Count >=0 )
         {
             // The next user is the one after the current one (if available)
             var nextUser = combinedQueue[0];
             // var nextUser = combinedQueue[1];
             CPH.SetGlobalVar("next_user", nextUser[0]);
             CPH.SetGlobalVar("next_color", nextUser[1]);
-            CPH.SetGlobalVar("next_frequency", nextUser[2]);
+            CPH.SetGlobalVar("next_rpm", nextUser[2]);
         }
         else
         {
             // If no next user is available, clear the next user info
             CPH.SetGlobalVar("next_user", null);
             CPH.SetGlobalVar("next_color", null);
-            CPH.SetGlobalVar("next_frequency", null);
+            CPH.SetGlobalVar("next_rpm", null);
         }
     }
 
-    private bool TryParseFrequencyAndColor(string message, out int frequency, out string color)
+    private bool TryParseRPMAndColor(string message, out int rpm, out string color)
     {
-        frequency = 0;
+        rpm = 0;
         color = string.Empty;
 
         message = message.Replace(",", " ");
@@ -171,7 +171,7 @@ public class CPHInline
 
         if (words.Length >= 2)
         {
-            string frequencyStr = "";
+            string rpmStr = "";
             int index = 0;
 
             while (index < words.Length)
@@ -184,7 +184,7 @@ public class CPHInline
 
                     if (!string.IsNullOrEmpty(word))
                     {
-                        frequencyStr += word;
+                        rpmStr += word;
                     }
 
                     index++;
@@ -192,7 +192,7 @@ public class CPHInline
                 }
                 else if (int.TryParse(word, out _))
                 {
-                    frequencyStr += word;
+                    rpmStr += word;
                     index++;
                 }
                 else
@@ -204,13 +204,13 @@ public class CPHInline
                     }
                     else
                     {
-                        CPH.LogWarn($"Parsing: Unexpected word '{word}' in frequency part.");
+                        CPH.LogWarn($"Parsing: Unexpected word '{word}' in rpm part.");
                         return false;
                     }
                 }
             }
 
-            if (int.TryParse(frequencyStr, out frequency))
+            if (int.TryParse(rpmStr, out rpm))
             {
                 if (index < words.Length)
                 {
@@ -225,7 +225,7 @@ public class CPHInline
             }
             else
             {
-                CPH.LogWarn($"Parsing: Could not parse frequency '{frequencyStr}' as an integer.");
+                CPH.LogWarn($"Parsing: Could not parse rpm '{rpmStr}' as an integer.");
                 return false;
             }
         }
@@ -235,10 +235,10 @@ public class CPHInline
         }
     }
 
-    private bool ProcessFrequencyAndColor(int frequency, string color, string userName)
+    private bool ProcessRPMAndColor(int rpm, string color, string userName)
     {
-        string[] supportedColors = { "red", "green", "blue", "yellow", "purple", "cyan" };
-        CPH.LogInfo($"-------------------------Processing frequency {frequency} Hz with color {color}.");
+        string[] supportedColors = { "red", "green", "blue", "yellow", "purple", "cyan", "magenta", "white" };
+        CPH.LogInfo($"-------------------------Processing rpm {rpm} Hz with color {color}.");
 
         if (!Array.Exists(supportedColors, c => c.Equals(color, StringComparison.OrdinalIgnoreCase)))
         {
