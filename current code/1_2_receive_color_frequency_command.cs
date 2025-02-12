@@ -20,7 +20,7 @@ public class CPHInline
         CPH.TryGetArg("eventSource", out string eventSource);
         CPH.TryGetArg("bits", out int bits);
 
-        //CPH.SendMessage($"Received message: {chatMessage} from {userName} (source: {eventSource}) with bits: {bits}");
+        //CPH.SendMessage($"Received message: {chatMessage} from @{userName} (source: {eventSource}) with bits: {bits}");
 
         if (chatMessage.IndexOf("Adding ", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("Now Serving", StringComparison.OrdinalIgnoreCase) >= 0 ||
@@ -42,7 +42,7 @@ public class CPHInline
 
         if (TryParseRPMAndColor(chatMessage, out int rpm, out string color, out string direction))
         {
-            if (!ProcessRPMAndColor(rpm, color, userName, direction))
+            if (!ProcessRPMAndColor(rpm, color, direction, userName))
             {
                 return false;
             }
@@ -75,7 +75,7 @@ public class CPHInline
                     }
 
                     // Send an update message since the user is being updated
-                    CPH.SendMessage($"Updating data for {userName} RPM:{rpm}, color:{color}, direction: {direction}.");
+                    CPH.SendMessage($"Updating data for @{userName} RPM:{rpm}, color:{color}, direction: {direction}.");
 
                     userFound = true;
                     break;
@@ -91,11 +91,11 @@ public class CPHInline
                 // Send a message for new entries
                 if (bits > 0)
                 {
-                    CPH.SendMessage($"[Priority] Adding {userName} to queue with rpm {rpm}, color {color} and direction {direction} (bits: {bits}).");
+                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with rpm {rpm}, color {color} and direction {direction} (bits: {bits}).");
                 }
                 else
                 {
-                    CPH.SendMessage($"Adding {userName} to queue with rpm {rpm}, color {color} and direction {direction}.");
+                    CPH.SendMessage($"Adding @{userName} to queue with rpm {rpm}, color {color} and direction {direction}.");
                 }
             }
 
@@ -127,8 +127,8 @@ public class CPHInline
         }
         else
         {
-            CPH.SendMessage($"Sorry {userName}, the message '{chatMessage}' does not match the expected format.");
-            CPH.LogInfo($"Root: Message from {userName}: '{chatMessage}' does not match the expected format.");
+//            CPH.SendMessage($"Sorry @{userName}, the message '{chatMessage}' does not match the expected format.");
+            CPH.LogInfo($"Root: Message from @{userName}: '{chatMessage}' does not match the expected format.");
         }
         return true;
     }
@@ -183,7 +183,7 @@ public class CPHInline
 
             return true;
         }
-        else if (words.Length > 2){
+        else if (words.Length == 3){
 
             rpmStr = words[0];
             color = words[1];
@@ -199,11 +199,11 @@ public class CPHInline
     private bool ProcessRPMAndColor(int rpm, string color, string direction, string userName)
     {
         string[] supportedColors = { "red", "green", "blue", "yellow", "purple", "cyan", "magenta", "white" };
-        CPH.LogInfo($"-----Adding  rpm {rpm}  with color {color} and direction {direction} for {userName}-------");
+        CPH.LogInfo($"-----Adding  rpm {rpm}  with color {color} and direction {direction} for @{userName}-------");
 
         if (!Array.Exists(supportedColors, c => c.Equals(color, StringComparison.OrdinalIgnoreCase)))
         {
-            CPH.SendMessage($"Sorry {userName}, the color '{color}' is not supported.");
+            CPH.SendMessage($"Sorry @{userName}, the color '{color}' is not supported.");
             return false;
         }
 

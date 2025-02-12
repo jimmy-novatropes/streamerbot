@@ -242,7 +242,26 @@ def color_to_rgb_string(color):
 def find_arduinos():
     arduinos = {"led": None, "motor": None}
 
-    available_ports = [port.device for port in serial.tools.list_ports.comports()]
+    # available_ports = [port.device for port in serial.tools.list_ports.comports()
+    # Get a list of all available serial ports
+    ports = serial.tools.list_ports.comports()
+
+    # Print details of each port
+    for port in ports:
+        print(
+            f"Device: {port.device}, Description: {port.description}, HWID: {port.hwid}\n")
+
+    available_ports = [
+        port.device for port in serial.tools.list_ports.comports()
+        if
+        "Arduino" in port.description
+        or "ttyUSB" in port.device
+        or "ttyACM" in port.device
+        or "USB-SERIAL CH340" in port.description
+        or "USB Serial Port (COM" in port.description
+        # or "USB Serial Port (COM"
+    ]
+
     print(f"Available COM ports: {available_ports}")
 
     for port in available_ports:
@@ -270,18 +289,20 @@ def find_arduinos():
                 if dict_key in response:
                     arduinos[dict_key] = ser
                     print(f"Assigned {port} to {dict_key}")
+                    continue
 
 
             if response not in arduinos.keys():
                 counter = 0
                 while ser.in_waiting == 0:
-                    # ser.write(b"whoareyou\n")
-                    # time.sleep(0.5)
+                    ser.write(b"whoareyou\n")
+                    time.sleep(0.5)
                     response = ser.read(ser.in_waiting).decode('utf-8').strip()
+                    print("attempt # ", counter)
                     if response in arduinos.keys():
                         break
                     counter += 1
-                    if counter > 50000:
+                    if counter > 10:
                         break
         except serial.SerialException as e:
             print(f"Could not open {port}: {e}")
@@ -340,18 +361,40 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                         ser1.reset_input_buffer()
                         ser1.reset_output_buffer()
                         ser1.write(message_arduino1.encode())
-                        print(f"Sent to Arduino 1: {message_arduino1}")
+                        print(f"----------------------- \nSent to Arduino 1: {message_arduino1}")
 
                         time.sleep(0.1)
                         raw_data1 = ser1.read(ser1.in_waiting)
                         response1 = raw_data1.decode('utf-8').strip() if raw_data1 else "No response"
                         logging.info(f"Received response from Arduino 1: {response1}")
-                        print(f"Decoded Response from Arduino 1: {response1}")
+                        print(f"Decoded Response from Arduino 1: {response1} \n")
 
                     # Send to Arduino 2: RPM
                     if ser2 and ser2.is_open:
 
-                        message_arduino2 = f"{rpm}, {direction}\n"
+                        message_arduino2 = f"RPM{rpm}\n"
+                        ser2.reset_input_buffer()
+                        ser2.reset_output_buffer()
+                        ser2.write(message_arduino2.encode())
+                        print(f"Sent to Arduino 2: {message_arduino2}")
+
+                        time.sleep(0.1)
+                        raw_data2 = ser2.read(ser2.in_waiting)
+                        response2 = raw_data2.decode('utf-8').strip() if raw_data2 else "No response"
+                        logging.info(f"Received response from Arduino 2: {response2}")
+                        print(f"Decoded Response from Arduino 2: {response2}")
+                        # ================================================================
+                        time.sleep(2)
+                        if direction.lower() == "forward":
+                            direction = "F"
+                        elif direction.lower() == "reverse":
+                            direction = "B"
+                        elif direction.lower() == "backward":
+                            direction = "B"
+                        else:
+                            continue
+
+                        message_arduino2 = f"{direction}\n"
                         ser2.reset_input_buffer()
                         ser2.reset_output_buffer()
                         ser2.write(message_arduino2.encode())
