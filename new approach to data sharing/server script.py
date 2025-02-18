@@ -329,6 +329,16 @@ color_counter_vals = {
     "purple": 1535,
 }
 
+mode_2_rpm = {
+    "1": 685,
+    "2": 260,
+    "3": 475,
+    "4": 1105,
+    "5": 845,
+    "6": 945,
+    "7": 1365
+}
+
 # Create a socket server
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
     server.bind((HOST, PORT))
@@ -371,8 +381,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
 
                     # Send to Arduino 2: RPM
                     if ser2 and ser2.is_open:
+                        rpm_true = mode_2_rpm.get(rpm)
+                        message_arduino2 = f"RPM{rpm_true}\n"
 
-                        message_arduino2 = f"RPM{rpm}\n"
                         ser2.reset_input_buffer()
                         ser2.reset_output_buffer()
                         ser2.write(message_arduino2.encode())

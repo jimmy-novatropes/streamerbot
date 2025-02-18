@@ -1,7 +1,7 @@
 /*
 This code processes user requests from two queues, `priority_order` and `order`, by serving the
 first user in the priority queue if available, or otherwise from the regular queue. It logs and
-updates relevant details (user, color, rpm) as global variables, manages "next user" information
+updates relevant details (user, color, mode) as global variables, manages "next user" information
 for queue continuity, and adjusts the queue counts accordingly.
 */
 
@@ -26,13 +26,14 @@ public class CPHInline
 
             // Log and process the first command from priorityOrder
             CPH.LogInfo("Priority command: " + string.Join(", ", firstCommand));
-            CPH.SendMessage($"[Priority] Now serving ~ rpm {firstCommand[2]} with color {firstCommand[1]} in the direction {firstCommand[3]} for user {firstCommand[0]}.");
+            CPH.SendMessage($"[Priority] Now serving ~ mode {firstCommand[2]} with color {firstCommand[1]} in the direction {firstCommand[3]} for user {firstCommand[0]}.");
 
             CPH.SetGlobalVar("current_user", firstCommand[0]);
             CPH.SetGlobalVar("current_color", firstCommand[1]);
-            CPH.SetGlobalVar("current_rpm", firstCommand[2]);
+            CPH.SetGlobalVar("current_mode", firstCommand[2]);
             CPH.SetGlobalVar("current_direction", firstCommand[3]);
             CPH.SetGlobalVar("bits_donated", firstCommand[4]);
+            CPH.SetGlobalVar("priority_timer", 1);
 
 
             // You can also trigger actions or further logic here 8 - Send Commands to Novatrope -         3dd43bd4-961c-4ed1-96c0-06420b2eb00d
@@ -46,8 +47,9 @@ public class CPHInline
                 var nextCommand = priorityOrder[1];
                 CPH.SetGlobalVar("next_user", nextCommand[0]);
                 CPH.SetGlobalVar("next_color", nextCommand[1]);
-                CPH.SetGlobalVar("next_rpm", nextCommand[2]);
+                CPH.SetGlobalVar("next_mode", nextCommand[2]);
                 CPH.SetGlobalVar("next_direction", nextCommand[3]);
+                CPH.SetGlobalVar("priority_timer", 1);
             }
             else if (commandOrder.Count > 0)
             {
@@ -55,7 +57,7 @@ public class CPHInline
                 var nextCommand = commandOrder[0];
                 CPH.SetGlobalVar("next_user", nextCommand[0]);
                 CPH.SetGlobalVar("next_color", nextCommand[1]);
-                CPH.SetGlobalVar("next_rpm", nextCommand[2]);
+                CPH.SetGlobalVar("next_mode", nextCommand[2]);
                 CPH.SetGlobalVar("next_direction", nextCommand[3]);
             }
             else
@@ -63,7 +65,7 @@ public class CPHInline
                 // Clear next variables if no users are available
                 CPH.SetGlobalVar("next_user", null);
                 CPH.SetGlobalVar("next_color", null);
-                CPH.SetGlobalVar("next_rpm", null);
+                CPH.SetGlobalVar("next_mode", null);
                 CPH.SetGlobalVar("next_direction", null);
             }
 
@@ -81,11 +83,13 @@ public class CPHInline
 
             // Log and process the first command from commandOrder
             CPH.LogInfo("Regular command: " + string.Join(", ", firstCommand));
-            CPH.SendMessage($"Now serving ~ rpm: {firstCommand[2]} with color: {firstCommand[1]} in the direction: {firstCommand[3]} for user: {firstCommand[0]}");
+            CPH.SendMessage($"Now serving ~ mode: {firstCommand[2]} with color: {firstCommand[1]} in the direction: {firstCommand[3]} for user: {firstCommand[0]}");
             CPH.SetGlobalVar("current_user", firstCommand[0]);
             CPH.SetGlobalVar("current_color", firstCommand[1]);
-            CPH.SetGlobalVar("current_rpm", firstCommand[2]);
+            CPH.SetGlobalVar("current_mode", firstCommand[2]);
             CPH.SetGlobalVar("current_direction", firstCommand[3]);
+            CPH.SetGlobalVar("priority_timer", 0);
+
 
             // You can also trigger actions or further logic here 8 - Send Commands to Novatrope -         3dd43bd4-961c-4ed1-96c0-06420b2eb00d
             CPH.RunActionById("3dd43bd4-961c-4ed1-96c0-06420b2eb00d");
@@ -96,16 +100,20 @@ public class CPHInline
                 var nextCommand = commandOrder[1];
                 CPH.SetGlobalVar("next_user", nextCommand[0]);
                 CPH.SetGlobalVar("next_color", nextCommand[1]);
-                CPH.SetGlobalVar("next_rpm", nextCommand[2]);
+                CPH.SetGlobalVar("next_mode", nextCommand[2]);
                 CPH.SetGlobalVar("next_direction", nextCommand[3]);
+                CPH.SetGlobalVar("priority_timer", 0);
+
             }
             else
             {
                 // Clear next variables if no users are available
                 CPH.SetGlobalVar("next_user", null);
                 CPH.SetGlobalVar("next_color", null);
-                CPH.SetGlobalVar("next_rpm", null);
+                CPH.SetGlobalVar("next_mode", null);
                 CPH.SetGlobalVar("next_direction", null);
+                CPH.SetGlobalVar("priority_timer", 0);
+
             }
 
             // Remove the first item from the commandOrder list
@@ -120,8 +128,10 @@ public class CPHInline
             // Clear next variables if no users are available
             CPH.SetGlobalVar("next_user", null);
             CPH.SetGlobalVar("next_color", null);
-            CPH.SetGlobalVar("next_rpm", null);
+            CPH.SetGlobalVar("next_mode", null);
             CPH.SetGlobalVar("next_direction", null);
+            CPH.SetGlobalVar("priority_timer", 0);
+
         }
         // Set the variable for the number of people in the queues
         CPH.SetGlobalVar("priority_queue_count", priorityOrder.Count);

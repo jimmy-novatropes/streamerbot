@@ -1,10 +1,10 @@
 /*
 This C# code defines a command handler that processes chat commands, primarily focused on identifying a user’s position in
-priority or regular queues, and parsing rpm and color information. The `Execute` method first verifies input arguments
+priority or regular queues, and parsing mode and color information. The `Execute` method first verifies input arguments
 (`message`, `userName`, `eventSource`, and `bits`). If the chat command starts with "position," the handler checks both
 `priorityOrder` and `commandOrder` queues for the user and provides a position update. It also handles custom commands involving
-rpm and color, where valid data is extracted and stored or updated in the appropriate queue (`priorityOrder` if bits are used).
-The code includes helper functions for rpm and color validation, logs the updated queue lists, sets the next user,
+mode and color, where valid data is extracted and stored or updated in the appropriate queue (`priorityOrder` if bits are used).
+The code includes helper functions for mode and color validation, logs the updated queue lists, sets the next user,
 and dynamically updates queue counts.
 */
 
@@ -18,18 +18,20 @@ public class CPHInline
         CPH.TryGetArg("message", out string chatMessage);
         CPH.TryGetArg("userName", out string userName);
         CPH.TryGetArg("eventSource", out string eventSource);
-        CPH.TryGetArg("bits", out int bits);
+//        CPH.TryGetArg("bits", out int bits);
+        int bits = 20;
 
         //CPH.SendMessage($"Received message: {chatMessage} from @{userName} (source: {eventSource}) with bits: {bits}");
 
         if (chatMessage.IndexOf("Adding ", StringComparison.OrdinalIgnoreCase) >= 0 ||
-            chatMessage.IndexOf("Now Serving", StringComparison.OrdinalIgnoreCase) >= 0 ||
+            chatMessage.IndexOf("Now Serving ~", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("found in", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("position", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("does not match the expected format", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("Updating data for", StringComparison.OrdinalIgnoreCase) >= 0 ||
-            chatMessage.IndexOf("is the timer active?", StringComparison.OrdinalIgnoreCase) >= 0 ||
-            eventSource != "twitch")
+            chatMessage.IndexOf("is the timer active?", StringComparison.OrdinalIgnoreCase) >= 0
+//            eventSource != "twitch"
+            )
         {
             return true;
         }
@@ -40,15 +42,15 @@ public class CPHInline
             return false;
         }
 
-        if (TryParseRPMAndColor(chatMessage, out int rpm, out string color, out string direction))
+        if (TryParseModeAndColor(chatMessage, out int mode, out string color, out string direction))
         {
-            if (!ProcessRPMAndColor(rpm, color, direction, userName))
+            if (!ProcessModeAndColor(mode, color, direction, userName))
             {
                 return false;
             }
 
-            CPH.LogInfo($"Root: Extracted rpm: {rpm} , color: {color}");
-            string stringRPM = rpm.ToString();
+            CPH.LogInfo($"Root: Extracted mode: {mode} , color: {color}");
+            string stringMode = mode.ToString();
 
             // Retrieve the existing list of lists for both 'priority_order' and 'order'
             var commandOrder = CPH.GetGlobalVar<List<List<string>>>("order") ?? new List<List<string>>();
@@ -67,7 +69,7 @@ public class CPHInline
                 {
                     // Update the existing entry if the user is found
                     targetOrder[i][1] = color;
-                    targetOrder[i][2] = stringRPM;
+                    targetOrder[i][2] = stringMode;
                     targetOrder[i][3] = direction;
                     if (bits > 0)
                     {
@@ -75,7 +77,7 @@ public class CPHInline
                     }
 
                     // Send an update message since the user is being updated
-                    CPH.SendMessage($"Updating data for @{userName} RPM:{rpm}, color:{color}, direction: {direction}.");
+                    CPH.SendMessage($"Updating data for @{userName} Mode:{mode}, color:{color}, direction: {direction}.");
 
                     userFound = true;
                     break;
@@ -85,17 +87,17 @@ public class CPHInline
             // If the user was not found, add a new entry to the target list
             if (!userFound)
             {
-                var newCommand = new List<string> { userName, color, stringRPM, direction };
+                var newCommand = new List<string> { userName, color, stringMode, direction };
                 targetOrder.Add(newCommand);
 
                 // Send a message for new entries
                 if (bits > 0)
                 {
-                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with rpm {rpm}, color {color} and direction {direction} (bits: {bits}).");
+                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color} and direction {direction} (bits: {bits}).");
                 }
                 else
                 {
-                    CPH.SendMessage($"Adding @{userName} to queue with rpm {rpm}, color {color} and direction {direction}.");
+                    CPH.SendMessage($"Adding @{userName} to queue with mode {mode}, color {color} and direction {direction}.");
                 }
             }
 
@@ -103,13 +105,13 @@ public class CPHInline
             CPH.LogInfo("Priority Order:");
             foreach (var command in priorityOrder)
             {
-                CPH.LogInfo($"User: {command[0]}, Color: {command[1]}, RPM: {command[2]}");
+                CPH.LogInfo($"User: {command[0]}, Color: {command[1]}, Mode: {command[2]}");
             }
 
             CPH.LogInfo("Regular Order:");
             foreach (var command in commandOrder)
             {
-                CPH.LogInfo($"User: {command[0]}, Color: {command[1]}, RPM: {command[2]}");
+                CPH.LogInfo($"User: {command[0]}, Color: {command[1]}, Mode: {command[2]}");
             }
 
             // Update the global variables for both lists
@@ -151,7 +153,7 @@ public class CPHInline
             // var nextUser = combinedQueue[1];
             CPH.SetGlobalVar("next_user", nextUser[0]);
             CPH.SetGlobalVar("next_color", nextUser[1]);
-            CPH.SetGlobalVar("next_rpm", nextUser[2]);
+            CPH.SetGlobalVar("next_mode", nextUser[2]);
             CPH.SetGlobalVar("next_direction", nextUser[3]);
         }
         else
@@ -159,16 +161,16 @@ public class CPHInline
             // If no next user is available, clear the next user info
             CPH.SetGlobalVar("next_user", null);
             CPH.SetGlobalVar("next_color", null);
-            CPH.SetGlobalVar("next_rpm", null);
+            CPH.SetGlobalVar("next_mode", null);
             CPH.SetGlobalVar("next_direction", null);
         }
     }
 
-    private bool TryParseRPMAndColor(string message, out int rpm, out string color, out string direction)
+    private bool TryParseModeAndColor(string message, out int mode, out string color, out string direction)
     {
-        rpm = 0;
+        mode = 0;
         color = string.Empty;
-        string rpmStr = "";
+        string modeStr = "";
         direction = "";
 
         message = message.Replace(",", " ");
@@ -176,18 +178,18 @@ public class CPHInline
         //CPH.SendMessage($"{words.Length}}");
         if (words.Length == 2){
 
-            rpmStr = words[0];
+            modeStr = words[0];
             color = words[1];
-            int.TryParse(rpmStr, out rpm);
+            int.TryParse(modeStr, out mode);
             direction = "same";
 
             return true;
         }
         else if (words.Length == 3){
 
-            rpmStr = words[0];
+            modeStr = words[0];
             color = words[1];
-            int.TryParse(rpmStr, out rpm);
+            int.TryParse(modeStr, out mode);
             direction = words[2];
 
             return true;
@@ -196,14 +198,20 @@ public class CPHInline
 
     }
 
-    private bool ProcessRPMAndColor(int rpm, string color, string direction, string userName)
+    private bool ProcessModeAndColor(int mode, string color, string direction, string userName)
     {
         string[] supportedColors = { "red", "green", "blue", "yellow", "purple", "cyan", "magenta", "white" };
-        CPH.LogInfo($"-----Adding  rpm {rpm}  with color {color} and direction {direction} for @{userName}-------");
+        int[] supportedModes = { 1, 2, 3, 4, 5, 6, 7 };
+        CPH.LogInfo($"-----Adding  mode {mode}  with color {color} and direction {direction} for @{userName}-------");
 
         if (!Array.Exists(supportedColors, c => c.Equals(color, StringComparison.OrdinalIgnoreCase)))
         {
             CPH.SendMessage($"Sorry @{userName}, the color '{color}' is not supported.");
+            return false;
+        }
+        if (!Array.Exists(supportedModes, m => m == mode))
+        {
+            CPH.SendMessage($"Sorry @{userName}, the mode '{mode}' is not supported.");
             return false;
         }
 
