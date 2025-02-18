@@ -87,17 +87,19 @@ public class CPHInline
             // If the user was not found, add a new entry to the target list
             if (!userFound)
             {
-                var newCommand = new List<string> { userName, color, stringMode, direction };
-                targetOrder.Add(newCommand);
+//                var newCommand = new List<string> { userName, color, stringMode, direction };
+//                targetOrder.Add(newCommand);
 
-                // Send a message for new entries
-                if (bits > 0)
+                // If the user was not found, add a new entry ONLY to the appropriate list
+                if (bits != 0)
                 {
-                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color} and direction {direction} (bits: {bits}).");
+                    priorityOrder.Add(new List<string> { userName, color, stringMode, direction, bits.ToString() });
+                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color}, direction {direction} (bits: {bits}).");
                 }
-                else
+                else if (bits == 0)
                 {
-                    CPH.SendMessage($"Adding @{userName} to queue with mode {mode}, color {color} and direction {direction}.");
+                    commandOrder.Add(new List<string> { userName, color, stringMode, direction });
+                    CPH.SendMessage($"Adding @{userName} to queue with mode {mode}, color {color}, direction {direction}.");
                 }
             }
 

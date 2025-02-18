@@ -915,3 +915,147 @@ Counter value: 1023
 Command recei
 2025-02-17 17:00:34,921 - INFO - Received response from Arduino 2: No response
 2025-02-17 17:00:37,039 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:40:40,913 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command received a
+2025-02-17 17:40:41,021 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:40:43,132 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:41:04,861 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command
+2025-02-17 17:41:04,969 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:41:07,080 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:41:26,126 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command received and
+2025-02-17 17:41:26,234 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:41:28,351 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:41:49,983 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command received a
+2025-02-17 17:41:50,091 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:41:52,206 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:41:52,314 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command received an
+2025-02-17 17:41:52,422 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:41:54,537 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:43:49,889 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command rece
+2025-02-17 17:43:49,996 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:43:52,118 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:44:13,668 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command
+2025-02-17 17:44:13,776 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:44:15,891 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:44:15,998 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command rec
+2025-02-17 17:44:16,106 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:44:18,227 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:46:45,041 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command received and
+2025-02-17 17:46:45,150 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:46:47,271 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:08,861 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command received
+2025-02-17 17:47:08,968 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:11,089 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:11,197 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command received an
+2025-02-17 17:47:11,306 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:13,422 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:30,613 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command received and
+2025-02-17 17:47:30,720 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:32,836 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:54,527 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Comman
+2025-02-17 17:47:54,637 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:56,759 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:56,869 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command received and
+2025-02-17 17:47:56,979 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:47:59,091 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:48:12,079 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+C
+2025-02-17 17:48:12,189 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:48:14,304 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:48:36,022 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command receive
+2025-02-17 17:48:36,130 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:48:38,253 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:48:38,360 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 1279
+Counter value: 1279
+Command recei
+2025-02-17 17:48:38,469 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:48:40,583 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:49:46,170 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command recei
+2025-02-17 17:49:46,278 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:49:48,392 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:50:10,112 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command receive
+2025-02-17 17:50:10,222 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:50:12,341 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:52:34,828 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command receiv
+2025-02-17 17:52:34,938 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:52:37,060 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:52:58,674 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command received and processe
+2025-02-17 17:52:58,784 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:53:00,906 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:53:01,015 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command received
+2025-02-17 17:53:01,122 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:53:03,245 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:54:02,664 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command received and proces
+2025-02-17 17:54:02,772 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:54:04,892 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:54:27,686 - INFO - Received response from Arduino 1: Received frequency: 60
+Received counter_val: 255
+Counter value: 255
+Command received
+2025-02-17 17:54:27,795 - INFO - Received response from Arduino 2: No response
+2025-02-17 17:54:29,917 - INFO - Received response from Arduino 2: No response
