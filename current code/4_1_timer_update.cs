@@ -8,6 +8,8 @@ public class CPHInline
     {
 		// CPH.SendMessage($"Updating data for queue");
 		int priorityTimer = CPH.GetGlobalVar<int>("priority_timer");
+		string regularQueueStr = CPH.GetGlobalVar<string>("regular_queue_count");
+        string prioQueueStr = CPH.GetGlobalVar<string>("priority_queue_count");
 		int timeLeft;
 		if (priorityTimer == 1)
 		{ timeLeft = 20; // 5:00 in seconds
@@ -16,6 +18,12 @@ public class CPHInline
 		{ timeLeft = 10; // 5:00 in seconds
 
 		}
+		if (regularQueueStr == "0" && prioQueueStr == "0")
+        {
+            timeLeft = 0;
+        }
+
+
         // Set the initial timer value in seconds (e.g., 5 minutes = 300 seconds)
         // Retrieve the existing lists for both 'priority_order' and 'order'
         var priorityOrder = CPH.GetGlobalVar<List<List<string>>>("priority_order") ?? new List<List<string>>();

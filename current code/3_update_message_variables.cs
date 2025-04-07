@@ -8,23 +8,25 @@ public class CPHInline
         string currentUser = CPH.GetGlobalVar<string>("current_user");
         string currentMode = CPH.GetGlobalVar<string>("current_mode");
         string currentColor = CPH.GetGlobalVar<string>("current_color");
-        string currentDirection = CPH.GetGlobalVar<string>("current_direction");
+//        string currentDirection = CPH.GetGlobalVar<string>("current_direction");
 
         // Build the message for the current user
-        string nowShowingMessage = $"Now Showing: @{currentUser}\nPattern: {currentMode}, {currentColor}, {currentDirection}\n";
+//        string nowShowingMessage = $"Now Showing: @{currentUser}\nPattern: {currentMode}, {currentColor}, {currentDirection}\n";
+        string nowShowingMessage = $"Now Showing: @{currentUser}\nPattern: {currentMode}, {currentColor}\n";
 
         // Retrieve the next user from the global variables
         var nextUser = CPH.GetGlobalVar<string>("next_user");
         // Retrieve the next user from the global variables
         var nextColor = CPH.GetGlobalVar<string>("next_color");
         var nextMode = CPH.GetGlobalVar<string>("next_mode");
-        var nextDirection = CPH.GetGlobalVar<string>("next_direction");
+//        var nextDirection = CPH.GetGlobalVar<string>("next_direction");
 
         // If next_user exists, include the "Next Up" section
         if (!string.IsNullOrEmpty(nextUser))
         {
         	var time_left = CPH.GetGlobalVar<string>("time_left");
-        	nowShowingMessage += $"Next Up: @{nextUser}\nNext Pattern: {nextMode}, {nextColor}, {nextDirection}\n";
+//        	nowShowingMessage += $"Next Up: @{nextUser}\nNext Pattern: {nextMode}, {nextColor}, {nextDirection}\n";
+        	nowShowingMessage += $"Next Up: @{nextUser}\nNext Pattern: {nextMode}, {nextColor}\n";
             string next_in_line = $"\n Next View in {time_left} minutes";
 
 

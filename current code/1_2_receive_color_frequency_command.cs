@@ -18,8 +18,8 @@ public class CPHInline
         CPH.TryGetArg("message", out string chatMessage);
         CPH.TryGetArg("userName", out string userName);
         CPH.TryGetArg("eventSource", out string eventSource);
-//        CPH.TryGetArg("bits", out int bits);
-        int bits = 20;
+        CPH.TryGetArg("bits", out int bits);
+//        int bits = 0;
 
         //CPH.SendMessage($"Received message: {chatMessage} from @{userName} (source: {eventSource}) with bits: {bits}");
 
@@ -42,9 +42,11 @@ public class CPHInline
             return false;
         }
 
-        if (TryParseModeAndColor(chatMessage, out int mode, out string color, out string direction))
+//        if (TryParseModeAndColor(chatMessage, out int mode, out string color, out string direction))
+        if (TryParseModeAndColor(chatMessage, out int mode, out string color))
         {
-            if (!ProcessModeAndColor(mode, color, direction, userName))
+//            if (!ProcessModeAndColor(mode, color, direction, userName))
+            if (!ProcessModeAndColor(mode, color, userName))
             {
                 return false;
             }
@@ -70,14 +72,15 @@ public class CPHInline
                     // Update the existing entry if the user is found
                     targetOrder[i][1] = color;
                     targetOrder[i][2] = stringMode;
-                    targetOrder[i][3] = direction;
+//                    targetOrder[i][3] = direction;
                     if (bits > 0)
                     {
                         targetOrder[i][4] = bits.ToString();
                     }
 
                     // Send an update message since the user is being updated
-                    CPH.SendMessage($"Updating data for @{userName} Mode:{mode}, color:{color}, direction: {direction}.");
+//                    CPH.SendMessage($"Updating data for @{userName} Mode:{mode}, color:{color}, direction: {direction}.");
+                    CPH.SendMessage($"Updating data for @{userName} Mode:{mode}, color:{color}.");
 
                     userFound = true;
                     break;
@@ -93,13 +96,17 @@ public class CPHInline
                 // If the user was not found, add a new entry ONLY to the appropriate list
                 if (bits != 0)
                 {
-                    priorityOrder.Add(new List<string> { userName, color, stringMode, direction, bits.ToString() });
-                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color}, direction {direction} (bits: {bits}).");
+//                    priorityOrder.Add(new List<string> { userName, color, stringMode, direction, bits.ToString() });
+//                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color}, direction {direction} (bits: {bits}).");
+                    priorityOrder.Add(new List<string> { userName, color, stringMode, bits.ToString() });
+                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color} (bits: {bits}).");
                 }
                 else if (bits == 0)
                 {
-                    commandOrder.Add(new List<string> { userName, color, stringMode, direction });
-                    CPH.SendMessage($"Adding @{userName} to queue with mode {mode}, color {color}, direction {direction}.");
+//                    commandOrder.Add(new List<string> { userName, color, stringMode, direction});
+//                    CPH.SendMessage($"Adding @{userName} to queue with mode {mode}, color {color}, direction {direction}.");
+                    commandOrder.Add(new List<string> { userName, color, stringMode});
+                    CPH.SendMessage($"Adding @{userName} to queue with mode {mode}, color {color}.");
                 }
             }
 
@@ -156,7 +163,7 @@ public class CPHInline
             CPH.SetGlobalVar("next_user", nextUser[0]);
             CPH.SetGlobalVar("next_color", nextUser[1]);
             CPH.SetGlobalVar("next_mode", nextUser[2]);
-            CPH.SetGlobalVar("next_direction", nextUser[3]);
+//            CPH.SetGlobalVar("next_direction", nextUser[3]);
         }
         else
         {
@@ -164,16 +171,17 @@ public class CPHInline
             CPH.SetGlobalVar("next_user", null);
             CPH.SetGlobalVar("next_color", null);
             CPH.SetGlobalVar("next_mode", null);
-            CPH.SetGlobalVar("next_direction", null);
+//            CPH.SetGlobalVar("next_direction", null);
         }
     }
 
-    private bool TryParseModeAndColor(string message, out int mode, out string color, out string direction)
+//    private bool TryParseModeAndColor(string message, out int mode, out string color, out string direction)
+    private bool TryParseModeAndColor(string message, out int mode, out string color)
     {
         mode = 0;
         color = string.Empty;
         string modeStr = "";
-        direction = "";
+//        direction = "";
 
         message = message.Replace(",", " ");
         string[] words = message.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -183,7 +191,7 @@ public class CPHInline
             modeStr = words[0];
             color = words[1];
             int.TryParse(modeStr, out mode);
-            direction = "same";
+//            direction = "same";
 
             return true;
         }
@@ -192,7 +200,7 @@ public class CPHInline
             modeStr = words[0];
             color = words[1];
             int.TryParse(modeStr, out mode);
-            direction = words[2];
+//            direction = words[2];
 
             return true;
         }
@@ -200,11 +208,13 @@ public class CPHInline
 
     }
 
-    private bool ProcessModeAndColor(int mode, string color, string direction, string userName)
+//    private bool ProcessModeAndColor(int mode, string color, string direction, string userName)
+    private bool ProcessModeAndColor(int mode, string color, string userName)
     {
         string[] supportedColors = { "red", "green", "blue", "yellow", "purple", "cyan", "magenta", "white" };
-        int[] supportedModes = { 1, 2, 3, 4, 5, 6, 7 };
-        CPH.LogInfo($"-----Adding  mode {mode}  with color {color} and direction {direction} for @{userName}-------");
+        int[] supportedModes = { 1, 2, 3, 4, 5, 6, 7, -1, -2, -3, -4, -5, -6, -7 };
+//        CPH.LogInfo($"-----Adding  mode {mode}  with color {color} and direction {direction} for @{userName}-------");
+        CPH.LogInfo($"-----Adding  mode {mode}  with color {color} for @{userName}-------");
 
         if (!Array.Exists(supportedColors, c => c.Equals(color, StringComparison.OrdinalIgnoreCase)))
         {

@@ -16,8 +16,6 @@ public class CPHInline
         var priorityOrder = CPH.GetGlobalVar<List<List<string>>>("priority_order") ?? new List<List<string>>();
         var commandOrder = CPH.GetGlobalVar<List<List<string>>>("order") ?? new List<List<string>>();
 
-
-
         // Check if there are any items in the priorityOrder list first
         if (priorityOrder.Count > 0)
         {
@@ -26,13 +24,15 @@ public class CPHInline
 
             // Log and process the first command from priorityOrder
             CPH.LogInfo("Priority command: " + string.Join(", ", firstCommand));
-            CPH.SendMessage($"[Priority] Now serving ~ mode {firstCommand[2]} with color {firstCommand[1]} in the direction {firstCommand[3]} for user {firstCommand[0]}.");
+//            CPH.SendMessage($"[Priority] Now serving ~ mode {firstCommand[2]} with color {firstCommand[1]} in the direction {firstCommand[3]} for user {firstCommand[0]}.");
+            CPH.SendMessage($"[Priority] Now serving ~ mode {firstCommand[2]} with color {firstCommand[1]} for user {firstCommand[0]}.");
 
             CPH.SetGlobalVar("current_user", firstCommand[0]);
             CPH.SetGlobalVar("current_color", firstCommand[1]);
             CPH.SetGlobalVar("current_mode", firstCommand[2]);
-            CPH.SetGlobalVar("current_direction", firstCommand[3]);
-            CPH.SetGlobalVar("bits_donated", firstCommand[4]);
+//            CPH.SetGlobalVar("current_direction", firstCommand[3]);
+//            CPH.SetGlobalVar("bits_donated", firstCommand[4]);
+            CPH.SetGlobalVar("bits_donated", firstCommand[3]);
             CPH.SetGlobalVar("priority_timer", 1);
 
 
@@ -48,7 +48,7 @@ public class CPHInline
                 CPH.SetGlobalVar("next_user", nextCommand[0]);
                 CPH.SetGlobalVar("next_color", nextCommand[1]);
                 CPH.SetGlobalVar("next_mode", nextCommand[2]);
-                CPH.SetGlobalVar("next_direction", nextCommand[3]);
+//                CPH.SetGlobalVar("next_direction", nextCommand[3]);
                 CPH.SetGlobalVar("priority_timer", 1);
             }
             else if (commandOrder.Count > 0)
@@ -58,7 +58,7 @@ public class CPHInline
                 CPH.SetGlobalVar("next_user", nextCommand[0]);
                 CPH.SetGlobalVar("next_color", nextCommand[1]);
                 CPH.SetGlobalVar("next_mode", nextCommand[2]);
-                CPH.SetGlobalVar("next_direction", nextCommand[3]);
+//                CPH.SetGlobalVar("next_direction", nextCommand[3]);
             }
             else
             {
@@ -66,7 +66,7 @@ public class CPHInline
                 CPH.SetGlobalVar("next_user", null);
                 CPH.SetGlobalVar("next_color", null);
                 CPH.SetGlobalVar("next_mode", null);
-                CPH.SetGlobalVar("next_direction", null);
+//                CPH.SetGlobalVar("next_direction", null);
             }
 
             // Remove the first item from the priorityOrder list
@@ -83,11 +83,12 @@ public class CPHInline
 
             // Log and process the first command from commandOrder
             CPH.LogInfo("Regular command: " + string.Join(", ", firstCommand));
-            CPH.SendMessage($"Now serving ~ mode: {firstCommand[2]} with color: {firstCommand[1]} in the direction: {firstCommand[3]} for user: {firstCommand[0]}");
+//            CPH.SendMessage($"Now serving ~ mode: {firstCommand[2]} with color: {firstCommand[1]} in the direction: {firstCommand[3]} for user: {firstCommand[0]}");
+            CPH.SendMessage($"Now serving ~ mode: {firstCommand[2]} with color: {firstCommand[1]} for user: {firstCommand[0]}");
             CPH.SetGlobalVar("current_user", firstCommand[0]);
             CPH.SetGlobalVar("current_color", firstCommand[1]);
             CPH.SetGlobalVar("current_mode", firstCommand[2]);
-            CPH.SetGlobalVar("current_direction", firstCommand[3]);
+//            CPH.SetGlobalVar("current_direction", firstCommand[3]);
             CPH.SetGlobalVar("priority_timer", 0);
 
 
@@ -101,7 +102,7 @@ public class CPHInline
                 CPH.SetGlobalVar("next_user", nextCommand[0]);
                 CPH.SetGlobalVar("next_color", nextCommand[1]);
                 CPH.SetGlobalVar("next_mode", nextCommand[2]);
-                CPH.SetGlobalVar("next_direction", nextCommand[3]);
+//                CPH.SetGlobalVar("next_direction", nextCommand[3]);
                 CPH.SetGlobalVar("priority_timer", 0);
 
             }
@@ -111,7 +112,7 @@ public class CPHInline
                 CPH.SetGlobalVar("next_user", null);
                 CPH.SetGlobalVar("next_color", null);
                 CPH.SetGlobalVar("next_mode", null);
-                CPH.SetGlobalVar("next_direction", null);
+//                CPH.SetGlobalVar("next_direction", null);
                 CPH.SetGlobalVar("priority_timer", 0);
 
             }
@@ -129,7 +130,7 @@ public class CPHInline
             CPH.SetGlobalVar("next_user", null);
             CPH.SetGlobalVar("next_color", null);
             CPH.SetGlobalVar("next_mode", null);
-            CPH.SetGlobalVar("next_direction", null);
+//            CPH.SetGlobalVar("next_direction", null);
             CPH.SetGlobalVar("priority_timer", 0);
 
         }

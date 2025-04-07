@@ -7,9 +7,12 @@ HOST = "localhost"
 PORT = 65432  # Same as in arduino_server.py
 
 
-def send_to_server(rpm, color, direction):
+def send_to_server(rpm, color, direction, shutter=None):
     """Sends rpm and color command to the always-running Python server."""
-    data = {"rpm": rpm, "color": color, "direction": direction}
+    data = {
+        "rpm": rpm,
+        "color": color,
+        "direction": direction}
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.connect((HOST, PORT))
