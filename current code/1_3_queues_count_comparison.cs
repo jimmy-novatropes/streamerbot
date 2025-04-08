@@ -14,19 +14,28 @@ public class CPHInline
         var commandOrder = CPH.GetGlobalVar<List<List<string>>>("order") ?? new List<List<string>>();
 		int timerActive = CPH.GetGlobalVar<int>("timer_active");
 
-		if ((priorityOrder.Count > 0 || commandOrder.Count > 0) && timerActive > 0)
+		if ((priorityOrder.Count > 0 || commandOrder.Count > 0) && timerActive == 0)
 		{
-			CPH.SetGlobalVar("timer_active", 55);
-			return true;
-			}
-        else if (priorityOrder.Count > 0 || commandOrder.Count > 0){
-			// Retrieve the current values from the global variables
 			CPH.SetGlobalVar("timer_active", 3);
-			return true;
+			}
+        else if (timerActive == 3){
+			// Retrieve the current values from the global variables
+			CPH.SetGlobalVar("timer_active", 55);
 		}
 		else{
 		CPH.SetGlobalVar("timer_active", 0);
-		return true;
 		}
+
+		// Check if either queue is less than 2
+        if ((priorityOrder.Count > 0 || commandOrder.Count > 0) && timerActive != 55)
+        {
+//			CPH.SetGlobalVar("timer_active", 4);
+            // Perform your logic here when either variable is less than 2
+            CPH.LogDebug("Either the regular queue or priority queue has less than 2.");
+
+            // You can also trigger actions or further logic here:  4 - Command Timer aed0fd9f-10b7-4f7f-83d3-eaa5775c4739
+            CPH.RunActionById("aed0fd9f-10b7-4f7f-83d3-eaa5775c4739");
+        }
+        return true;
     }
 }

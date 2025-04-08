@@ -38,6 +38,8 @@ public class CPHInline
 
             // You can also trigger actions or further logic here 8 - Send Commands to Novatrope -         3dd43bd4-961c-4ed1-96c0-06420b2eb00d
             CPH.RunActionById("3dd43bd4-961c-4ed1-96c0-06420b2eb00d");
+            CPH.SetGlobalVar("timer_currently_running", 1);
+
             //3 - Update Text Widgets                             113c947b-8a9d-44e2-892d-4a7a639fafee
             CPH.RunActionById("113c947b-8a9d-44e2-892d-4a7a639fafee");
 
