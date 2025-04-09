@@ -14571,3 +14571,61 @@ Command received
 2025-04-08 17:37:50,396 - DEBUG - http://192.168.4.248:5000 "POST /set/saturation?value=90 HTTP/1.1" 200 41
 2025-04-08 17:37:50,409 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
 2025-04-08 17:37:50,496 - DEBUG - http://192.168.4.248:5000 "POST /set/hue?value=0 HTTP/1.1" 200 41
+2025-04-08 18:36:21,985 - INFO - Server initialized with 3 Arduino connections
+2025-04-08 18:36:21,988 - INFO - Server running on localhost:65432
+2025-04-08 18:38:21,544 - INFO - Connection from ('127.0.0.1', 60340)
+2025-04-08 18:38:21,550 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:38:22,944 - DEBUG - http://192.168.4.248:5000 "POST /set/exposure?value=20 HTTP/1.1" 200 41
+2025-04-08 18:38:22,961 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:38:23,045 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance_auto?value=1 HTTP/1.1" 200 41
+2025-04-08 18:38:23,052 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:38:23,133 - DEBUG - http://192.168.4.248:5000 "POST /set/brightness?value=-5 HTTP/1.1" 200 41
+2025-04-08 18:38:23,145 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:38:23,251 - DEBUG - http://192.168.4.248:5000 "POST /set/contrast?value=40 HTTP/1.1" 200 41
+2025-04-08 18:38:23,274 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:38:23,350 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance?value=4500 HTTP/1.1" 200 131
+2025-04-08 18:38:23,361 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:38:23,449 - DEBUG - http://192.168.4.248:5000 "POST /set/saturation?value=90 HTTP/1.1" 200 41
+2025-04-08 18:38:23,454 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:38:23,533 - DEBUG - http://192.168.4.248:5000 "POST /set/hue?value=10 HTTP/1.1" 200 41
+2025-04-08 18:38:23,545 - WARNING - Serial connection LED Arduino is not available
+2025-04-08 18:38:23,545 - WARNING - Serial connection Motor Arduino is not available
+2025-04-08 18:38:23,545 - WARNING - Serial connection Shutter Arduino is not available
+2025-04-08 18:55:37,291 - INFO - Server initialized with 3 Arduino connections
+2025-04-08 18:55:37,294 - INFO - Server running on localhost:65432
+2025-04-08 18:55:41,918 - INFO - Connection from ('127.0.0.1', 61081)
+2025-04-08 18:55:41,922 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:55:42,019 - DEBUG - http://192.168.4.248:5000 "POST /set/exposure?value=20 HTTP/1.1" 200 41
+2025-04-08 18:55:42,033 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:55:42,094 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance_auto?value=1 HTTP/1.1" 200 41
+2025-04-08 18:55:42,108 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:55:42,190 - DEBUG - http://192.168.4.248:5000 "POST /set/brightness?value=-5 HTTP/1.1" 200 41
+2025-04-08 18:55:42,201 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:55:42,275 - DEBUG - http://192.168.4.248:5000 "POST /set/contrast?value=40 HTTP/1.1" 200 41
+2025-04-08 18:55:42,289 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:55:42,354 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance?value=4500 HTTP/1.1" 200 131
+2025-04-08 18:55:42,365 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:55:42,445 - DEBUG - http://192.168.4.248:5000 "POST /set/saturation?value=90 HTTP/1.1" 200 41
+2025-04-08 18:55:42,458 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:55:42,534 - DEBUG - http://192.168.4.248:5000 "POST /set/hue?value=10 HTTP/1.1" 200 41
+2025-04-08 18:55:42,546 - WARNING - Serial connection LED Arduino is not available
+2025-04-08 18:55:42,546 - WARNING - Serial connection Motor Arduino is not available
+2025-04-08 18:55:42,546 - WARNING - Serial connection Shutter Arduino is not available
+2025-04-08 18:56:41,609 - INFO - Connection from ('127.0.0.1', 61112)
+2025-04-08 18:56:41,611 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:56:41,706 - DEBUG - http://192.168.4.248:5000 "POST /set/exposure?value=20 HTTP/1.1" 200 41
+2025-04-08 18:56:41,718 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:56:41,801 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance_auto?value=0 HTTP/1.1" 200 41
+2025-04-08 18:56:41,827 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:56:41,904 - DEBUG - http://192.168.4.248:5000 "POST /set/brightness?value=-10 HTTP/1.1" 200 41
+2025-04-08 18:56:41,917 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:56:41,998 - DEBUG - http://192.168.4.248:5000 "POST /set/contrast?value=35 HTTP/1.1" 200 41
+2025-04-08 18:56:42,009 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:56:42,094 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance?value=4500 HTTP/1.1" 200 41
+2025-04-08 18:56:42,107 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:56:42,188 - DEBUG - http://192.168.4.248:5000 "POST /set/saturation?value=100 HTTP/1.1" 200 41
+2025-04-08 18:56:42,198 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 18:56:42,277 - DEBUG - http://192.168.4.248:5000 "POST /set/hue?value=-40 HTTP/1.1" 200 41
+2025-04-08 18:56:42,292 - WARNING - Serial connection LED Arduino is not available
+2025-04-08 18:56:42,292 - WARNING - Serial connection Motor Arduino is not available
+2025-04-08 18:56:42,292 - WARNING - Serial connection Shutter Arduino is not available

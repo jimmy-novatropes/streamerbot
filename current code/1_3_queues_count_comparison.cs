@@ -22,9 +22,6 @@ public class CPHInline
 			// Retrieve the current values from the global variables
 			CPH.SetGlobalVar("timer_active", 55);
 		}
-		else{
-		CPH.SetGlobalVar("timer_active", 0);
-		}
 
 		// Check if either queue is less than 2
         if ((priorityOrder.Count > 0 || commandOrder.Count > 0) && timerActive != 55)

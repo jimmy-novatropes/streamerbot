@@ -7,7 +7,9 @@ using System;
 public class CPHInline
 {
     public bool Execute()
+
     {
+
         // Retrieve the current values from the global variables
         int timerActive = CPH.GetGlobalVar<int>("timer_active");
         string regularQueueStr = CPH.GetGlobalVar<string>("regular_queue_count");

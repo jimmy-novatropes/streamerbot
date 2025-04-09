@@ -212,7 +212,7 @@ public class CPHInline
     private bool ProcessModeAndColor(int mode, string color, string userName)
     {
         string[] supportedColors = { "red", "green", "blue", "yellow", "purple", "cyan", "magenta", "white" };
-        int[] supportedModes = { 1, 2, 3, 4, 5, 6, 7, -1, -2, -3, -4, -5, -6, -7 };
+        int[] supportedModes = { 1, 2, 3, 4, 5, 6, -1, -2, -3, -4, -5, -6 };
 //        CPH.LogInfo($"-----Adding  mode {mode}  with color {color} and direction {direction} for @{userName}-------");
         CPH.LogInfo($"-----Adding  mode {mode}  with color {color} for @{userName}-------");
 

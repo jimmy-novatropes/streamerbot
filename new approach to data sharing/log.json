@@ -43,5 +43,32 @@
         "shutter_instructions": null,
         "source": "streamerbot_script",
         "timestamp": "2025-04-08T17:37:49.723185"
+    },
+    "entry_20250408183821": {
+        "color": "blue",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T18:38:21.545956"
+    },
+    "entry_20250408185541": {
+        "color": "blue",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T18:55:41.918355"
+    },
+    "entry_20250408185641": {
+        "color": "green",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T18:56:41.609989"
     }
 }
