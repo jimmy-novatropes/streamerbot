@@ -10,26 +10,7 @@ import os
 from support_functions import (save_or_extend_json, clean_settings,
                                color_to_rgb_string, find_arduinos,
                                set_camera_setting, find_color_settings)
-
-"""
-Sub Queue: ~priority_queue_count~ people 
-Final notes collection:
-{'color': 'white', 'awb': 0, 'notes': 'good, but a tad purple'}
-{'color': 'white', 'awb': 0, 'notes': 'purpleish'}
-{'color': 'white', 'awb': 1, 'notes': 'greenish'}
-{'color': 'red', 'awb': 0, 'notes': 'darkred'}
-{'color': 'red', 'awb': 1, 'notes': 'not red but light red to orange'}
-{'color': 'green', 'awb': 0, 'notes': 'intense green'}
-{'color': 'green', 'awb': 1, 'notes': 'redish hue around sculpture'}
-{'color': 'blue', 'awb': 0, 'notes': 'hard to see deep blue'}
-{'color': 'blue', 'awb': 1, 'notes': 'easier to see but reddish hue around sculpture'}
-{'color': 'yellow', 'awb': 0, 'notes': 'good yellow'}
-{'color': 'yellow', 'awb': 1, 'notes': 'greenish yellow'}
-{'color': 'magenta', 'awb': 0, 'notes': 'blueish magenta'}
-{'color': 'magenta', 'awb': 1, 'notes': 'lighter magenta with green hue around sculpture'}
-{'color': 'cyan', 'awb': 0, 'notes': 'bright cyan'}
-{'color': 'cyan', 'awb': 1, 'notes': 'greenish cyan with red hue around it, looks bad'}
-"""
+from server_settings import (counter_color_values, modes_2_rpm)
 
 logging.basicConfig(
     filename='log.txt', level=logging.DEBUG,
@@ -45,33 +26,9 @@ ser3 = arduino_ports["shutter"]  # Arduino for Shutter and LED control
 # Server Socket Details
 HOST = "localhost"
 PORT = 65432
-color_counter_vals = {
-    "white": [1, 0],
-    "red": [1750, 0],
-    "yellow": [511, 0],
-    "green": [767, 0],
-    "cyan": [1023, 0],
-    "blue": [1279, 1],
-    "magenta": [1535, 0],
-    "purple": [1535, 0],
-}
+color_counter_vals = counter_color_values()
 
-mode_2_rpm = {
-    #"-7": [820, "forward"],
-    "-6": [945, "backward"],
-    "-5": [265, "backward"],
-    "-4": [1375, "backward"], #same as 820
-    "-3": [425, "forward"],
-    "-2": [685, "backward"],
-    "-1": [1118, "forward"],
-    "1": [1118, "backward"],
-    "2": [685, "forward"],
-    "3": [425, "backward"],
-    "4": [1375, "forward"],
-    "5": [265, "forward"],
-    "6": [945, "forward"]
-    #"7": [820, "backward"], #same as 1375 but rougher
-}
+mode_2_rpm = modes_2_rpm()
 settings_json = "server_settings.json"
 if os.path.exists(settings_json):
     with open(settings_json, "r") as f:

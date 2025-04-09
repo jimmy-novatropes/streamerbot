@@ -6,6 +6,28 @@ import serial
 import serial.tools.list_ports
 import time
 
+
+
+"""
+Sub Queue: ~priority_queue_count~ people 
+Final notes collection:
+{'color': 'white', 'awb': 0, 'notes': 'good, but a tad purple'}
+{'color': 'white', 'awb': 0, 'notes': 'purpleish'}
+{'color': 'white', 'awb': 1, 'notes': 'greenish'}
+{'color': 'red', 'awb': 0, 'notes': 'darkred'}
+{'color': 'red', 'awb': 1, 'notes': 'not red but light red to orange'}
+{'color': 'green', 'awb': 0, 'notes': 'intense green'}
+{'color': 'green', 'awb': 1, 'notes': 'redish hue around sculpture'}
+{'color': 'blue', 'awb': 0, 'notes': 'hard to see deep blue'}
+{'color': 'blue', 'awb': 1, 'notes': 'easier to see but reddish hue around sculpture'}
+{'color': 'yellow', 'awb': 0, 'notes': 'good yellow'}
+{'color': 'yellow', 'awb': 1, 'notes': 'greenish yellow'}
+{'color': 'magenta', 'awb': 0, 'notes': 'blueish magenta'}
+{'color': 'magenta', 'awb': 1, 'notes': 'lighter magenta with green hue around sculpture'}
+{'color': 'cyan', 'awb': 0, 'notes': 'bright cyan'}
+{'color': 'cyan', 'awb': 1, 'notes': 'greenish cyan with red hue around it, looks bad'}
+"""
+
 BASE_URL = "http://192.168.4.248:5000/set"
 color_counter_vals = {
     "white": [1, 0],

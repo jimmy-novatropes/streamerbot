@@ -7,5 +7,41 @@
         "shutter_instructions": null,
         "source": "streamerbot_script",
         "timestamp": "2025-04-08T17:22:55.424653"
+    },
+    "entry_20250408173232": {
+        "color": "red",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T17:32:32.159041"
+    },
+    "entry_20250408173331": {
+        "color": "yellow",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T17:33:31.809154"
+    },
+    "entry_20250408173431": {
+        "color": "cyan",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T17:34:31.300034"
+    },
+    "entry_20250408173749": {
+        "color": "red",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T17:37:49.723185"
     }
 }
