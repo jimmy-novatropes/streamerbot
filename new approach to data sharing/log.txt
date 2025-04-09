@@ -14500,3 +14500,18 @@ Command received
 2025-04-08 13:09:34,216 - INFO - Received response from Arduino 1: No response
 2025-04-08 13:09:34,324 - INFO - Received response from Arduino 2: No response
 2025-04-08 13:09:34,434 - INFO - Received response from Arduino 3: No response
+2025-04-08 17:15:03,389 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 17:22:55,427 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 17:22:56,857 - DEBUG - http://192.168.4.248:5000 "POST /set/exposure?value=20 HTTP/1.1" 200 41
+2025-04-08 17:22:56,871 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 17:22:56,947 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance_auto?value=0 HTTP/1.1" 200 41
+2025-04-08 17:22:56,963 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 17:22:57,035 - DEBUG - http://192.168.4.248:5000 "POST /set/brightness?value=-10 HTTP/1.1" 200 41
+2025-04-08 17:22:57,040 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 17:22:57,134 - DEBUG - http://192.168.4.248:5000 "POST /set/contrast?value=35 HTTP/1.1" 200 41
+2025-04-08 17:22:57,151 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 17:22:57,271 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance?value=4500 HTTP/1.1" 200 41
+2025-04-08 17:22:57,273 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 17:22:57,337 - DEBUG - http://192.168.4.248:5000 "POST /set/saturation?value=100 HTTP/1.1" 200 41
+2025-04-08 17:22:57,347 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-08 17:22:57,433 - DEBUG - http://192.168.4.248:5000 "POST /set/hue?value=-40 HTTP/1.1" 200 41

@@ -7,7 +7,9 @@ import serial.tools.list_ports
 from datetime import datetime
 import requests
 import os
-from support_functions import save_or_extend_json
+from support_functions import (save_or_extend_json, clean_settings,
+                               color_to_rgb_string, find_arduinos,
+                               set_camera_setting, find_color_settings)
 
 """
 Sub Queue: ~priority_queue_count~ people 
@@ -34,137 +36,6 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-BASE_URL = "http://192.168.4.248:5000/set"
-def reverse_lookup(d, value):
-    return next((k for k, v in d.items() if v == value), None)
-
-def set_camera_setting(setting: str, value: int):
-    endpoints = {
-        "auto_exposure": "exposure_auto",
-        "exposure_time_absolute": "exposure",
-        "white_balance_automatic": "white_balance_auto",
-        "brightness": "brightness",
-        "contrast": "contrast",
-        "white_balance_temperature": "white_balance",
-        "saturation": "saturation",
-        "hue": "hue",
-    }
-
-    ranges = {
-        "auto_exposure": (1, 3),
-        "exposure_time_absolute": (1, 5000),
-        "white_balance_automatic": (0, 1),
-        "brightness": (-64, 64),
-        "contrast": (0, 64),
-        "white_balance_temperature": (2800, 6500),
-        "saturation": (0, 128),
-        "hue": (-40, 40),
-    }
-
-    if setting not in endpoints:
-        setting = reverse_lookup(endpoints, setting)
-
-
-    if isinstance(value, bool):
-        value = int(value)
-
-    min_val, max_val = ranges[setting]
-    if not (min_val <= value <= max_val):
-        raise ValueError(f"{setting} must be between {min_val} and {max_val}")
-
-    url = f"{BASE_URL}/{endpoints[setting]}"
-    params = {"value": value}
-    print(f"Setting camera {setting} to {value}. URL: {url}, Params: {params}")
-    response = requests.post(url, params=params)
-
-    return response.status_code, response.text
-
-
-
-def color_to_rgb_string(color):
-    """Convert color name to RGB string. Return None if not recognized."""
-    return color_counter_vals.get(color.lower())
-
-
-# Scan and assign Arduino COM ports
-def find_arduinos():
-    arduinos = {
-        "shutter": None,
-        "led": None,
-        "motor": None
-                }  # Initialize with None
-
-    # available_ports = [port.device for port in serial.tools.list_ports.comports()
-    # Get a list of all available serial ports
-    ports = serial.tools.list_ports.comports()
-
-    # Print details of each port
-    for port in ports:
-        print(
-            f"Device: {port.device}, Description: {port.description}, HWID: {port.hwid}\n")
-
-    available_ports = [
-        port.device for port in serial.tools.list_ports.comports()
-        if
-        "Arduino" in port.description
-        or "ttyUSB" in port.device
-        or "ttyACM" in port.device
-        or "USB-SERIAL CH340" in port.description
-        or "USB Serial Port (COM" in port.description
-        # or "USB Serial Port (COM"
-    ]
-
-    print(f"Available COM ports: {available_ports}")
-
-    for port in available_ports:
-        try:
-            ser = serial.Serial(port, 9600, timeout=5, dsrdtr=False)
-            # ser = serial.Serial(port, 9600, timeout=5, dsrdtr=True)
-            time.sleep(3)  # Allow Arduino to initialize
-
-            ser.write(b"whoareyou\n")  # Ask Arduino for its identifier
-            time.sleep(0.5)
-
-            raw_data = ser.read(ser.in_waiting)  # Read available bytes
-            response = raw_data.decode('utf-8', errors='ignore').strip()  # Decode safely & remove whitespace
-
-            # print(f"Response from {port}: {response}")
-
-            if response in arduinos.keys():
-                if response in arduinos:
-                    arduinos[response] = ser
-                    print(f"Assigned {port} to {response}")
-                else:
-                    ser.close()  # Close if not recognized
-                continue
-
-            for dict_key in arduinos.keys():
-                if dict_key in response:
-                    arduinos[dict_key] = ser
-                    print(f"Assigned {port} to {dict_key}")
-                    continue
-
-
-            if response not in arduinos.keys():
-                counter = 0
-                while ser.in_waiting == 0:
-                    ser.write(b"whoareyou\n")
-                    time.sleep(0.5)
-                    response = ser.read(ser.in_waiting).decode('utf-8').strip()
-                    print("attempt # ", counter)
-                    if response in arduinos.keys():
-                        arduinos[response] = ser
-                        print(f"Assigned {port} to {response}")
-                        break
-                    counter += 1
-                    if counter > 10:
-                        break
-        except serial.SerialException as e:
-            print(f"Could not open {port}: {e}")
-
-    return arduinos
-
-
 # Find Arduinos dynamically
 arduino_ports = find_arduinos()
 ser1 = arduino_ports["led"]  # Arduino for frequency & color
@@ -184,8 +55,6 @@ color_counter_vals = {
     "magenta": [1535, 0],
     "purple": [1535, 0],
 }
-
-
 
 mode_2_rpm = {
     #"-7": [820, "forward"],
@@ -208,43 +77,37 @@ if os.path.exists(settings_json):
     with open(settings_json, "r") as f:
         main_settings = json.load(f)
 
-
-def find_color_settings(color_name, color_data):
-    results = [entry for entry in color_data if entry.get("color_name") == color_name.lower()]
-    return results
-
 color_settings = find_color_settings("white", main_settings)
-def clean_settings(entry):
-    exclude_keys = {
-        "timestamp", "color_name", "color", "rpm",
-        "direction", "shutter_instructions", "comments"
-    }
-    return {
-        k: v for k, v in entry.items()
-        if v not in ("default", "") and k not in exclude_keys
-    }
-
-
 # Create a socket server
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
     server.bind((HOST, PORT))
     server.listen()
     print(f"Server running on {HOST}:{PORT}\n")
-
     while True:
         conn, addr = server.accept()
         with conn:
             data = conn.recv(1024)
             if not data:
                 continue
-
             try:
                 command = json.loads(data.decode())
                 rpm = command.get("rpm")
                 frequency = 60
                 color = command.get("color")
+                direction = None
                 shutter_instructions = None  # Default to None, will be set if provided in command
-
+                log_data = {
+                    "color": color,
+                    "rpm": rpm,
+                    "frequency": frequency,
+                    "direction": direction,
+                    "shutter_instructions": shutter_instructions,
+                }
+                if command.get("source") == "admin_script":
+                    log_data["source"] = "admin_script"
+                else:
+                    log_data["source"] = "streamerbot_script"
+                save_or_extend_json(log_data, "log.json")
 
                 if rpm in mode_2_rpm.keys() and command.get("source") != "admin_script":
                     rpm_true, direction = mode_2_rpm.get(rpm)
@@ -254,8 +117,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                     camera_settings = clean_settings(color_settings[0])
                     for setting, value in camera_settings.items():
                         set_camera_setting(setting, int(value))
-
-
 
                 elif command.get("source") == "admin_script":
 
@@ -279,19 +140,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                     print(f"Invalid RPM: {rpm}. Command not sent.")
                     continue
 
-                log_data = {
-                    "color": color,
-                    "rpm": rpm,
-                    "frequency": frequency,
-                    "direction": direction,
-                    "shutter_instructions": shutter_instructions,
-                }
-                if command.get("source") == "admin_script":
-                    log_data["source"] = "admin_script"
-                else:
-                    log_data["source"] = "streamerbot_script"
-                save_or_extend_json(log_data, "log.json")
-
                 # Get the current timestamp
                 timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 print(f"Received: rpm {rpm}, frequency {frequency}, "
@@ -299,13 +147,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                       f"Shutter Instructions {shutter_instructions}"
                       f"  Timestamp: {timestamp}")
 
-                # rgb_string = color_to_rgb_string(color)
                 if rgb_string is None:
                     logging.error(f"Invalid color: {color}. Command not sent.")
                     print(f"Invalid color: {color}. Command not sent.")
                 else:
-                    # Send to Arduino 1: Frequency & Color
-                    # print("test - 1")
+
                     if ser1 and ser1.is_open:
                         message_arduino1 = f"count{rgb_string}\n"
                         ser1.reset_input_buffer()
@@ -317,13 +163,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                         raw_data1 = ser1.read(ser1.in_waiting)
                         response1 = raw_data1.decode('utf-8').strip() if raw_data1 else "No response"
                         logging.info(f"Received response from Arduino 1: {response1}")
-                        # print(f"Decoded Response from Arduino 1: {response1} \n")
-                    # print("test - 2")
-                    # Send to Arduino 2: RPM
+
                     if ser2 and ser2.is_open:
 
-                        # rpm_true = mode_2_rpm.get(rpm)
-                        # print(f"RPM True: {rpm_true}, RPM: {rpm}")
                         if direction.lower() == "forward":
                             direction = ""
                         elif direction.lower() == "reverse":
@@ -341,51 +183,18 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                         raw_data2 = ser2.read(ser2.in_waiting)
                         response2 = raw_data2.decode('utf-8').strip() if raw_data2 else "No response"
                         logging.info(f"Received response from Arduino 2: {response2}")
-                        # print(f"Decoded Response from Arduino 2: {response2}")
-                        # ================================================================
-                        # time.sleep(2)
-                        # if direction.lower() == "forward":
-                        #     direction = "f"
-                        # elif direction.lower() == "reverse":
-                        #     direction = "b"
-                        # elif direction.lower() == "backward":
-                        #     direction = "b"
-                        # else:
-                        #     print(f"Invalid direction: {direction}. Command not sent.")
-                        #
-                        # if direction in ["f", "b"]:
-                        #     message_arduino2 = f"{direction}\n"
-                        #     ser2.reset_input_buffer()
-                        #     ser2.reset_output_buffer()
-                        #     ser2.write(message_arduino2.encode())
-                        #     print(f"Sent to Arduino 2: {message_arduino2}")
-                        #
-                        #     time.sleep(0.1)
-                        #     raw_data2 = ser2.read(ser2.in_waiting)
-                        #     response2 = raw_data2.decode('utf-8').strip() if raw_data2 else "No response"
-                        #     logging.info(f"Received response from Arduino 2: {response2}")
-                            # print(f"Decoded Response from Arduino 2: {response2}")# Send to Arduino 2: RPM
 
-                    # print("test - 3")
-                    # print(ser3.is_open, ser2.is_open, ser1.is_open)
                     if ser3 and ser3.is_open and shutter_instructions is not None:
-                        # print(f"Shutter Instructions: {shutter_instructions}")
 
                         message_arduino3 = f"{shutter_instructions}\n"
-                        # print(f"Message to Arduino 3: {message_arduino3}")
-
                         ser3.reset_input_buffer()
                         ser3.reset_output_buffer()
                         ser3.write(message_arduino3.encode())
                         print(f"Sent to Arduino 3: {message_arduino3}")
-
                         time.sleep(0.1)
                         raw_data3 = ser3.read(ser3.in_waiting)
                         response3 = raw_data3.decode('utf-8').strip() if raw_data3 else "No response"
                         logging.info(f"Received response from Arduino 3: {response3}")
-                        # print(f"Decoded Response from Arduino 3: {response3}")
-                        # ================================================================
-
 
             except json.JSONDecodeError:
                 print("Error: Received invalid JSON")
