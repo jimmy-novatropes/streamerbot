@@ -7,6 +7,7 @@ import serial.tools.list_ports
 from datetime import datetime
 import requests
 import os
+from support_functions import save_or_extend_json
 
 """
 Sub Queue: ~priority_queue_count~ people 
@@ -278,6 +279,18 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                     print(f"Invalid RPM: {rpm}. Command not sent.")
                     continue
 
+                log_data = {
+                    "color": color,
+                    "rpm": rpm,
+                    "frequency": frequency,
+                    "direction": direction,
+                    "shutter_instructions": shutter_instructions,
+                }
+                if command.get("source") == "admin_script":
+                    log_data["source"] = "admin_script"
+                else:
+                    log_data["source"] = "streamerbot_script"
+                save_or_extend_json(log_data, "log.json")
 
                 # Get the current timestamp
                 timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
