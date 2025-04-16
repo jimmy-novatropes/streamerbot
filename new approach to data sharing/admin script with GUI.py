@@ -4,6 +4,7 @@ import socket
 import json
 import os
 from datetime import datetime
+import subprocess
 
 HOST = "localhost"
 PORT = 65432
@@ -11,6 +12,15 @@ SETTINGS_FILE = "saved_settings.json"
 COLOR_FILE = "colors.json"
 RPM_FILE = "rpm.json"
 
+
+def run_streamerbot_script():
+    try:
+        subprocess.Popen([
+            r"C:\\Users\\BloomTech\\Documents\\Streamer.bot-x64-0.2.6(1)\\Streamer.bot.exe"
+        ])
+        print("Streamer.bot launched.")
+    except Exception as e:
+        print(f"Failed to launch software: {e}")
 # Load color values
 def load_colors():
     if os.path.exists(COLOR_FILE):
@@ -30,8 +40,6 @@ def load_rpm_options():
             except json.JSONDecodeError:
                 print("Invalid rpm JSON, using default.")
     return {}
-
-
 
 color_counter_vals = load_colors()
 mode_2_rpm = load_rpm_options()
@@ -76,7 +84,7 @@ def on_send():
             print(f"{setting}: default")
         else:
             send_to_server(rpm, color, direction, shutter, setting, value)
-    send_to_server(rpm, color, direction, shutter)  # Send without camera settings for backward compatibility
+    send_to_server(rpm, color, direction, shutter)
 
 def on_save():
     selected_color = color_var.get()
@@ -119,7 +127,6 @@ def on_save():
         json.dump(all_data, f, indent=4)
     print("Settings saved.")
 
-    # Update colors.json with new value for selected color
     try:
         new_color_val = int(color_value)
         color_counter_vals[selected_color] = new_color_val
@@ -128,7 +135,16 @@ def on_save():
         print(f"Updated color '{selected_color}' to {new_color_val} in colors.json.")
     except ValueError:
         print(f"Invalid number entered for color '{selected_color}', not saved.")
-# GUI Setup
+
+def run_server_script():
+    try:
+        subprocess.Popen(
+            ["python",
+             r"C:\Users\BloomTech\Documents\twitch streaming\streamerbot\new approach to data sharing\server script.py"])  # Change to your script
+        print("External script started.")
+    except Exception as e:
+        print(f"Failed to start script: {e}")
+
 root = tk.Tk()
 root.title("Command Sender")
 root.configure(bg='#2871C9')
@@ -222,7 +238,13 @@ send_btn.grid(row=row, column=3, **pad)
 save_btn = ttk.Button(container, text="Save Settings", command=on_save, style="RoundedButton.TButton")
 save_btn.grid(row=row, column=4, **pad)
 
-row += 1
+run_btn = ttk.Button(container, text="Start Twitch Python Server ", command=run_server_script, style="RoundedButton.TButton")
+run_btn.grid(row=row, column=5, **pad)
 
+run_btn = ttk.Button(container, text="Run Script", command=run_streamerbot_script
+                     , style="RoundedButton.TButton")
+run_btn.grid(row=row, column=6, columnspan=2, **pad)
+
+row += 1
 
 root.mainloop()

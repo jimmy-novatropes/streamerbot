@@ -70,5 +70,428 @@
         "shutter_instructions": null,
         "source": "streamerbot_script",
         "timestamp": "2025-04-08T18:56:41.609989"
+    },
+    "entry_20250408191620": {
+        "color": "blue",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T19:16:20.854576"
+    },
+    "entry_20250408191720": {
+        "color": "cyan",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T19:17:20.724298"
+    },
+    "entry_20250408192844": {
+        "color": "cyan",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-08T19:28:44.027113"
+    },
+    "entry_20250414154847": {
+        "color": "blue",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T15:48:47.575618"
+    },
+    "entry_20250414154953": {
+        "color": "yellow",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T15:49:53.556150"
+    },
+    "entry_20250414155051": {
+        "color": "green",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T15:50:51.879132"
+    },
+    "entry_20250414160223": {
+        "color": "yellow",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T16:02:23.461394"
+    },
+    "entry_20250414160321": {
+        "color": "green",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T16:03:21.878916"
+    },
+    "entry_20250414160632": {
+        "color": "yellow",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T16:06:32.025490"
+    },
+    "entry_20250414160730": {
+        "color": "green",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T16:07:30.212865"
+    },
+    "entry_20250414170607": {
+        "color": "red",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:06:07.499693"
+    },
+    "entry_20250414170707": {
+        "color": "blue",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:07:07.519008"
+    },
+    "entry_20250414170857": {
+        "color": "red",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:08:57.566070"
+    },
+    "entry_20250414170956": {
+        "color": "yellow",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:09:56.811610"
+    },
+    "entry_20250414173009": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T17:30:09.132107"
+    },
+    "entry_20250414173029": {
+        "color": "yellow",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:30:29.793484"
+    },
+    "entry_20250414173307": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T17:33:07.318657"
+    },
+    "entry_20250414173320": {
+        "color": "red",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:33:20.654876"
+    },
+    "entry_20250414173418": {
+        "color": "blue",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:34:18.074340"
+    },
+    "entry_20250414173517": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T17:35:17.478885"
+    },
+    "entry_20250414173538": {
+        "color": "cyan",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:35:38.648426"
+    },
+    "entry_20250414173953": {
+        "color": "red",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:39:53.950892"
+    },
+    "entry_20250414174028": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T17:40:28.165122"
+    },
+    "entry_20250414174052": {
+        "color": "cyan",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:40:52.929076"
+    },
+    "entry_20250414174151": {
+        "color": "red",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:41:51.658375"
+    },
+    "entry_20250414174206": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T17:42:06.191407"
+    },
+    "entry_20250414174250": {
+        "color": "cyan",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:42:50.906788"
+    },
+    "entry_20250414174445": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T17:44:45.257200"
+    },
+    "entry_20250414174542": {
+        "color": "red",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:45:42.527749"
+    },
+    "entry_20250414174626": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T17:46:26.388226"
+    },
+    "entry_20250414174803": {
+        "color": "green",
+        "rpm": "-2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:48:03.556662"
+    },
+    "entry_20250414174902": {
+        "color": "green",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:49:02.309290"
+    },
+    "entry_20250414175356": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T17:53:56.017657"
+    },
+    "entry_20250414175530": {
+        "color": "red",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:55:30.872194"
+    },
+    "entry_20250414175546": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T17:55:46.161678"
+    },
+    "entry_20250414175659": {
+        "color": "red",
+        "rpm": "-2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T17:56:59.501335"
+    },
+    "entry_20250414180038": {
+        "color": "yellow",
+        "rpm": "-3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T18:00:38.991319"
+    },
+    "entry_20250414180100": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T18:01:00.743130"
+    },
+    "entry_20250414180136": {
+        "color": "cyan",
+        "rpm": "-3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T18:01:36.869427"
+    },
+    "entry_20250414180157": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-14T18:01:57.569196"
+    },
+    "entry_20250414180235": {
+        "color": "red",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-14T18:02:35.412258"
+    },
+    "entry_20250415172415": {
+        "color": "blue",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-15T17:24:15.483393"
+    },
+    "entry_20250415172516": {
+        "color": "red",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-15T17:25:16.076098"
+    },
+    "entry_20250415172527": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-15T17:25:27.835267"
+    },
+    "entry_20250415172615": {
+        "color": "yellow",
+        "rpm": "-4",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-15T17:26:15.885736"
+    },
+    "entry_20250415172715": {
+        "color": "cyan",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-15T17:27:15.387874"
+    },
+    "entry_20250415172814": {
+        "color": "magenta",
+        "rpm": "-5",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-15T17:28:14.831833"
     }
 }

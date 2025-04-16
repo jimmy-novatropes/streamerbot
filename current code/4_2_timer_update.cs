@@ -1,78 +1,123 @@
 /*
 This C# script is designed for use in **Streamer.bot** to manage a countdown
 timer based on the status of two command queues: `priority_order` and `order`.
-It first determines the appropriate duration for the timer (`10`
-or `20` seconds) depending on whether a `priority_timer` is active. I
-f both queues are empty, it cancels the timer by setting it to `0`.
-When the timer is activated, the script enters a loop that updates a global
-`time_left` variable every 5 seconds, formats the remaining time as `MM:SS`,
-and triggers specific actions to update UI elements or widgets. Once the
-timer finishes, it resets `time_left` and can trigger a final update.
-If no users are detected in the queues, the timer is not started, and a
-log message is written for reference.
+It first determines the appropriate duration for the timer based on whether a 
+`priority_timer` is active. If both queues are empty, it cancels the timer by 
+setting it to `0`. When the timer is activated, the script enters a loop that 
+updates a global `time_left` variable every 5 seconds, formats the remaining 
+time as `MM:SS`, and triggers specific actions to update UI elements or widgets.
 */
 using System;
-using System.Threading; // Import the threading library for sleep functionality
+using System.Threading;
 using System.Collections.Generic;
 
 public class CPHInline
 {
+    // Action IDs for UI updates
+    private const string COMMAND_TIMER_DISPLAY_ACTION = "3269fdd1-f0f0-4141-b273-b9b84c7170d6";
+    private const string TEXT_WIDGETS_ACTION = "113c947b-8a9d-44e2-892d-4a7a639fafee";
+    
+    // Default values in case global variables are not set
+    private const int DEFAULT_PRIORITY_TIME = 20;
+    private const int DEFAULT_FREE_TIME = 50;
+    private const int SLEEP_INTERVAL = 4900; // 4.9 seconds to account for action delay
+
     public bool Execute()
     {
-		// CPH.SendMessage($"Updating data for queue");
-		int priorityTimer = CPH.GetGlobalVar<int>("priority_timer");
-		string regularQueueStr = CPH.GetGlobalVar<string>("regular_queue_count");
-        string prioQueueStr = CPH.GetGlobalVar<string>("priority_queue_count");
-		int timeLeft;
-		if (priorityTimer == 1)
-		{ timeLeft = 20; // 5:00 in seconds
-		}
-		else
-		{ timeLeft = 50; // 5:00 in seconds
-		}
-        // Retrieve the existing lists for both 'priority_order' and 'order'
-        var priorityOrder = CPH.GetGlobalVar<List<List<string>>>("priority_order") ?? new List<List<string>>();
-        var commandOrder = CPH.GetGlobalVar<List<List<string>>>("order") ?? new List<List<string>>();
-        int timerActive = CPH.GetGlobalVar<int>("timer_active");
-        int timerCurrentlyRunning = CPH.GetGlobalVar<int>("timer_currently_running");
-        if (timerActive > 0)
+        try
         {
-            while (timeLeft > 0)
+            // Get timer configuration
+            int priorityTimer = CPH.GetGlobalVar<int>("priority_timer");
+            string regularQueueStr = CPH.GetGlobalVar<string>("regular_queue_count");
+            string prioQueueStr = CPH.GetGlobalVar<string>("priority_queue_count");
+            
+            // Get timer durations from global variables as strings and convert to integers
+            string priorityTimeStr = CPH.GetGlobalVar<string>("time_left_priority");
+            string freeTimeStr = CPH.GetGlobalVar<string>("time_left_free");
+            
+            int timeLeft;
+            if (priorityTimer == 1)
             {
-                string formattedTime;
-                if (timeLeft < 60)
+                if (string.IsNullOrEmpty(priorityTimeStr) || !int.TryParse(priorityTimeStr, out timeLeft))
                 {
-                    // If less than a minute, display as seconds only (e.g., "45s")
-                    formattedTime = $"{timeLeft} seconds";
+                    CPH.LogError($"Invalid priority timer duration: {priorityTimeStr}. Using default value.");
+                    timeLeft = DEFAULT_PRIORITY_TIME;
                 }
-                else
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(freeTimeStr) || !int.TryParse(freeTimeStr, out timeLeft))
                 {
-                    // Otherwise, display in MM:SS format (e.g., "01:30")
-                    int minutes = timeLeft / 60;
-                    int seconds = timeLeft % 60;
-                    formattedTime = $"{minutes:D2}:{seconds:D2} minutes";
+                    CPH.LogError($"Invalid free timer duration: {freeTimeStr}. Using default value.");
+                    timeLeft = DEFAULT_FREE_TIME;
                 }
-                // Update the global variable with the formatted time
-                CPH.SetGlobalVar("time_left", formattedTime);
-                // Trigger actions to update visuals (e.g., overlays or chat updates)
-                CPH.RunActionById("3269fdd1-f0f0-4141-b273-b9b84c7170d6"); // Update command timer display
-                CPH.RunActionById("113c947b-8a9d-44e2-892d-4a7a639fafee"); // Update text widgets
-                // Wait for 5 seconds (slightly less to offset action delay)
-                Thread.Sleep(4900);
-                // Reduce the timer by 5 seconds
-                timeLeft -= 5;
             }
 
-            // Once the timer reaches 0, you can trigger a final action
+            // Get queue lists
+            var priorityOrder = CPH.GetGlobalVar<List<List<string>>>("priority_order") ?? new List<List<string>>();
+            var commandOrder = CPH.GetGlobalVar<List<List<string>>>("order") ?? new List<List<string>>();
+            
+            // Check if timer should be active
+            int timerActive = CPH.GetGlobalVar<int>("timer_active");
+            int timerCurrentlyRunning = CPH.GetGlobalVar<int>("timer_currently_running");
+
+            if (timerActive <= 0)
+            {
+                CPH.LogDebug("Timer is not active. Exiting.");
+                return true;
+            }
+
+            CPH.LogDebug($"Starting timer with duration: {timeLeft} seconds");
+
+            while (timeLeft > 0)
+            {
+                string formattedTime = FormatTime(timeLeft);
+                
+                // Update the global variable with the formatted time
+                CPH.SetGlobalVar("time_left", formattedTime);
+                
+                // Update UI elements
+                UpdateUI();
+                
+                // Wait for the interval
+                Thread.Sleep(SLEEP_INTERVAL);
+                
+                // Reduce the timer
+                timeLeft -= 5;
+                
+                CPH.LogDebug($"Time remaining: {formattedTime}");
+            }
+
+            // Timer finished
             CPH.SetGlobalVar("time_left", "00:00");
             CPH.SetGlobalVar("timer_ended", 1);
-            // Run an action on every 5-second decrement 5 - Update the command timer display - 3269fdd1-f0f0-4141-b273-b9b84c7170d6
-            CPH.RunActionById("3269fdd1-f0f0-4141-b273-b9b84c7170d6"); // Run Command 5
-            //3 - Update Text Widgets                             113c947b-8a9d-44e2-892d-4a7a639fafee
-			CPH.RunActionById("113c947b-8a9d-44e2-892d-4a7a639fafee");
+            UpdateUI();
+            
+            CPH.LogDebug("Timer completed successfully");
             return true;
         }
-        return true;
+        catch (Exception ex)
+        {
+            CPH.LogError($"Error in timer update: {ex.Message}");
+            return false;
+        }
+    }
 
+    private string FormatTime(int seconds)
+    {
+        if (seconds < 60)
+        {
+            return $"{seconds} seconds";
+        }
+        
+        int minutes = seconds / 60;
+        int remainingSeconds = seconds % 60;
+        return $"{minutes:D2}:{remainingSeconds:D2} minutes";
+    }
+
+    private void UpdateUI()
+    {
+        CPH.RunActionById(COMMAND_TIMER_DISPLAY_ACTION);
+        CPH.RunActionById(TEXT_WIDGETS_ACTION);
     }
 }

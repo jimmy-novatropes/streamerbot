@@ -5,7 +5,7 @@ import requests
 import serial
 import serial.tools.list_ports
 import time
-
+# import psutil
 
 
 """
@@ -206,6 +206,7 @@ def find_arduinos():
                         break
         except serial.SerialException as e:
             print(f"Could not open {port}: {e}")
+            # free_com_port(port)
 
     return arduinos
 
@@ -224,3 +225,20 @@ def clean_settings(entry):
 def find_color_settings(color_name, color_data):
     results = [entry for entry in color_data if entry.get("color_name") == color_name.lower()]
     return results
+
+# def free_com_port(port):
+#     port = port.upper()
+#     for proc in psutil.process_iter(["pid", "name", "cmdline"]):
+#         try:
+#             cmdline_list = proc.info.get("cmdline")
+#             if not cmdline_list:
+#                 continue
+#             cmdline = " ".join(cmdline_list).upper()
+#             if port in cmdline:
+#                 print(f"Killing PID {proc.pid} using {port}")
+#                 proc.kill()
+#                 return True
+#         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+#             continue
+#     print(f"No process found using {port}")
+#     return False

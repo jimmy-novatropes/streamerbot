@@ -1,19 +1,18 @@
 import socket
 import json
-import serial
 import time
 import logging
 import serial.tools.list_ports
 from datetime import datetime
-import requests
 import os
 import sys
-from typing import Dict, Tuple, Optional, Any
+from typing import Dict
 from contextlib import contextmanager
 from support_functions import (save_or_extend_json, clean_settings,
                                color_to_rgb_string, find_arduinos,
                                set_camera_setting, find_color_settings)
 from server_settings import (counter_color_values, modes_2_rpm)
+# import psutil
 
 # Configure logging
 logging.basicConfig(
@@ -207,7 +206,11 @@ class ArduinoServer:
             with self._serial_connection(self.ser3, "Shutter Arduino") as ser:
                 if ser:
                     self._send_to_arduino(ser, f"{shutter_instructions}\n", "Shutter Arduino")
-    
+
+
+
+
+
     def run(self) -> None:
         """Run the server and handle incoming connections."""
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
