@@ -50,7 +50,16 @@ class ArduinoServer:
                 logging.error(f"Failed to parse {self.settings_json}")
                 return {}
         return {}
-    
+
+    def _reset_arduino_connections(self):
+        """Reset all Arduino serial connections."""
+        logging.info("Resetting Arduino COM connections...")
+        self.arduino_ports = find_arduinos()
+        self.ser1 = self.arduino_ports["led"]
+        self.ser2 = self.arduino_ports["motor"]
+        self.ser3 = self.arduino_ports["shutter"]
+        logging.info(f"Reconnected to {len(self.arduino_ports)} Arduinos")
+
     @contextmanager
     def _serial_connection(self, ser: serial.Serial, name: str):
         """Context manager for safe serial communication."""
@@ -87,13 +96,34 @@ class ArduinoServer:
     
     def _process_command(self, command: Dict) -> Dict:
         """Process incoming command and prepare response data."""
+        if command.get("reset_coms"):
+            self._reset_arduino_connections()
+            return {"message": "Arduino COMs reset"}
+        if command.get("load_last_command"):
+            try:
+                with open("last_command.json", "r") as f:
+                    last_command = json.load(f)
+
+                # prevent infinite loop if last_command is also a load command
+                if last_command.get("load_last_command"):
+                    logging.warning(
+                        "⚠️ Skipping replay: last command is a load trigger.")
+                    return {
+                        "message": "Last command was a load trigger. Skipped to avoid loop."}
+
+                print("Loading last command...")
+                return self._process_command(last_command)
+            except Exception as e:
+                logging.error(f"Failed to load last command: {e}")
+                return {"error": "Failed to load last command"}
+
         rpm = command.get("rpm")
         frequency = 60
         color = command.get("color")
         direction = None
         shutter_instructions = None
         rgb_string = None
-        
+
         log_data = {
             "color": color,
             "rpm": rpm,
@@ -230,7 +260,12 @@ class ArduinoServer:
                             
                         try:
                             command = json.loads(data.decode())
+                            if not command.get("load_last_command"):
+                                with open("last_command.json", "w") as f:
+                                    json.dump(command, f, indent=2)
+
                             processed_data = self._process_command(command)
+
                             self._execute_arduino_commands(processed_data)
                             
                             # Log command details

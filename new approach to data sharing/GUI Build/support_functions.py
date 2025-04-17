@@ -35,7 +35,7 @@ mode_2_rpm = load_rpm_options()
 
 HOST = "localhost"
 PORT = 65432
-SETTINGS_FILE = "saved_settings.json"
+SETTINGS_FILE = r"C:\Users\BloomTech\Documents\twitch streaming\streamerbot\new approach to data sharing\GUI Build\saved_settings.json"
 
 
 def on_rpm_mode_change(rpm_mode_var, rpm_entry, direction_var):
@@ -202,6 +202,29 @@ def stop_sculpture(cam_setting=None, cam_value=None):
     if cam_setting and cam_value is not None:
         data["camera_setting"] = cam_setting
         data["camera_value"] = cam_value
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.connect((HOST, PORT))
+            sock.sendall(json.dumps(data).encode())
+    except ConnectionRefusedError:
+        print("Error: Could not connect to the Arduino server.")
+
+
+def reset_arduinos():
+    data = {
+        "reset_coms": True
+    }
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.connect((HOST, PORT))
+            sock.sendall(json.dumps(data).encode())
+    except ConnectionRefusedError:
+        print("Error: Could not connect to the Arduino server.")
+
+def sculpture_change_complete():
+    data = {
+        "load_last_command": True
+    }
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.connect((HOST, PORT))

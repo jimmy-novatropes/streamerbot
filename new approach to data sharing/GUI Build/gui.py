@@ -1,12 +1,153 @@
 import tkinter as tk
 from tkinter import ttk
-from support_functions import (
-    load_colors, load_rpm_options, on_send,
-    on_save, run_server_script,
-    on_rpm_mode_change, run_streamerbot_script,
-    on_color_change, stop_sculpture
-)
 import sys
+import json
+from support_functions import (
+    on_send,
+    on_save,
+    run_server_script,
+    run_streamerbot_script,
+    stop_sculpture,
+    reset_arduinos
+)
+
+# Load color settings from JSON
+# with open("server_settings.json", "r") as f:
+#     color_settings_data = json.load(f)
+
+
+def get_saved_settings():
+    return [
+        {
+            "timestamp": "2025-04-01T15:01:04.005931",
+            "color_name": "white",
+            "color": "0",
+            "rpm": "685",
+            "direction": "forward",
+            "shutter_instructions": "d.9",
+            "comments": "",
+            "exposure": "1",
+            "white_balance_auto": "1",
+            "white_balance": "3000",
+            "brightness": "-15",
+            "contrast": "30",
+            "saturation": "90",
+            "hue": "0"
+        },
+        {
+            "timestamp": "2025-04-01T15:09:23.323638",
+            "color_name": "red",
+            "color": "255",
+            "rpm": "685",
+            "direction": "forward",
+            "shutter_instructions": "d.6",
+            "comments": "",
+            "exposure": "1",
+            "white_balance_auto": "0",
+            "white_balance": "4500",
+            "brightness": "-10",
+            "contrast": "50",
+            "saturation": "60",
+            "hue": "0"
+        },
+        {
+            "timestamp": "2025-04-01T15:16:29.796479",
+            "color_name": "yellow",
+            "color": "380",
+            "rpm": "685",
+            "direction": "forward",
+            "shutter_instructions": "d.7",
+            "comments": "",
+            "exposure": "1",
+            "white_balance_auto": "0",
+            "white_balance": "4500",
+            "brightness": "-10",
+            "contrast": "40",
+            "saturation": "90",
+            "hue": "10"
+        },
+        {
+            "timestamp": "2025-04-01T15:22:46.058417",
+            "color_name": "green",
+            "color": "775",
+            "rpm": "685",
+            "direction": "forward",
+            "shutter_instructions": "d.6",
+            "comments": "",
+            "exposure": "1",
+            "white_balance_auto": "0",
+            "white_balance": "5500",
+            "brightness": "-20",
+            "contrast": "35",
+            "saturation": "50",
+            "hue": "-10"
+        },
+        {
+            "timestamp": "2025-04-01T15:36:31.924739",
+            "color_name": "cyan",
+            "color": "950",
+            "rpm": "685",
+            "direction": "forward",
+            "shutter_instructions": "d.5",
+            "comments": "",
+            "exposure": "1",
+            "white_balance_auto": "0",
+            "white_balance": "4500",
+            "brightness": "-20",
+            "contrast": "35",
+            "saturation": "60",
+            "hue": "-3"
+        },
+        {
+            "timestamp": "2025-04-01T15:43:34.908912",
+            "color_name": "blue",
+            "color": "1300",
+            "rpm": "685",
+            "direction": "forward",
+            "shutter_instructions": "d1.8",
+            "comments": "",
+            "exposure": "1",
+            "white_balance_auto": "1",
+            "white_balance": "6500",
+            "brightness": "-20",
+            "contrast": "30",
+            "saturation": "60",
+            "hue": "-10"
+        },
+        {
+            "timestamp": "2025-04-01T15:58:02.441811",
+            "color_name": "magenta",
+            "color": "1575",
+            "rpm": "685",
+            "direction": "forward",
+            "shutter_instructions": "d.9",
+            "comments": "",
+            "exposure": "1",
+            "white_balance_auto": "0",
+            "white_balance": "5000",
+            "brightness": "-20",
+            "contrast": "35",
+            "saturation": "70",
+            "hue": "20"
+        },
+        {
+            "timestamp": "2025-04-01T16:07:30.438273",
+            "color_name": "purple",
+            "color": "1470",
+            "rpm": "685",
+            "direction": "forward",
+            "shutter_instructions": "d.9",
+            "comments": "",
+            "exposure": "1",
+            "white_balance_auto": "0",
+            "white_balance": "4750",
+            "brightness": "-20",
+            "contrast": "35",
+            "saturation": "80",
+            "hue": "0"
+        }
+    ]
+color_settings_data = get_saved_settings()
 
 class TextRedirector:
     def __init__(self, widget):
@@ -19,21 +160,47 @@ class TextRedirector:
     def flush(self):
         pass
 
+def on_color_change(color_var, color_value_entry, rpm_entry, direction_var, shutter_entry, setting_entries):
+    def handler(event=None):
+        color_name = color_var.get().lower()
+        match = next((c for c in color_settings_data if c["color_name"] == color_name), None)
+        if not match:
+            return
+
+        color_value_entry.delete(0, tk.END)
+        color_value_entry.insert(0, match["color"])
+
+        rpm_entry.delete(0, tk.END)
+        rpm_entry.insert(0, match["rpm"])
+
+        direction_var.set(match["direction"])
+
+        shutter_entry.delete(0, tk.END)
+        shutter_entry.insert(0, match["shutter_instructions"])
+
+        setting_entries["exposure_time_absolute"].delete(0, tk.END)
+        setting_entries["exposure_time_absolute"].insert(0, match["exposure"])
+
+        setting_entries["white_balance_automatic"].delete(0, tk.END)
+        setting_entries["white_balance_automatic"].insert(0, match["white_balance_auto"])
+
+        setting_entries["white_balance_temperature"].delete(0, tk.END)
+        setting_entries["white_balance_temperature"].insert(0, match["white_balance"])
+
+        setting_entries["brightness"].delete(0, tk.END)
+        setting_entries["brightness"].insert(0, match["brightness"])
+
+        setting_entries["contrast"].delete(0, tk.END)
+        setting_entries["contrast"].insert(0, match["contrast"])
+
+        setting_entries["saturation"].delete(0, tk.END)
+        setting_entries["saturation"].insert(0, match["saturation"])
+
+        setting_entries["hue"].delete(0, tk.END)
+        setting_entries["hue"].insert(0, match["hue"])
+    return handler
 
 def start_gui():
-    color_counter_vals = load_colors()
-    mode_2_rpm = load_rpm_options()
-
-    camera_settings = {
-        "exposure_time_absolute": (1, 5000),
-        "white_balance_automatic": (0, 1),
-        "white_balance_temperature": (2800, 6500),
-        "brightness": (-64, 64),
-        "contrast": (0, 64),
-        "saturation": (0, 128),
-        "hue": (-40, 40),
-    }
-
     root = tk.Tk()
     root.title("Command Sender")
     root.configure(bg='#2871C9')
@@ -45,7 +212,6 @@ def start_gui():
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
 
-    # Reduce spacing between columns
     for col in range(4):
         container.grid_columnconfigure(col, weight=1)
 
@@ -61,93 +227,109 @@ def start_gui():
     pad = {'padx': 2, 'pady': 7}
     row = 0
 
-    # RPM Mode
-    ttk.Label(container, text="RPM Mode:").grid(row=row, column=0, sticky="w", **pad)
-    rpm_mode_var = tk.StringVar()
-    rpm_mode_menu = ttk.Combobox(container, textvariable=rpm_mode_var, values=list(mode_2_rpm.keys()), width=8)
-    rpm_mode_menu.grid(row=row, column=1, sticky="w", **pad)
-    rpm_mode_menu.set("2")
-
+    # RPM + Direction
+    ttk.Label(container, text="RPM:").grid(row=row, column=0, sticky="w", **pad)
     rpm_entry = ttk.Entry(container, width=8)
-    rpm_entry.grid(row=row, column=2, sticky="w", **pad)
-    rpm_entry.insert(0, str(mode_2_rpm.get("2", [0])[0]))
+    rpm_entry.grid(row=row, column=1, sticky="w", **pad)
 
     direction_var = tk.StringVar()
-    direction_menu = ttk.Combobox(container, textvariable=direction_var, values=["forward", "backward"], width=8)
-    direction_menu.grid(row=row, column=3, sticky="w", **pad)
-    direction_menu.set(mode_2_rpm.get("2", [0, "forward"])[1])
-    rpm_mode_menu.bind("<<ComboboxSelected>>", on_rpm_mode_change(rpm_mode_var, rpm_entry, direction_var))
+    direction_menu = ttk.Combobox(container, textvariable=direction_var, values=["forward", "backward"], width=10)
+    direction_menu.grid(row=row, column=2, sticky="w", **pad)
     row += 1
 
-    # Color
+    # Color + Value
     ttk.Label(container, text="Color:").grid(row=row, column=0, sticky="w", **pad)
     color_var = tk.StringVar()
-    color_menu = ttk.Combobox(container, textvariable=color_var, values=list(color_counter_vals.keys()), width=8)
+    color_menu = ttk.Combobox(container, textvariable=color_var,
+                               values=[c["color_name"] for c in color_settings_data], width=10)
     color_menu.grid(row=row, column=1, sticky="w", **pad)
-    color_menu.set("white")
 
     color_value_entry = ttk.Entry(container, width=12)
-    color_value_entry.grid(row=row, column=2, columnspan=2, sticky="w", **pad)
-    color_value_entry.insert(0, str(color_counter_vals.get("white", 0)))
-    color_menu.bind("<<ComboboxSelected>>", on_color_change(color_var, color_value_entry))
+    color_value_entry.grid(row=row, column=2, sticky="w", **pad)
     row += 1
 
-    # Shutter
-    ttk.Label(container, text="Shutter:").grid(row=row, column=0, sticky="w",
-                                               **pad)
+    # Shutter + Comments
+    ttk.Label(container, text="Shutter:").grid(row=row, column=0, sticky="w", **pad)
     shutter_entry = ttk.Entry(container)
     shutter_entry.grid(row=row, column=1, **pad)
-    shutter_entry.insert(0, "d.9")
 
-    # Comments on the right of shutter
-    ttk.Label(container, text="Comments:").grid(row=row, column=2,
-                                                sticky="nw", **pad)
-
-
-    row += 1  # Move to next row for settings
-    comments_entry = tk.Text(container, height=8, width=40,
-                             font=("Segoe UI", 14))
-    comments_entry.grid(row=row, column=2, rowspan=6, sticky="n",
-                        **pad)  # Tall, aligned top
+    ttk.Label(container, text="Comments:").grid(row=row, column=2, sticky="nw", **pad)
+    row += 1
+    comments_entry = tk.Text(container, height=8, width=40, font=("Segoe UI", 14))
+    comments_entry.grid(row=row, column=2, rowspan=6, sticky="n", **pad)
 
     # Camera settings
+    camera_settings = {
+        "exposure_time_absolute": (1, 5000),
+        "white_balance_automatic": (0, 1),
+        "white_balance_temperature": (2800, 6500),
+        "brightness": (-64, 64),
+        "contrast": (0, 64),
+        "saturation": (0, 128),
+        "hue": (-40, 40),
+    }
+
     setting_entries = {}
     for setting, (min_val, max_val) in camera_settings.items():
-        ttk.Label(container,
-                  text=f"{setting.replace('_', ' ').title()} ({min_val}-{max_val}):").grid(
-            row=row, column=0, sticky="w", **pad)
+        ttk.Label(container, text=f"{setting.replace('_', ' ').title()} ({min_val}-{max_val}):").grid(row=row, column=0, sticky="w", **pad)
         entry = ttk.Entry(container)
         entry.grid(row=row, column=1, **pad)
         setting_entries[setting] = entry
         row += 1
 
+    # Bind color change
+    color_handler = on_color_change(color_var, color_value_entry, rpm_entry, direction_var, shutter_entry, setting_entries)
+    color_menu.bind("<<ComboboxSelected>>", color_handler)
+
+    # Set initial values using "white"
+    color_var.set("white")
+    color_handler()
+    # Buttons
     button_width = 30
     # Buttons
     ttk.Button(container,
                text="Send Command to Novatrope",
-               command=on_send,
+               command=lambda: on_send(
+                   rpm_entry,
+                   color_value_entry,
+                   direction_var,
+                   shutter_entry, setting_entries
+               ),
                width=button_width,
                style="RoundedButton.TButton").grid(row=row, column=0, **pad)
     ttk.Button(container, text="Save Current Settings", width=button_width,
-               command=on_save, style="RoundedButton.TButton").grid(row=row, column=1, **pad)
+               command=on_save, style="RoundedButton.TButton").grid(row=row,
+                                                                    column=1,
+                                                                    **pad)
     ttk.Button(container,
                text="Start Twitch Python Server",
                width=button_width,
-               command=run_server_script, style="RoundedButton.TButton").grid(row=row, column=2, **pad)
+               command=run_server_script, style="RoundedButton.TButton").grid(
+        row=row, column=2, **pad)
     row += 1
     ttk.Button(container,
                text="Start Stream Apps", width=button_width,
-               command=run_streamerbot_script, style="RoundedButton.TButton").grid(row=row, column=0, **pad)
+               command=run_streamerbot_script,
+               style="RoundedButton.TButton").grid(row=row, column=0, **pad)
 
     ttk.Button(container,
                text="Change the Sculpture", width=button_width,
-               command=stop_sculpture, style="RoundedButton.TButton").grid(row=row, column=1, **pad)
+               command=stop_sculpture, style="RoundedButton.TButton").grid(
+        row=row, column=1, **pad)
+    ttk.Button(container,
+               text="Reset Arduino", width=button_width,
+               command=reset_arduinos, style="RoundedButton.TButton").grid(
+        row=row, column=2, **pad)
+    row += 1
     row += 1
 
-    # Console
+    # Console output
     console_output = tk.Text(container, height=10, width=150, bg="black", fg="white")
-    console_output.grid(row=row, column=0, columnspan=6, padx=10, pady=10)
+    console_output.grid(row=row, column=0, columnspan=4, padx=10, pady=10)
     sys.stdout = TextRedirector(console_output)
     sys.stderr = TextRedirector(console_output)
 
     root.mainloop()
+
+if __name__ == "__main__":
+    start_gui()

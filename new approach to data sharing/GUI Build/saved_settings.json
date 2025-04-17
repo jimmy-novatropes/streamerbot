@@ -10,7 +10,7 @@
         "exposure_time_absolute": "default",
         "white_balance_automatic": "0",
         "white_balance_temperature": "5000",
-        "brightness": "-10",
+        "brightness": "-10",`
         "contrast": "default",
         "saturation": "default",
         "hue": "default"
