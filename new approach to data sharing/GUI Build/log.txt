@@ -1,0 +1,6 @@
+2025-04-09 12:02:35,727 - INFO - Server initialized with 3 Arduino connections
+2025-04-09 12:02:35,730 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
+2025-04-09 12:03:10,006 - INFO - Server initialized with 3 Arduino connections
+2025-04-09 12:03:10,009 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
+2025-04-14 15:41:29,744 - INFO - Server initialized with 3 Arduino connections
+2025-04-14 15:41:29,747 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
