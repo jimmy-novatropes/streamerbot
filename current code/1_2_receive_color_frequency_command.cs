@@ -79,8 +79,14 @@ public class CPHInline
                     }
 
                     // Send an update message since the user is being updated
-//                    CPH.SendMessage($"Updating data for @{userName} Mode:{mode}, color:{color}, direction: {direction}.");
-                    CPH.SendMessage($"Updating data for @{userName} Mode:{mode}, color:{color}.");
+                    if (eventSource == "twitch")
+                    {
+                        CPH.SendMessage($"Updating data for @{userName} Mode:{mode}, color:{color}.");
+                    }
+                    else if (eventSource == "youtube")
+                    {
+                        CPH.SendYouTubeMessage($"Updating data for @{userName} Mode:{mode}, color:{color}.");
+                    }
 
                     userFound = true;
                     break;
@@ -99,14 +105,29 @@ public class CPHInline
 //                    priorityOrder.Add(new List<string> { userName, color, stringMode, direction, bits.ToString() });
 //                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color}, direction {direction} (bits: {bits}).");
                     priorityOrder.Add(new List<string> { userName, color, stringMode, bits.ToString() });
-                    CPH.SendMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color} (bits: {bits}).");
+//                    CPH.TryGetArg("eventSource", out string eventSource);
+                    if (eventSource == "twitch")
+                    {
+                        CPH.SendMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color} (bits: {bits}).");
+                    }
+                    else if (eventSource == "youtube")
+                    {
+                        CPH.SendYouTubeMessage($"[Priority] Adding @{userName} to queue with mode {mode}, color {color} (bits: {bits}).");
+                    }
                 }
                 else if (bits == 0)
                 {
 //                    commandOrder.Add(new List<string> { userName, color, stringMode, direction});
 //                    CPH.SendMessage($"Adding @{userName} to queue with mode {mode}, color {color}, direction {direction}.");
                     commandOrder.Add(new List<string> { userName, color, stringMode});
-                    CPH.SendMessage($"Adding @{userName} to queue with mode {mode}, color {color}.");
+                    if (eventSource == "twitch")
+                    {
+                        CPH.SendMessage($"Adding @{userName} to queue with mode {mode}, color {color}.");
+                    }
+                    else if (eventSource == "youtube")
+                    {
+                        CPH.SendYouTubeMessage($"Adding @{userName} to queue with mode {mode}, color {color}.");
+                    }
                 }
             }
 
@@ -148,6 +169,7 @@ public class CPHInline
     {
         // Retrieve the current user to check if we need to set the next one
         var currentUser = CPH.GetGlobalVar<string>("current_user");
+        CPH.TryGetArg("eventSource", out string eventSource);
 
         // Combine both lists to process them as a single queue
         List<List<string>> combinedQueue = new List<List<string>>();
@@ -215,15 +237,32 @@ public class CPHInline
         int[] supportedModes = { 1, 2, 3, 4, 5, 6, -1, -2, -3, -4, -5, -6 };
 //        CPH.LogInfo($"-----Adding  mode {mode}  with color {color} and direction {direction} for @{userName}-------");
         CPH.LogInfo($"-----Adding  mode {mode}  with color {color} for @{userName}-------");
+        CPH.TryGetArg("eventSource", out string eventSource);
 
         if (!Array.Exists(supportedColors, c => c.Equals(color, StringComparison.OrdinalIgnoreCase)))
         {
-            CPH.SendMessage($"Sorry @{userName}, the color '{color}' is not supported.");
+            if (eventSource == "twitch")
+            {
+                CPH.SendMessage($"Sorry @{userName}, the color '{color}' is not supported.");
+            }
+            else if (eventSource == "youtube")
+            {
+                CPH.SendYouTubeMessage($"Sorry @{userName}, the color '{color}' is not supported.");
+            }
+//            CPH.SendMessage($"Sorry @{userName}, the color '{color}' is not supported.");
             return false;
         }
         if (!Array.Exists(supportedModes, m => m == mode))
         {
-            CPH.SendMessage($"Sorry @{userName}, the mode '{mode}' is not supported.");
+            if (eventSource == "twitch")
+            {
+                CPH.SendMessage($"Sorry @{userName}, the mode '{mode}' is not supported.");
+            }
+            else if (eventSource == "youtube")
+            {
+                CPH.SendYouTubeMessage($"Sorry @{userName}, the mode '{mode}' is not supported.");
+            }
+
             return false;
         }
 

@@ -55,10 +55,19 @@ public class CPHInline
     {
         // Check in priority list first
         int position = FindUserInList(userName, priorityList);
+        CPH.TryGetArg("eventSource", out string eventSource);
         
         if (position >= 0)
         {
-            CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {priorityList.Count} in the priority list.");
+            if (eventSource == "Twitch")
+            {
+                CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {priorityList.Count} in the priority list.");
+            }
+            else if (eventSource == "YouTube")
+            {
+                CPH.SendYouTubeMessage($"{userName}, You are currently at position {position + 1} out of {priorityList.Count} in the priority list.");
+            }
+//            CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {priorityList.Count} in the priority list.");
             return;
         }
         
@@ -67,12 +76,28 @@ public class CPHInline
         
         if (position >= 0)
         {
-            CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {commandList.Count} in the regular list.");
+            if (eventSource == "Twitch")
+            {
+                CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {commandList.Count} in the regular list.");
+            }
+            else if (eventSource == "YouTube")
+            {
+                CPH.SendYouTubeMessage($"{userName}, You are currently at position {position + 1} out of {commandList.Count} in the regular list.");
+            }
+//            CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {commandList.Count} in the regular list.");
             return;
         }
         
         // User not found in either list
-        CPH.SendMessage($"User {userName} not found in priority or regular order lists.");
+        if (eventSource == "Twitch")
+        {
+            CPH.SendMessage($"User {userName} not found in priority or regular order lists.");
+        }
+        else if (eventSource == "YouTube")
+        {
+            CPH.SendYouTubeMessage($"User {userName} not found in priority or regular order lists.");
+        }
+//        CPH.SendMessage($"User {userName} not found in priority or regular order lists.");
     }
     
     /// <summary>

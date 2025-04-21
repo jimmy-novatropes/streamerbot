@@ -24,8 +24,10 @@ public class CPHInline
 
             // Log and process the first command from priorityOrder
             CPH.LogInfo("Priority command: " + string.Join(", ", firstCommand));
-//            CPH.SendMessage($"[Priority] Now serving ~ mode {firstCommand[2]} with color {firstCommand[1]} in the direction {firstCommand[3]} for user {firstCommand[0]}.");
+//
             CPH.SendMessage($"[Priority] Now serving ~ mode {firstCommand[2]} with color {firstCommand[1]} for user {firstCommand[0]}.");
+            CPH.SendYouTubeMessage($"[Priority] Now serving ~ mode {firstCommand[2]} with color {firstCommand[1]} for user {firstCommand[0]}.");
+
 
             CPH.SetGlobalVar("current_user", firstCommand[0]);
             CPH.SetGlobalVar("current_color", firstCommand[1]);
@@ -85,8 +87,11 @@ public class CPHInline
 
             // Log and process the first command from commandOrder
             CPH.LogInfo("Regular command: " + string.Join(", ", firstCommand));
-//            CPH.SendMessage($"Now serving ~ mode: {firstCommand[2]} with color: {firstCommand[1]} in the direction: {firstCommand[3]} for user: {firstCommand[0]}");
+
             CPH.SendMessage($"Now serving ~ mode: {firstCommand[2]} with color: {firstCommand[1]} for user: {firstCommand[0]}");
+            CPH.SendYouTubeMessage($"Now serving ~ mode: {firstCommand[2]} with color: {firstCommand[1]} for user: {firstCommand[0]}");
+
+
             CPH.SetGlobalVar("current_user", firstCommand[0]);
             CPH.SetGlobalVar("current_color", firstCommand[1]);
             CPH.SetGlobalVar("current_mode", firstCommand[2]);

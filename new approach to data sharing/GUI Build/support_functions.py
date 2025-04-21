@@ -55,7 +55,7 @@ def run_streamerbot_script():
         subprocess.Popen([
             r"C:\Program Files\Streamlabs OBS\Streamlabs OBS.exe"
         ])
-        print("StreamLabs launched.")
+        print("++++++++++++++ GUI Command: StreamLabs launched.")
     except Exception as e:
         print(f"Failed to launch software: {e}")
 
@@ -75,6 +75,7 @@ def send_to_server(rpm, color, direction, shutter, cam_setting=None, cam_value=N
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.connect((HOST, PORT))
             sock.sendall(json.dumps(data).encode())
+        print("++++++++++++++ GUI Command: Data sent to Arduino server.")
     except ConnectionRefusedError:
         print("Error: Could not connect to the Arduino server.")
 
@@ -147,7 +148,7 @@ def on_save(color_var, color_value_entry, rpm_entry, direction_var,
         color_counter_vals[selected_color] = new_color_val
         with open(COLOR_FILE, "w") as f:
             json.dump(color_counter_vals, f, indent=4)
-        print(f"Updated color '{selected_color}' to {new_color_val} in colors.json.")
+        print(f"++++++++++++++ GUI Command: Updated color '{selected_color}' to {new_color_val} in colors.json.")
     except ValueError:
         print(f"Invalid number entered for color '{selected_color}', not saved.")
 
@@ -170,6 +171,7 @@ def run_server_script():
                 print(line, end="")  # or redirect to console widget
             for line in proc.stderr:
                 print("ERROR:", line, end="")
+            print("+++++++++++++++ GUI Command: Python Server script started.")
 
         except Exception as e:
             print(f"Failed to start script: {e}")
@@ -206,6 +208,7 @@ def stop_sculpture(cam_setting=None, cam_value=None):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.connect((HOST, PORT))
             sock.sendall(json.dumps(data).encode())
+        print("++++++++++++++ GUI Command: Stopped the sculpture.")
     except ConnectionRefusedError:
         print("Error: Could not connect to the Arduino server.")
 
@@ -218,6 +221,7 @@ def reset_arduinos():
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.connect((HOST, PORT))
             sock.sendall(json.dumps(data).encode())
+        print("++++++++++++++ GUI Command: Resetting Arduino COM ports.")
     except ConnectionRefusedError:
         print("Error: Could not connect to the Arduino server.")
 
@@ -229,5 +233,6 @@ def sculpture_change_complete():
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.connect((HOST, PORT))
             sock.sendall(json.dumps(data).encode())
+        print("++++++++++++++ GUI Command: Sculpture change complete.")
     except ConnectionRefusedError:
         print("Error: Could not connect to the Arduino server.")

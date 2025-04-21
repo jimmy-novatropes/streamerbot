@@ -53,7 +53,7 @@ def get_saved_settings():
         {
             "timestamp": "2025-04-01T15:16:29.796479",
             "color_name": "yellow",
-            "color": "380",
+            "color": "480",
             "rpm": "685",
             "direction": "forward",
             "shutter_instructions": "d.7",

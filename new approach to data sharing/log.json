@@ -15154,5 +15154,806 @@
         "shutter_instructions": null,
         "source": "admin_script",
         "timestamp": "2025-04-16T23:08:16.739892"
+    },
+    "entry_20250417142327": {
+        "color": "0",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:27.947521"
+    },
+    "entry_20250417142328": {
+        "color": "0",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:28.596874"
+    },
+    "entry_20250417142329": {
+        "color": "0",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:29.520666"
+    },
+    "entry_20250417142330": {
+        "color": "0",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:30.920272"
+    },
+    "entry_20250417142331": {
+        "color": "0",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:31.400562"
+    },
+    "entry_20250417142346": {
+        "color": "1300",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:46.723839"
+    },
+    "entry_20250417142347": {
+        "color": "1300",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:47.727965"
+    },
+    "entry_20250417142348": {
+        "color": "1300",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:48.630719"
+    },
+    "entry_20250417142349": {
+        "color": "1300",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:49.568401"
+    },
+    "entry_20250417142350": {
+        "color": "1300",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:23:50.035330"
+    },
+    "entry_20250417142403": {
+        "color": "1575",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:24:03.792946"
+    },
+    "entry_20250417142404": {
+        "color": "1575",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:24:04.791127"
+    },
+    "entry_20250417142405": {
+        "color": "1575",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:24:05.729190"
+    },
+    "entry_20250417142406": {
+        "color": "1575",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:24:06.655411"
+    },
+    "entry_20250417142407": {
+        "color": "1575",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:24:07.125412"
+    },
+    "entry_20250417142502": {
+        "color": "magenta",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-17T14:25:02.934215"
+    },
+    "entry_20250417142724": {
+        "color": "white",
+        "rpm": "-2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-17T14:27:24.547239"
+    },
+    "entry_20250417143021": {
+        "color": "purple",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-17T14:30:21.349059"
+    },
+    "entry_20250417143332": {
+        "color": "yellow",
+        "rpm": "-1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-17T14:33:32.084394"
+    },
+    "entry_20250417143804": {
+        "color": "685",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:38:04.796710"
+    },
+    "entry_20250417143805": {
+        "color": "685",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:38:05.752732"
+    },
+    "entry_20250417143806": {
+        "color": "685",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:38:06.657959"
+    },
+    "entry_20250417143807": {
+        "color": "685",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:38:07.586729"
+    },
+    "entry_20250417143831": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:38:31.729642"
+    },
+    "entry_20250417143832": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:38:32.649055"
+    },
+    "entry_20250417143833": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:38:33.549726"
+    },
+    "entry_20250417143834": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:38:34.926981"
+    },
+    "entry_20250417143914": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:14.646130"
+    },
+    "entry_20250417143915": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:15.576741"
+    },
+    "entry_20250417143916": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:16.953725"
+    },
+    "entry_20250417143917": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:17.406220"
+    },
+    "entry_20250417143921": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:21.816840"
+    },
+    "entry_20250417143922": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:22.718509"
+    },
+    "entry_20250417143923": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:23.637025"
+    },
+    "entry_20250417143924": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:24.541786"
+    },
+    "entry_20250417143925": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:25.610063"
+    },
+    "entry_20250417143926": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:26.546767"
+    },
+    "entry_20250417143927": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:27.932648"
+    },
+    "entry_20250417143928": {
+        "color": "380",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:28.913746"
+    },
+    "entry_20250417143959": {
+        "color": "400",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:39:59.517010"
+    },
+    "entry_20250417144000": {
+        "color": "400",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:00.962531"
+    },
+    "entry_20250417144001": {
+        "color": "400",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:01.972465"
+    },
+    "entry_20250417144002": {
+        "color": "400",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:02.888554"
+    },
+    "entry_20250417144005": {
+        "color": "420",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:05.562201"
+    },
+    "entry_20250417144006": {
+        "color": "420",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:06.970941"
+    },
+    "entry_20250417144007": {
+        "color": "420",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:07.898799"
+    },
+    "entry_20250417144008": {
+        "color": "420",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:08.360777"
+    },
+    "entry_20250417144014": {
+        "color": "450",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:14.750211"
+    },
+    "entry_20250417144015": {
+        "color": "450",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:15.792443"
+    },
+    "entry_20250417144016": {
+        "color": "450",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:16.746961"
+    },
+    "entry_20250417144017": {
+        "color": "450",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:17.628968"
+    },
+    "entry_20250417144018": {
+        "color": "450",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:18.094181"
+    },
+    "entry_20250417144023": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:23.688578"
+    },
+    "entry_20250417144024": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:24.622625"
+    },
+    "entry_20250417144025": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:25.988882"
+    },
+    "entry_20250417144026": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-17T14:40:26.421453"
+    },
+    "entry_20250417144507": {
+        "color": "green",
+        "rpm": "4",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-17T14:45:07.643979"
+    },
+    "entry_20250417144730": {
+        "color": "red",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-17T14:47:30.110830"
+    },
+    "entry_20250417150432": {
+        "color": "magenta",
+        "rpm": "-4",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-17T15:04:32.839794"
+    },
+    "entry_20250417150926": {
+        "color": "cyan",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-17T15:09:26.214156"
+    },
+    "entry_20250421112732": {
+        "color": "red",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:27:32.352856"
+    },
+    "entry_20250421113227": {
+        "color": "yellow",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:32:27.014465"
+    },
+    "entry_20250421113448": {
+        "color": "green",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:34:48.595898"
+    },
+    "entry_20250421113709": {
+        "color": "cyan",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:37:09.562120"
+    },
+    "entry_20250421113929": {
+        "color": "red",
+        "rpm": "3",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:39:29.578029"
+    },
+    "entry_20250421114150": {
+        "color": "cyan",
+        "rpm": "5",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:41:50.557410"
+    },
+    "entry_20250421114410": {
+        "color": "green",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:44:10.550580"
+    },
+    "entry_20250421114631": {
+        "color": "blue",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:46:31.609973"
+    },
+    "entry_20250421114852": {
+        "color": "red",
+        "rpm": "6",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:48:52.730046"
+    },
+    "entry_20250421115113": {
+        "color": "white",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:51:13.683958"
+    },
+    "entry_20250421115126": {
+        "color": "magenta",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:51:26.614272"
+    },
+    "entry_20250421115139": {
+        "color": "yellow",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:51:39.793621"
+    },
+    "entry_20250421115257": {
+        "color": "red",
+        "rpm": "2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:52:57.063640"
+    },
+    "entry_20250421115333": {
+        "color": "green",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:53:33.564406"
+    },
+    "entry_20250421115409": {
+        "color": "white",
+        "rpm": "-2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:54:09.847811"
+    },
+    "entry_20250421115446": {
+        "color": "cyan",
+        "rpm": "5",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:54:46.640298"
+    },
+    "entry_20250421115552": {
+        "color": "green",
+        "rpm": "-2",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-04-21T11:55:52.403779"
+    },
+    "entry_20250421122214": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:22:14.764138"
+    },
+    "entry_20250421122254": {
+        "color": "775",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:22:54.643664"
+    },
+    "entry_20250421122255": {
+        "color": "775",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:22:55.977710"
+    },
+    "entry_20250421122256": {
+        "color": "775",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:22:56.848033"
+    },
+    "entry_20250421122257": {
+        "color": "775",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:22:57.283437"
+    },
+    "entry_20250421122309": {
+        "color": "0",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:23:09.950580"
+    },
+    "entry_20250421122310": {
+        "color": "0",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:23:10.822815"
+    },
+    "entry_20250421122311": {
+        "color": "0",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:23:11.717833"
+    },
+    "entry_20250421122312": {
+        "color": "0",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:23:12.603158"
+    },
+    "entry_20250421122555": {
+        "color": 1,
+        "rpm": 0,
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:25:55.521442"
+    },
+    "entry_20250421122759": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:27:59.937441"
+    },
+    "entry_20250421122800": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-04-21T12:28:00.470525"
     }
 }
