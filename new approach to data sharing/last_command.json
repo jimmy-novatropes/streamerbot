@@ -1,7 +1,5 @@
 {
-  "rpm": "685",
-  "color": "480",
-  "direction": "forward",
-  "shutter_instructions": "d.7",
-  "source": "admin_script"
+  "rpm": "2",
+  "color": "red",
+  "direction": "~current_direction~"
 }

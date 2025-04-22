@@ -4,6 +4,7 @@ import subprocess
 import socket
 import tkinter as tk
 import threading
+import requests
 # import psutil
 
 from datetime import datetime
@@ -35,7 +36,8 @@ mode_2_rpm = load_rpm_options()
 
 HOST = "localhost"
 PORT = 65432
-SETTINGS_FILE = r"C:\Users\BloomTech\Documents\twitch streaming\streamerbot\new approach to data sharing\GUI Build\saved_settings.json"
+# SETTINGS_FILE = r"C:\Users\BloomTech\Documents\twitch streaming\streamerbot\new approach to data sharing\GUI Build\saved_settings.json"
+SETTINGS_FILE = r"A:\Desktop\Novatropes Stream\saved_settings.json"
 
 
 def on_rpm_mode_change(rpm_mode_var, rpm_entry, direction_var):
@@ -166,12 +168,13 @@ def run_server_script():
                 stderr=subprocess.PIPE,
                 text=True
             )
+            print("+++++++++++++++ GUI Command: Python Server script started.")
 
             for line in proc.stdout:
                 print(line, end="")  # or redirect to console widget
             for line in proc.stderr:
                 print("ERROR:", line, end="")
-            print("+++++++++++++++ GUI Command: Python Server script started.")
+
 
         except Exception as e:
             print(f"Failed to start script: {e}")
@@ -236,3 +239,51 @@ def sculpture_change_complete():
         print("++++++++++++++ GUI Command: Sculpture change complete.")
     except ConnectionRefusedError:
         print("Error: Could not connect to the Arduino server.")
+
+def update_timers(free_timer, priority_timer):
+    args = {}
+    if free_timer.get() != "" or free_timer.get() is not None:
+        args["time_left_free"] = free_timer.get()
+    if priority_timer.get() != "" or priority_timer.get() is not None:
+        args["time_left_priority"] = priority_timer.get()
+
+    if args:
+        try:
+            trigger_action_http(args)
+            print("++++++++++++++ GUI Command: Timers updated.")
+        except Exception as e:
+            print(f"Error triggering action: {e}")
+
+
+def reset_timer_variables():
+    args = {
+        "timer_active": "0",
+        "timer_ended": "0",
+        "time_left": "00:00"
+    }
+    try:
+        trigger_action_http(args)
+        print("++++++++++++++ GUI Command: Timer variables reset.")
+    except Exception as e:
+        print(f"Error triggering action: {e}")
+
+
+def trigger_action_http(args):
+    action_id = "2f1d77c1-7060-4420-9afa-e0a56109b97a"
+    action_name = "9 - update variables"
+
+    url = "http://127.0.0.1:7474/DoAction"
+    payload = {
+        "action": {
+            "id": action_id,
+            "name": action_name
+        },
+        "args": args
+    }
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(url, data=json.dumps(payload), headers=headers)
+
+    if response.ok:
+        print("✅ Action triggered")
+    else:
+        print("❌ Error:", response.text)

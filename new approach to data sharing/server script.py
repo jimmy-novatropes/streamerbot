@@ -27,7 +27,7 @@ class ArduinoServer:
         """Initialize the server with configuration."""
         self.host = host
         self.port = port
-        self.settings_json = "server_settings.json"
+        self.settings_json = r"A:\Desktop\Novatropes Stream\server_settings.json"
         self.main_settings = self._load_settings()
         self.mode_2_rpm = modes_2_rpm()
         self.color_counter_vals = counter_color_values()
