@@ -56534,3 +56534,17 @@ Zero-RPM received
 2025-04-22 08:26:29,441 - INFO - Sent to Shutter Arduino: d.6
 
 2025-04-22 08:26:29,549 - INFO - Received response from Shutter Arduino: No response
+2025-04-22 16:12:23,945 - INFO - Server initialized with 3 Arduino connections
+2025-04-22 16:12:23,948 - INFO - Server running on localhost:65432
+2025-04-22 17:01:40,436 - INFO - Server initialized with 3 Arduino connections
+2025-04-22 17:01:40,439 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
+2025-04-22 17:07:39,508 - INFO - Server initialized with 3 Arduino connections
+2025-04-22 17:07:39,511 - INFO - Server running on localhost:65432
+2025-04-22 17:08:42,383 - INFO - Server initialized with 3 Arduino connections
+2025-04-22 17:08:42,386 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
+2025-04-22 17:18:37,146 - INFO - Server initialized with 3 Arduino connections
+2025-04-22 17:18:37,150 - INFO - Server running on localhost:65432
+2025-04-22 18:06:56,207 - INFO - Server initialized with 3 Arduino connections
+2025-04-22 18:06:56,211 - INFO - Server running on localhost:65432
+2025-04-24 13:30:28,712 - INFO - Server initialized with 3 Arduino connections
+2025-04-24 13:30:28,716 - INFO - Server running on localhost:65432

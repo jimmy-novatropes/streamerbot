@@ -14,145 +14,12 @@ from support_functions import (
 
 )
 
-# Load color settings from JSON
-
-
 
 def get_saved_settings():
     with open(r"A:\Desktop\Novatropes Stream\server_settings.json", "r") as f:
         color_settings_data = json.load(f)
     return color_settings_data
 
-    # return [
-    #     {
-    #         "timestamp": "2025-04-01T15:01:04.005931",
-    #         "color_name": "white",
-    #         "color": "0",
-    #         "rpm": "685",
-    #         "direction": "forward",
-    #         "shutter_instructions": "d.9",
-    #         "comments": "",
-    #         "exposure": "1",
-    #         "white_balance_auto": "1",
-    #         "white_balance": "3000",
-    #         "brightness": "-15",
-    #         "contrast": "30",
-    #         "saturation": "90",
-    #         "hue": "0"
-    #     },
-    #     {
-    #         "timestamp": "2025-04-01T15:09:23.323638",
-    #         "color_name": "red",
-    #         "color": "255",
-    #         "rpm": "685",
-    #         "direction": "forward",
-    #         "shutter_instructions": "d.6",
-    #         "comments": "",
-    #         "exposure": "1",
-    #         "white_balance_auto": "0",
-    #         "white_balance": "4500",
-    #         "brightness": "-10",
-    #         "contrast": "50",
-    #         "saturation": "60",
-    #         "hue": "0"
-    #     },
-    #     {
-    #         "timestamp": "2025-04-01T15:16:29.796479",
-    #         "color_name": "yellow",
-    #         "color": "480",
-    #         "rpm": "685",
-    #         "direction": "forward",
-    #         "shutter_instructions": "d.7",
-    #         "comments": "",
-    #         "exposure": "1",
-    #         "white_balance_auto": "0",
-    #         "white_balance": "4500",
-    #         "brightness": "-10",
-    #         "contrast": "40",
-    #         "saturation": "90",
-    #         "hue": "10"
-    #     },
-    #     {
-    #         "timestamp": "2025-04-01T15:22:46.058417",
-    #         "color_name": "green",
-    #         "color": "775",
-    #         "rpm": "685",
-    #         "direction": "forward",
-    #         "shutter_instructions": "d.6",
-    #         "comments": "",
-    #         "exposure": "1",
-    #         "white_balance_auto": "0",
-    #         "white_balance": "5500",
-    #         "brightness": "-20",
-    #         "contrast": "35",
-    #         "saturation": "50",
-    #         "hue": "-10"
-    #     },
-    #     {
-    #         "timestamp": "2025-04-01T15:36:31.924739",
-    #         "color_name": "cyan",
-    #         "color": "950",
-    #         "rpm": "685",
-    #         "direction": "forward",
-    #         "shutter_instructions": "d.5",
-    #         "comments": "",
-    #         "exposure": "1",
-    #         "white_balance_auto": "0",
-    #         "white_balance": "4500",
-    #         "brightness": "-20",
-    #         "contrast": "35",
-    #         "saturation": "60",
-    #         "hue": "-3"
-    #     },
-    #     {
-    #         "timestamp": "2025-04-01T15:43:34.908912",
-    #         "color_name": "blue",
-    #         "color": "1300",
-    #         "rpm": "685",
-    #         "direction": "forward",
-    #         "shutter_instructions": "d1.8",
-    #         "comments": "",
-    #         "exposure": "1",
-    #         "white_balance_auto": "1",
-    #         "white_balance": "6500",
-    #         "brightness": "-20",
-    #         "contrast": "30",
-    #         "saturation": "60",
-    #         "hue": "-10"
-    #     },
-    #     {
-    #         "timestamp": "2025-04-01T15:58:02.441811",
-    #         "color_name": "magenta",
-    #         "color": "1575",
-    #         "rpm": "685",
-    #         "direction": "forward",
-    #         "shutter_instructions": "d.9",
-    #         "comments": "",
-    #         "exposure": "1",
-    #         "white_balance_auto": "0",
-    #         "white_balance": "5000",
-    #         "brightness": "-20",
-    #         "contrast": "35",
-    #         "saturation": "70",
-    #         "hue": "20"
-    #     },
-    #     {
-    #         "timestamp": "2025-04-01T16:07:30.438273",
-    #         "color_name": "purple",
-    #         "color": "1470",
-    #         "rpm": "685",
-    #         "direction": "forward",
-    #         "shutter_instructions": "d.9",
-    #         "comments": "",
-    #         "exposure": "1",
-    #         "white_balance_auto": "0",
-    #         "white_balance": "4750",
-    #         "brightness": "-20",
-    #         "contrast": "35",
-    #         "saturation": "80",
-    #         "hue": "0"
-    #     }
-    # ]
 color_settings_data = get_saved_settings()
 
 class TextRedirector:
@@ -276,20 +143,11 @@ def start_gui():
     }
 
     setting_entries = {}
-    # for setting, (min_val, max_val) in camera_settings.items():
-    #     ttk.Label(container, text=f"{setting.replace('_', ' ').title()} ({min_val}-{max_val}):").grid(row=row, column=0, sticky="w", **pad)
-    #     entry = ttk.Entry(container)
-    #     entry.grid(row=row, column=1, **pad)
-    #     setting_entries[setting] = entry
-    #     row += 1
 
 
     total = len(camera_settings)
     for i, (setting, (min_val, max_val)) in enumerate(
             camera_settings.items()):
-
-
-
         label_text = f"{setting.replace('_', ' ').title()} ({min_val}-{max_val}):"
         ttk.Label(container, text=label_text).grid(row=row, column=0,
                                                    sticky="w", **pad)

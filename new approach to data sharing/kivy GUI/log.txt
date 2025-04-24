@@ -1,0 +1,34 @@
+2025-04-09 12:02:35,727 - INFO - Server initialized with 3 Arduino connections
+2025-04-09 12:02:35,730 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
+2025-04-09 12:03:10,006 - INFO - Server initialized with 3 Arduino connections
+2025-04-09 12:03:10,009 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
+2025-04-14 15:41:29,744 - INFO - Server initialized with 3 Arduino connections
+2025-04-14 15:41:29,747 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
+2025-04-22 18:15:55,335 - INFO - Server initialized with 3 Arduino connections
+2025-04-22 18:15:55,338 - INFO - Server running on localhost:65432
+2025-04-22 18:15:56,210 - INFO - Connection from ('127.0.0.1', 61464)
+2025-04-22 18:15:56,215 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-22 18:15:56,310 - DEBUG - http://192.168.4.248:5000 "POST /set/exposure?value=1 HTTP/1.1" 200 41
+2025-04-22 18:15:56,318 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-22 18:15:56,379 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance_auto?value=1 HTTP/1.1" 200 41
+2025-04-22 18:15:56,390 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-22 18:15:56,453 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance?value=6500 HTTP/1.1" 200 131
+2025-04-22 18:15:56,467 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-22 18:15:56,541 - DEBUG - http://192.168.4.248:5000 "POST /set/brightness?value=-20 HTTP/1.1" 200 41
+2025-04-22 18:15:56,552 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-22 18:15:56,607 - DEBUG - http://192.168.4.248:5000 "POST /set/contrast?value=30 HTTP/1.1" 200 41
+2025-04-22 18:15:56,620 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-22 18:15:56,679 - DEBUG - http://192.168.4.248:5000 "POST /set/saturation?value=60 HTTP/1.1" 200 41
+2025-04-22 18:15:56,691 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-22 18:15:56,745 - DEBUG - http://192.168.4.248:5000 "POST /set/hue?value=-10 HTTP/1.1" 200 41
+2025-04-22 18:15:56,757 - INFO - Sent to LED Arduino: count1300
+
+2025-04-22 18:15:56,862 - INFO - Received response from LED Arduino: No response
+2025-04-22 18:15:56,862 - INFO - Sent to Motor Arduino: rpm-1118
+
+2025-04-22 18:15:56,972 - INFO - Received response from Motor Arduino: No response
+2025-04-22 18:15:56,972 - INFO - Sent to Shutter Arduino: d1.8
+
+2025-04-22 18:15:57,079 - INFO - Received response from Shutter Arduino: No response
+2025-04-22 18:19:37,235 - INFO - Server initialized with 3 Arduino connections
+2025-04-22 18:19:37,237 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
