@@ -41,6 +41,10 @@ public class CPHInline
                 if (string.IsNullOrEmpty(priorityTimeStr) || !int.TryParse(priorityTimeStr, out timeLeft))
                 {
                     CPH.LogError($"Invalid priority timer duration: {priorityTimeStr}. Using default value.");
+                    CPH.SetGlobalVar("error_message",$"Invalid priority timer duration: {priorityTimeStr}. Using default value. - timer - streamerbot");
+                    CPH.SetGlobalVar("error_type", "timer");
+                    CPH.SetGlobalVar("error_source", "streamerbot");
+                    CPH.RunActionById("759582b8-2849-48b5-b383-554497f1e454");
                     timeLeft = DEFAULT_PRIORITY_TIME;
                 }
             }
@@ -49,6 +53,10 @@ public class CPHInline
                 if (string.IsNullOrEmpty(freeTimeStr) || !int.TryParse(freeTimeStr, out timeLeft))
                 {
                     CPH.LogError($"Invalid free timer duration: {freeTimeStr}. Using default value.");
+                    CPH.SetGlobalVar("error_message",$"Invalid free timer duration: {freeTimeStr}. Using default value. - timer - streamerbot");
+                    CPH.SetGlobalVar("error_type", "timer");
+                    CPH.SetGlobalVar("error_source", "streamerbot");
+                    CPH.RunActionById("759582b8-2849-48b5-b383-554497f1e454");
                     timeLeft = DEFAULT_FREE_TIME;
                 }
             }
@@ -99,6 +107,10 @@ public class CPHInline
         catch (Exception ex)
         {
             CPH.LogError($"Error in timer update: {ex.Message}");
+            CPH.SetGlobalVar("error_message",$"Error in timer update: {ex.Message} - timer - streamerbot");
+            CPH.SetGlobalVar("error_type", "timer");
+            CPH.SetGlobalVar("error_source", "streamerbot");
+            CPH.RunActionById("759582b8-2849-48b5-b383-554497f1e454");
             return false;
         }
     }

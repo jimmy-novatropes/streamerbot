@@ -39,6 +39,10 @@ public class CPHInline
         if (string.IsNullOrEmpty(chatMessage) || string.IsNullOrEmpty(userName))
         {
             CPH.LogWarn("Root: The required variables 'message' or 'userName' are missing.");
+            CPH.SetGlobalVar("error_message","Root: The required variables 'message' or 'userName' are missing. - user commands - chat");
+            CPH.SetGlobalVar("error_type", "user commands");
+            CPH.SetGlobalVar("error_source", "chat");
+            CPH.RunActionById("759582b8-2849-48b5-b383-554497f1e454");
             return false;
         }
 
@@ -72,7 +76,6 @@ public class CPHInline
                     // Update the existing entry if the user is found
                     targetOrder[i][1] = color;
                     targetOrder[i][2] = stringMode;
-//                    targetOrder[i][3] = direction;
                     if (bits > 0)
                     {
                         targetOrder[i][4] = bits.ToString();
@@ -161,6 +164,10 @@ public class CPHInline
         {
 //            CPH.SendMessage($"Sorry @{userName}, the message '{chatMessage}' does not match the expected format.");
             CPH.LogInfo($"Root: Message from @{userName}: '{chatMessage}' does not match the expected format.");
+            CPH.SetGlobalVar("error_message",$"Root: Message from @{userName}: '{chatMessage}' does not match the expected format. - user commands - chat");
+            CPH.SetGlobalVar("error_type", "user commands");
+            CPH.SetGlobalVar("error_source", "chat");
+            CPH.RunActionById("759582b8-2849-48b5-b383-554497f1e454");
         }
         return true;
     }
@@ -244,10 +251,19 @@ public class CPHInline
             if (eventSource == "twitch")
             {
                 CPH.SendMessage($"Sorry @{userName}, the color '{color}' is not supported.");
+                CPH.SetGlobalVar("error_message", $"Sorry @{userName}, the color '{color}' is not supported. - user commands - twitch");
+                CPH.SetGlobalVar("error_type", "user commands");
+                CPH.SetGlobalVar("error_source", "twitch");
+                CPH.RunActionById("759582b8-2849-48b5-b383-554497f1e454");
+
             }
             else if (eventSource == "youtube")
             {
                 CPH.SendYouTubeMessage($"Sorry @{userName}, the color '{color}' is not supported.");
+                CPH.SetGlobalVar("error_message", $"Sorry @{userName}, the color '{color}' is not supported. - user commands - youtube");
+                CPH.SetGlobalVar("error_type", "user commands");
+                CPH.SetGlobalVar("error_source", "youtube");
+                CPH.RunActionById("759582b8-2849-48b5-b383-554497f1e454");
             }
 //            CPH.SendMessage($"Sorry @{userName}, the color '{color}' is not supported.");
             return false;
@@ -257,10 +273,18 @@ public class CPHInline
             if (eventSource == "twitch")
             {
                 CPH.SendMessage($"Sorry @{userName}, the mode '{mode}' is not supported.");
+                CPH.SetGlobalVar("error_message", $"Sorry @{userName}, the mode '{mode}' is not supported.  - user commands - twitch");
+                CPH.SetGlobalVar("error_type", "user commands");
+                CPH.SetGlobalVar("error_source", "twitch");
+                CPH.RunActionById("759582b8-2849-48b5-b383-554497f1e454");
             }
             else if (eventSource == "youtube")
             {
                 CPH.SendYouTubeMessage($"Sorry @{userName}, the mode '{mode}' is not supported.");
+                CPH.SetGlobalVar("error_message", $"Sorry @{userName}, the mode '{mode}' is not supported. - user commands - youtube");
+                CPH.SetGlobalVar("error_type", "user commands");
+                CPH.SetGlobalVar("error_source", "youtube");
+                CPH.RunActionById("759582b8-2849-48b5-b383-554497f1e454");
             }
 
             return false;
