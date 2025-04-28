@@ -69,11 +69,10 @@ class NovatropeControlApp(App):
         setting_inputs["hue"].text = match["hue"]
 
     def build(self):
-        Window.size = (1700, 940)
-        Window.left = 100  # X position from left of screen
+        Window.size = (1800, 940)
+        Window.left = 50  # X position from left of screen
         Window.top = 50  # Y position from top of screen
-        run_streamerbot_script()
-        # run_server_script()
+
         print("Python used:", sys.executable)
 
         self.color_settings_data = self.get_saved_settings()
@@ -85,7 +84,7 @@ class NovatropeControlApp(App):
         layout.bind(minimum_height=layout.setter('height'))
 
         # Separate button layout row
-        button_layout = GridLayout(cols=4, spacing=10, size_hint_y=None, height=120)
+        button_layout = GridLayout(cols=4, spacing=10, size_hint_y=None, height=100)
         layout.add_widget(Label(text='RPM:', color=(1, 1, 1, 1)))
         rpm_entry = TextInput()
         layout.add_widget(rpm_entry)
@@ -170,9 +169,43 @@ class NovatropeControlApp(App):
             color_spinner, color_value_entry, rpm_entry, direction_spinner, shutter_entry, setting_inputs))
         self.on_color_change(color_spinner, color_value_entry, rpm_entry, direction_spinner, shutter_entry, setting_inputs)
 
+        btn = Button(
+            text="Start Twitch/Youtube Python Server",
+            on_press=lambda x: run_server_script(),
+            halign='center',
+            valign='middle',
+            background_normal='',
+            background_color=(0.57, 0.27, 1, 1),  # Purple
+            color=(1, 1, 1, 1),
+        )
+        btn.bind(size=lambda instance, value: setattr(instance, 'text_size',
+                                                      (instance.width, None)))
+        layout.add_widget(btn)
 
+        # layout.add_widget(Button(
+        #     text="Start Twitch/Youtube Python Server",
+        #     on_press=lambda x: run_server_script(),
+        #     background_normal='',
+        #     background_color=(0.57, 0.27, 1, 1),  # Purple
+        #     color=(1, 1, 1, 1),
+        #     width=300,
+        #     size_hint_x=None,  # Set your desired width
+        #
+        # ))
+        # btn = Button(
+        #     text="Start Twitch/Youtube Python Server",
+        #     on_press=lambda x: run_server_script(),
+        #     size_hint_x=None,
+        #     width=300,  # Set your desired width
+        #     halign='center',
+        #     valign='middle',
+        #     background_normal='',
+        #     background_color=(0.57, 0.27, 1, 1),  # Purple
+        #     color=(1, 1, 1, 1)
+        # )
+        # btn.text_size = (btn.width, None)  # Enable wrapping horizontally
+        # layout.add_widget(btn)
 
-        layout.add_widget(Button(text="Start Twitch Python Server", on_press=lambda x: run_server_script()))
         layout.add_widget(Button(text="Start Stream Apps", on_press=lambda x: run_streamerbot_script()))
 
         for _ in range(6):
@@ -196,6 +229,9 @@ class NovatropeControlApp(App):
         scroll.add_widget(layout)
         root.add_widget(button_layout)
         root.add_widget(scroll)
+
+        run_streamerbot_script()
+        run_server_script()
         return root
 
 

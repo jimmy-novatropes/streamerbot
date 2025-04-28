@@ -32,3 +32,33 @@
 2025-04-22 18:15:57,079 - INFO - Received response from Shutter Arduino: No response
 2025-04-22 18:19:37,235 - INFO - Server initialized with 3 Arduino connections
 2025-04-22 18:19:37,237 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
+2025-04-28 15:03:46,263 - INFO - Server initialized with 3 Arduino connections
+2025-04-28 15:03:46,266 - INFO - Server running on localhost:65432
+2025-04-28 15:37:43,892 - INFO - Server initialized with 3 Arduino connections
+2025-04-28 15:37:43,895 - ERROR - Server error: [WinError 10048] Only one usage of each socket address (protocol/network address/port) is normally permitted
+2025-04-28 15:41:18,319 - INFO - Server initialized with 3 Arduino connections
+2025-04-28 15:41:18,322 - INFO - Server running on localhost:65432
+2025-04-28 15:41:47,475 - INFO - Connection from ('127.0.0.1', 61352)
+2025-04-28 15:41:47,480 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-28 15:41:47,558 - DEBUG - http://192.168.4.248:5000 "POST /set/exposure?value=1 HTTP/1.1" 200 41
+2025-04-28 15:41:47,570 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-28 15:41:47,656 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance_auto?value=1 HTTP/1.1" 200 41
+2025-04-28 15:41:47,668 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-28 15:41:47,734 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance?value=6500 HTTP/1.1" 200 131
+2025-04-28 15:41:47,743 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-28 15:41:47,823 - DEBUG - http://192.168.4.248:5000 "POST /set/brightness?value=-20 HTTP/1.1" 200 41
+2025-04-28 15:41:47,834 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-28 15:41:47,888 - DEBUG - http://192.168.4.248:5000 "POST /set/contrast?value=30 HTTP/1.1" 200 41
+2025-04-28 15:41:47,901 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-28 15:41:48,003 - DEBUG - http://192.168.4.248:5000 "POST /set/saturation?value=60 HTTP/1.1" 200 41
+2025-04-28 15:41:48,005 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-04-28 15:41:48,056 - DEBUG - http://192.168.4.248:5000 "POST /set/hue?value=-10 HTTP/1.1" 200 41
+2025-04-28 15:41:48,067 - INFO - Sent to LED Arduino: count1300
+
+2025-04-28 15:41:48,167 - INFO - Received response from LED Arduino: No response
+2025-04-28 15:41:48,168 - INFO - Sent to Motor Arduino: rpm-425
+
+2025-04-28 15:41:48,269 - INFO - Received response from Motor Arduino: No response
+2025-04-28 15:41:48,269 - INFO - Sent to Shutter Arduino: d1.8
+
+2025-04-28 15:41:48,369 - INFO - Received response from Shutter Arduino: No response

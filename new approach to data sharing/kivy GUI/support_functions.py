@@ -160,18 +160,29 @@ def on_save(color_var, color_value_entry, rpm_entry, direction_var,
     except ValueError:
         print(f"Invalid number entered for color '{selected_color}', not saved.")
 
-import multiprocessing
-
-def launch_script():
-    script_path = r"C:\Users\BloomTech\Documents\twitch streaming\streamerbot\new approach to data sharing\server script.py"
-    with open(script_path, encoding="utf-8") as f:
-        exec(f.read(), {'__name__': '__main__'})
+import os
 
 def run_server_script():
     try:
-        multiprocessing.Process(target=launch_script).start()
+        script_path = r"C:\Users\BloomTech\Documents\twitch streaming\streamerbot\new approach to data sharing\server script.py"
+        os.startfile(script_path)
+        print("✅ Server script launched.")
     except Exception as e:
-        print(f"Failed to run server: {e}")
+        print(f"❌ Failed to launch server script: {e}")
+
+
+import multiprocessing
+
+# def launch_script():
+#     script_path = r"C:\Users\BloomTech\Documents\twitch streaming\streamerbot\new approach to data sharing\server script.py"
+#     with open(script_path, encoding="utf-8") as f:
+#         exec(f.read(), {'__name__': '__main__'})
+#
+# def run_server_script():
+#     try:
+#         multiprocessing.Process(target=launch_script).start()
+#     except Exception as e:
+#         print(f"Failed to run server: {e}")
 
 
 # def run_server_script():
@@ -260,10 +271,14 @@ def sculpture_change_complete():
 
 def update_timers(free_timer, priority_timer):
     args = {}
-    if free_timer.text != "" or free_timer.text is not None:
-        args["time_left_free"] = free_timer.text
-    if priority_timer.text != "" or priority_timer.text is not None:
-        args["time_left_priority"] = priority_timer.text
+
+
+    if free_timer.text != "":
+        if free_timer.text is not None:
+            args["time_left_free"] = free_timer.text
+    if priority_timer.text != "":
+        if priority_timer.text is not None:
+            args["time_left_priority"] = priority_timer.text
 
     if args:
         try:
