@@ -1,118 +1,99 @@
-/*
- * Code to check a user's position in either the priority list or regular command list
- * This script responds to the "position" command in chat
- */
-
 using System;
 using System.Collections.Generic;
 
 public class CPHInline
 {
-    // Constants for repeated strings
-    private const string POSITION_COMMAND = "position";
+    private readonly List<string> PositionCommands = new List<string>
+    {
+        "position",       // English
+        "posición",       // Spanish
+        "posição",        // Portuguese
+        "positionfr"      // Custom trigger for French
+    };
+
     private const string PRIORITY_LIST_VAR = "priority_order";
     private const string COMMAND_LIST_VAR = "order";
-    
+
     public bool Execute()
     {
-        // Get arguments from the event
         CPH.TryGetArg("message", out string chatMessage);
         CPH.TryGetArg("userName", out string userName);
         CPH.TryGetArg("eventSource", out string eventSource);
-        CPH.TryGetArg("bits", out int bits);
 
-        // Check if the command is "position"
-        if (IsPositionCommand(chatMessage))
+        if (IsPositionCommand(chatMessage, out string lang))
         {
-            // Get the lists from global variables
             var priorityList = CPH.GetGlobalVar<List<List<string>>>(PRIORITY_LIST_VAR) ?? new List<List<string>>();
             var commandList = CPH.GetGlobalVar<List<List<string>>>(COMMAND_LIST_VAR) ?? new List<List<string>>();
 
-            // Check user position in both lists
-            CheckUserPosition(userName, priorityList, commandList);
-            
+            CheckUserPosition(userName, priorityList, commandList, eventSource, lang);
             return true;
         }
-        
+
         return true;
     }
-    
-    /// <summary>
-    /// Checks if the message starts with the position command
-    /// </summary>
-    private bool IsPositionCommand(string message)
+
+    private bool IsPositionCommand(string message, out string lang)
     {
-        if (string.IsNullOrEmpty(message))
-            return false;
-            
-        return message.Split(' ')[0].Equals(POSITION_COMMAND, StringComparison.OrdinalIgnoreCase);
+        lang = "en";
+        if (string.IsNullOrEmpty(message)) return false;
+
+        string keyword = message.Split(' ')[0].ToLower();
+        if (keyword == "posición") lang = "es";
+        else if (keyword == "posição") lang = "pt";
+        else if (keyword == "positionfr") lang = "fr";
+        else if (keyword == "position") lang = "en";
+        else return false;
+
+        return true;
     }
-    
-    /// <summary>
-    /// Checks the user's position in both lists and sends appropriate messages
-    /// </summary>
-    private void CheckUserPosition(string userName, List<List<string>> priorityList, List<List<string>> commandList)
+
+    private void CheckUserPosition(string userName, List<List<string>> priorityList, List<List<string>> commandList, string eventSource, string lang)
     {
-        // Check in priority list first
+        var messages = new Dictionary<string, (string, string, string)>
+        {
+            { "en", ($"{{0}}, You are currently at position {{1}} out of {{2}} in the priority list.",
+                     $"{{0}}, You are currently at position {{1}} out of {{2}} in the regular list.",
+                     $"User {{0}} not found in priority or regular order lists.") },
+            { "es", ($"{{0}}, estás en la posición {{1}} de {{2}} en la lista prioritaria.",
+                     $"{{0}}, estás en la posición {{1}} de {{2}} en la lista regular.",
+                     $"Usuario {{0}} no encontrado en ninguna lista.") },
+            { "pt", ($"{{0}}, você está na posição {{1}} de {{2}} na lista prioritária.",
+                     $"{{0}}, você está na posição {{1}} de {{2}} na lista normal.",
+                     $"Usuário {{0}} não encontrado em nenhuma lista.") },
+            { "fr", ($"{{0}}, vous êtes à la position {{1}} sur {{2}} dans la liste prioritaire.",
+                     $"{{0}}, vous êtes à la position {{1}} sur {{2}} dans la liste normale.",
+                     $"Utilisateur {{0}} introuvable dans les listes.") }
+        };
+
+        var (priorityMsg, regularMsg, notFoundMsg) = messages.ContainsKey(lang) ? messages[lang] : messages["en"];
+
         int position = FindUserInList(userName, priorityList);
-        CPH.TryGetArg("eventSource", out string eventSource);
-        
+        string msg;
         if (position >= 0)
         {
-            if (eventSource == "Twitch")
-            {
-                CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {priorityList.Count} in the priority list.");
-            }
-            else if (eventSource == "YouTube")
-            {
-                CPH.SendYouTubeMessage($"{userName}, You are currently at position {position + 1} out of {priorityList.Count} in the priority list.");
-            }
-//            CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {priorityList.Count} in the priority list.");
-            return;
+            msg = string.Format(priorityMsg, userName, position + 1, priorityList.Count);
         }
-        
-        // If not in priority list, check in command list
-        position = FindUserInList(userName, commandList);
-        
-        if (position >= 0)
+        else
         {
-            if (eventSource == "Twitch")
-            {
-                CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {commandList.Count} in the regular list.");
-            }
-            else if (eventSource == "YouTube")
-            {
-                CPH.SendYouTubeMessage($"{userName}, You are currently at position {position + 1} out of {commandList.Count} in the regular list.");
-            }
-//            CPH.SendMessage($"{userName}, You are currently at position {position + 1} out of {commandList.Count} in the regular list.");
-            return;
+            position = FindUserInList(userName, commandList);
+            msg = position >= 0
+                ? string.Format(regularMsg, userName, position + 1, commandList.Count)
+                : string.Format(notFoundMsg, userName);
         }
-        
-        // User not found in either list
-        if (eventSource == "Twitch")
-        {
-            CPH.SendMessage($"User {userName} not found in priority or regular order lists.");
-        }
-        else if (eventSource == "YouTube")
-        {
-            CPH.SendYouTubeMessage($"User {userName} not found in priority or regular order lists.");
-        }
-//        CPH.SendMessage($"User {userName} not found in priority or regular order lists.");
+
+        if (eventSource.Equals("twitch", StringComparison.OrdinalIgnoreCase))
+            CPH.SendMessage(msg);
+        else if (eventSource.Equals("youtube", StringComparison.OrdinalIgnoreCase))
+            CPH.SendYouTubeMessage(msg);
     }
-    
-    /// <summary>
-    /// Finds a user in a list and returns their index, or -1 if not found
-    /// </summary>
+
     private int FindUserInList(string userName, List<List<string>> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
             if (list[i][0] == userName)
-            {
                 return i;
-            }
         }
-        
         return -1;
     }
 }
