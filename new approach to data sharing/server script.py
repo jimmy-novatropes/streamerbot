@@ -20,6 +20,8 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
+last_command_path = r"A:\Desktop\Novatropes Stream\last_command.json"
+
 class ArduinoServer:
     """Server class to handle communication with Arduinos and clients."""
     
@@ -101,7 +103,7 @@ class ArduinoServer:
             return {"message": "Arduino COMs reset"}
         if command.get("load_last_command"):
             try:
-                with open("last_command.json", "r") as f:
+                with open(last_command_path, "r") as f:
                     last_command = json.load(f)
 
                 # prevent infinite loop if last_command is also a load command
@@ -260,8 +262,8 @@ class ArduinoServer:
                             
                         try:
                             command = json.loads(data.decode())
-                            if not command.get("load_last_command"):
-                                with open("last_command.json", "w") as f:
+                            if not command.get("load_last_command") and command.get("source")!= "admin_script":
+                                with open(last_command_path, "w") as f:
                                     json.dump(command, f, indent=2)
 
                             processed_data = self._process_command(command)

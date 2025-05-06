@@ -17,7 +17,9 @@ from support_functions import (
     stop_sculpture,
     reset_arduinos,
     update_timers,
-    reset_timer_variables
+    reset_timer_variables,
+    restart_sculpture,
+    sculpture_change_complete
 )
 
 # class TextRedirector:
@@ -84,7 +86,7 @@ class NovatropeControlApp(App):
         layout.bind(minimum_height=layout.setter('height'))
 
         # Separate button layout row
-        button_layout = GridLayout(cols=4, spacing=10, size_hint_y=None, height=100)
+        button_layout = GridLayout(cols=4, spacing=10, size_hint_y=None, height=140)
         layout.add_widget(Label(text='RPM:', color=(1, 1, 1, 1)))
         rpm_entry = TextInput()
         layout.add_widget(rpm_entry)
@@ -118,30 +120,60 @@ class NovatropeControlApp(App):
 
         setting_inputs = {}
         for setting, (min_val, max_val) in camera_settings.items():
-            layout.add_widget(Label(
+            # layout.add_widget(Label(
+            #     text=f"{setting.replace('_', ' ').title()} ({min_val}-{max_val})",
+            #     text_size=(200, None),  # set fixed width
+            #     halign='center',
+            #     color=(1, 1, 1, 1)))
+            # entry = TextInput()
+            # layout.add_widget(entry)
+            lbl = Label(
                 text=f"{setting.replace('_', ' ').title()} ({min_val}-{max_val})",
-                text_size=(200, None),  # set fixed width
                 halign='center',
-                color=(1, 1, 1, 1)))
+                valign='middle',
+                color=(1, 1, 1, 1)
+            )
+            lbl.bind(
+                size=lambda instance, value: setattr(instance, 'text_size',
+                                                     (instance.width, None)))
+            layout.add_widget(lbl)
+
             entry = TextInput()
             layout.add_widget(entry)
+
             setting_inputs[setting] = entry
 
         layout.add_widget(Label(text='Comments:', color=(1, 1, 1, 1)))
         comments_entry = TextInput(multiline=True)
         layout.add_widget(comments_entry)
 
-        layout.add_widget(Button(text="Send Command to Novatrope", on_press=lambda x: on_send(
-            rpm_entry, color_value_entry, direction_spinner, shutter_entry, setting_inputs),
-    background_normal='',
-    background_color=(0, 0.5, 0, 1),  # Dark green
-    color=(1, 1, 1, 1)           ))
+        # layout.add_widget(Button(text="Send Command to Novatrope", on_press=lambda x: on_send(
+        #     rpm_entry, color_value_entry, direction_spinner, shutter_entry, setting_inputs),
+        #                          background_normal='',
+        #                          background_color=(0, 0.5, 0, 1),
+        #                          color=(1, 1, 1, 1)           ))
+
+        btn = Button(
+            text="Send Command to Novatrope",
+            on_press=lambda x: on_send(
+                rpm_entry, color_value_entry, direction_spinner, shutter_entry, setting_inputs
+            ),
+            background_normal='',
+            background_color=(0, 0.5, 0, 1),  # Dark green
+            color=(1, 1, 1, 1),               # White text
+            halign='center',
+            valign='middle'
+        )
+        btn.bind(size=lambda instance, value: setattr(instance, 'text_size', (instance.width, None)))
+        layout.add_widget(btn)
+
+
 
         layout.add_widget(Button(text="Save Current Settings", on_press=lambda x: on_save(
             color_spinner, color_value_entry, rpm_entry, direction_spinner, shutter_entry, comments_entry, setting_inputs),
-    background_normal='',
-    background_color=(0, 0.5, 0, 1),  # Dark green
-    color=(1, 1, 1, 1)    ))
+                background_normal='',
+                background_color=(0, 0.5, 0, 1),  # Dark green
+                color=(1, 1, 1, 1)    ))
 
         for _ in range(12):
             layout.add_widget(Label())
@@ -182,34 +214,18 @@ class NovatropeControlApp(App):
                                                       (instance.width, None)))
         layout.add_widget(btn)
 
-        # layout.add_widget(Button(
-        #     text="Start Twitch/Youtube Python Server",
-        #     on_press=lambda x: run_server_script(),
-        #     background_normal='',
-        #     background_color=(0.57, 0.27, 1, 1),  # Purple
-        #     color=(1, 1, 1, 1),
-        #     width=300,
-        #     size_hint_x=None,  # Set your desired width
-        #
-        # ))
-        # btn = Button(
-        #     text="Start Twitch/Youtube Python Server",
-        #     on_press=lambda x: run_server_script(),
-        #     size_hint_x=None,
-        #     width=300,  # Set your desired width
-        #     halign='center',
-        #     valign='middle',
-        #     background_normal='',
-        #     background_color=(0.57, 0.27, 1, 1),  # Purple
-        #     color=(1, 1, 1, 1)
-        # )
-        # btn.text_size = (btn.width, None)  # Enable wrapping horizontally
-        # layout.add_widget(btn)
 
         layout.add_widget(Button(text="Start Stream Apps", on_press=lambda x: run_streamerbot_script()))
 
-        for _ in range(6):
+        for _ in range(5):
             layout.add_widget(Label())
+
+        layout.add_widget(Button(text="Restart Sculpture",
+                                 on_press=lambda x: sculpture_change_complete(),
+                                 background_normal='',
+                                 background_color=(1, 0, 0, 1),
+                                 # Red background
+                                 color=(1, 1, 1, 1)))
         layout.add_widget(Button(text="Change the Sculpture", on_press=lambda x: stop_sculpture(),  background_normal='',
     background_color=(1, 0, 0, 1),  # Red background
     color=(1, 1, 1, 1) ))

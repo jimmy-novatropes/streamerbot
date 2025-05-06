@@ -520,3 +520,7 @@ def clean_settings(entry):
 def find_color_settings(color_name, color_data):
     results = [entry for entry in color_data if entry.get("color_name") == color_name.lower()]
     return results
+
+
+def restart_sculpture():
+    pass

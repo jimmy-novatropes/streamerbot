@@ -29,7 +29,10 @@ public class CPHInline
             chatMessage.IndexOf("position", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("does not match the expected format", StringComparison.OrdinalIgnoreCase) >= 0 ||
             chatMessage.IndexOf("Updating data for", StringComparison.OrdinalIgnoreCase) >= 0 ||
-            chatMessage.IndexOf("is the timer active?", StringComparison.OrdinalIgnoreCase) >= 0
+            chatMessage.IndexOf("is the timer active?", StringComparison.OrdinalIgnoreCase) >= 0 ||
+            chatMessage.IndexOf("is not supported", StringComparison.OrdinalIgnoreCase) >= 0 ||
+            chatMessage.IndexOf("Sorry", StringComparison.OrdinalIgnoreCase) >= 0
+
 //            eventSource != "twitch"
             )
         {
@@ -240,7 +243,18 @@ public class CPHInline
 //    private bool ProcessModeAndColor(int mode, string color, string direction, string userName)
     private bool ProcessModeAndColor(int mode, string color, string userName)
     {
-        string[] supportedColors = { "red", "green", "blue", "yellow", "purple", "cyan", "magenta", "white" };
+//        string[] supportedColors = { "red", "green", "blue", "yellow", "purple", "cyan", "magenta", "white" };
+        string[] supportedColors;
+        try
+        {
+            supportedColors = System.IO.File.ReadAllLines(@"A:\Desktop\Novatropes Stream\accepted_colors.txt");
+        }
+        catch (Exception ex)
+        {
+            CPH.LogError($"Failed to load colors: {ex.Message}");
+            return false;
+        }
+
         int[] supportedModes = { 1, 2, 3, 4, 5, 6, -1, -2, -3, -4, -5, -6 };
 //        CPH.LogInfo($"-----Adding  mode {mode}  with color {color} and direction {direction} for @{userName}-------");
         CPH.LogInfo($"-----Adding  mode {mode}  with color {color} for @{userName}-------");

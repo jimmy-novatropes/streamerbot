@@ -1,0 +1,5 @@
+{
+  "rpm": "1",
+  "color": "green",
+  "direction": "~current_direction~"
+}

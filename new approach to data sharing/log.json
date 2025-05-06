@@ -16936,5 +16936,23 @@
         "shutter_instructions": null,
         "source": "streamerbot_script",
         "timestamp": "2025-04-22T08:26:28.510376"
+    },
+    "entry_20250505201919": {
+        "color": "vert",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-05-05T20:19:19.330286"
+    },
+    "entry_20250505202333": {
+        "color": "vert",
+        "rpm": "1",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "streamerbot_script",
+        "timestamp": "2025-05-05T20:23:33.959365"
     }
 }

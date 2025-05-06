@@ -125,10 +125,30 @@ def set_camera_setting(setting: str, value: int):
     return response.status_code, response.text
 
 
+color_translations = {
+    "rojo": "red", "rouge": "red", "vermelho": "red",
+    "verde": "green", "vert": "green",
+    "azul": "blue", "bleu": "blue",
+    "amarillo": "yellow", "jaune": "yellow",
+    "morado": "purple", "violet": "purple",
+    "blanco": "white", "branco": "white", "blanc": "white",
+    "cian": "cyan", "cyan": "cyan",
+    "magenta": "magenta",
+    "negro": "black", "preto": "black", "noir": "black",
+    "naranja": "orange", "laranja": "orange", "orange": "orange",
+    "rosa": "pink", "rose": "pink",
+    "gris": "gray", "cinza": "gray", "gray": "gray"
+}
+
+# def color_to_rgb_string(color):
+#     """Convert color name to RGB string. Return None if not recognized."""
+#     return color_counter_vals.get(color.lower())
 
 def color_to_rgb_string(color):
-    """Convert color name to RGB string. Return None if not recognized."""
-    return color_counter_vals.get(color.lower())
+    normalized = color.lower()
+    english_color = color_translations.get(normalized, normalized)
+    print(f"Normalized color: {normalized}, English color: {english_color}")
+    return color_counter_vals.get(english_color)
 
 
 # Scan and assign Arduino COM ports
@@ -223,7 +243,9 @@ def clean_settings(entry):
 
 
 def find_color_settings(color_name, color_data):
-    results = [entry for entry in color_data if entry.get("color_name") == color_name.lower()]
+    normalized = color_name.lower()
+    english_color = color_translations.get(normalized, normalized)
+    results = [entry for entry in color_data if entry.get("color_name") == english_color.lower()]
     return results
 
 # def free_com_port(port):
