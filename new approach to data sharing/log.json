@@ -16954,5 +16954,77 @@
         "shutter_instructions": null,
         "source": "streamerbot_script",
         "timestamp": "2025-05-05T20:23:33.959365"
+    },
+    "entry_20250506122253": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-06T12:22:53.628793"
+    },
+    "entry_20250506122254": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-06T12:22:54.581217"
+    },
+    "entry_20250506122255": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-06T12:22:55.902694"
+    },
+    "entry_20250506122256": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-06T12:22:56.766845"
+    },
+    "entry_20250506122318": {
+        "color": "775",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-06T12:23:18.553739"
+    },
+    "entry_20250506122319": {
+        "color": "775",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-06T12:23:19.927730"
+    },
+    "entry_20250506122320": {
+        "color": "775",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-06T12:23:20.798630"
+    },
+    "entry_20250506122321": {
+        "color": "775",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-06T12:23:21.216436"
     }
 }
