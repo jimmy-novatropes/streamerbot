@@ -522,5 +522,12 @@ def find_color_settings(color_name, color_data):
     return results
 
 
-def restart_sculpture():
-    pass
+import subprocess
+
+def reset_camera():
+    subprocess.run([
+        'curl',
+        '-X', 'POST',
+        'http://192.168.4.248:5000/restart_hdmi_service'
+    ], check=True)
+

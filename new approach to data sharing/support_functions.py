@@ -129,16 +129,17 @@ color_translations = {
     "rojo": "red", "rouge": "red", "vermelho": "red",
     "verde": "green", "vert": "green",
     "azul": "blue", "bleu": "blue",
-    "amarillo": "yellow", "jaune": "yellow",
-    "morado": "purple", "violet": "purple",
+    "amarillo": "yellow", "jaune": "yellow", "amarelo": "yellow",
+    "morado": "purple", "violet": "purple", "roxo": "purple",
     "blanco": "white", "branco": "white", "blanc": "white",
-    "cian": "cyan", "cyan": "cyan",
+    "cian": "cyan", "cyan": "cyan", "turquesa": "cyan",
     "magenta": "magenta",
     "negro": "black", "preto": "black", "noir": "black",
     "naranja": "orange", "laranja": "orange", "orange": "orange",
     "rosa": "pink", "rose": "pink",
     "gris": "gray", "cinza": "gray", "gray": "gray"
 }
+
 
 # def color_to_rgb_string(color):
 #     """Convert color name to RGB string. Return None if not recognized."""

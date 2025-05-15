@@ -254,3 +254,5 @@
 2025-04-28 16:11:14,660 - INFO - Sent to Shutter Arduino: d.6
 
 2025-04-28 16:11:14,760 - INFO - Received response from Shutter Arduino: No response
+2025-05-06 17:10:35,904 - INFO - Server initialized with 3 Arduino connections
+2025-05-06 17:10:35,907 - INFO - Server running on localhost:65432

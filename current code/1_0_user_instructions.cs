@@ -67,13 +67,14 @@ public class CPHInline
             colorsExample = string.Join(", ", quotedColors);
         }
 
-        var instructions = new Dictionary<string, string>
-        {
-            { "en", "@{0}, to join the queue, type a number followed by a color. Supported colors: {1}" },
-            { "es", "@{0}, para unirte a la cola, escribe un número seguido de un color. Colores soportados: {1}" },
-            { "fr", "@{0}, pour rejoindre la file, tapez un chiffre suivi d'une couleur. Couleurs prises en charge : {1}" },
-            { "pt", "@{0}, para entrar na fila, digite um número seguido de uma cor. Cores suportadas: {1}" }
+
+        var instructions = new Dictionary<string, string>{
+            { "en", "@{0}, to join the queue, type a number followed by a color. Supported colors: {1}. Supported commands: 'instructions', 'position'." },
+            { "es", "@{0}, para unirte a la cola, escribe un número seguido de un color. Colores soportados: {1}. Comandos soportados: 'instrucciones', 'posición'." },
+            { "fr", "@{0}, pour rejoindre la file, tapez un chiffre suivi d'une couleur. Couleurs prises en charge : {1}. Commandes prises en charge : 'instructionsfr', 'position'." },
+            { "pt", "@{0}, para entrar na fila, digite um número seguido de uma cor. Cores suportadas: {1}. Comandos suportados: 'instruções', 'posição'." }
         };
+
 
         if (!instructions.ContainsKey(lang)) lang = "en";
 
@@ -91,5 +92,6 @@ public class CPHInline
         if (cmd == "instruções") return "pt";
         if (cmd == "instructionsfr") return "fr";
         if (cmd == "instructions") return "en";
+        return "en";
     }
 }

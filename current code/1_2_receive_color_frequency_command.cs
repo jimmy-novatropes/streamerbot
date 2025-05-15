@@ -98,41 +98,76 @@ public class CPHInline
         return true;
     }
 
-    private bool ProcessModeAndColor(int mode, string color, string userName, string eventSource, Dictionary<string, string> colorLanguageMap)
+//    private bool ProcessModeAndColor(int mode, string color, string userName, string eventSource, Dictionary<string, string> colorLanguageMap)
+//    {
+//        string[] supportedColors = System.IO.File.ReadAllLines(@"A:\\Desktop\\Novatropes Stream\\accepted_colors.txt");
+//        int[] supportedModes = { 1, 2, 3, 4, 5, 6, -1, -2, -3, -4, -5, -6 };
+//        string normalizedColor = color.Trim().ToLower();
+//        string lang = colorLanguageMap.ContainsKey(normalizedColor) ? colorLanguageMap[normalizedColor] : "en";
+//
+//        var errorMessages = new Dictionary<string, string>
+//        {
+//            { "color_unsupported_en", "Sorry @{0}, the color '{1}' is not supported." },
+//            { "color_unsupported_es", "Lo siento @{0}, el color '{1}' no está soportado." },
+//            { "color_unsupported_fr", "Désolé @{0}, la couleur '{1}' n'est pas prise en charge." },
+//            { "color_unsupported_pt", "Desculpe @{0}, a cor '{1}' não é suportada." },
+//            { "mode_unsupported_en", "Sorry @{0}, the mode '{1}' is not supported." },
+//            { "mode_unsupported_es", "Lo siento @{0}, el modo '{1}' no está soportado." },
+//            { "mode_unsupported_fr", "Désolé @{0}, le mode '{1}' n'est pas pris en charge." },
+//            { "mode_unsupported_pt", "Desculpe @{0}, o modo '{1}' não é suportado." }
+//        };
+//
+//        if (!Array.Exists(supportedColors, c => c.Trim().ToLower() == normalizedColor))
+//        {
+//            string msg = string.Format(errorMessages[$"color_unsupported_{lang}"], userName, color);
+//            SendLocalizedMessage(msg, eventSource);
+//            return false;
+//        }
+//
+//        if (!Array.Exists(supportedModes, m => m == mode))
+//        {
+//            string msg = string.Format(errorMessages[$"mode_unsupported_{lang}"], userName, mode);
+//            SendLocalizedMessage(msg, eventSource);
+//            return false;
+//        }
+//
+//        return true;
+//    }
+private bool ProcessModeAndColor(int mode, string color, string userName, string eventSource, Dictionary<string, string> colorLanguageMap)
+{
+    int[] supportedModes = { 1, 2, 3, 4, 5, 6, -1, -2, -3, -4, -5, -6 };
+    string normalizedColor = color.Trim().ToLower();
+    string lang = colorLanguageMap.ContainsKey(normalizedColor) ? colorLanguageMap[normalizedColor] : "en";
+
+    var errorMessages = new Dictionary<string, string>
     {
-        string[] supportedColors = System.IO.File.ReadAllLines(@"A:\\Desktop\\Novatropes Stream\\accepted_colors.txt");
-        int[] supportedModes = { 1, 2, 3, 4, 5, 6, -1, -2, -3, -4, -5, -6 };
-        string normalizedColor = color.Trim().ToLower();
-        string lang = colorLanguageMap.ContainsKey(normalizedColor) ? colorLanguageMap[normalizedColor] : "en";
+        { "color_unsupported_en", "Sorry @{0}, the color '{1}' is not supported." },
+        { "color_unsupported_es", "Lo siento @{0}, el color '{1}' no está soportado." },
+        { "color_unsupported_fr", "Désolé @{0}, la couleur '{1}' n'est pas prise en charge." },
+        { "color_unsupported_pt", "Desculpe @{0}, a cor '{1}' não é suportada." },
+        { "mode_unsupported_en", "Sorry @{0}, the mode '{1}' is not supported." },
+        { "mode_unsupported_es", "Lo siento @{0}, el modo '{1}' no está soportado." },
+        { "mode_unsupported_fr", "Désolé @{0}, le mode '{1}' n'est pas pris en charge." },
+        { "mode_unsupported_pt", "Desculpe @{0}, o modo '{1}' não é suportado." }
+    };
 
-        var errorMessages = new Dictionary<string, string>
-        {
-            { "color_unsupported_en", "Sorry @{0}, the color '{1}' is not supported." },
-            { "color_unsupported_es", "Lo siento @{0}, el color '{1}' no está soportado." },
-            { "color_unsupported_fr", "Désolé @{0}, la couleur '{1}' n'est pas prise en charge." },
-            { "color_unsupported_pt", "Desculpe @{0}, a cor '{1}' não é suportada." },
-            { "mode_unsupported_en", "Sorry @{0}, the mode '{1}' is not supported." },
-            { "mode_unsupported_es", "Lo siento @{0}, el modo '{1}' no está soportado." },
-            { "mode_unsupported_fr", "Désolé @{0}, le mode '{1}' n'est pas pris en charge." },
-            { "mode_unsupported_pt", "Desculpe @{0}, o modo '{1}' não é suportado." }
-        };
-
-        if (!Array.Exists(supportedColors, c => c.Trim().ToLower() == normalizedColor))
-        {
-            string msg = string.Format(errorMessages[$"color_unsupported_{lang}"], userName, color);
-            SendLocalizedMessage(msg, eventSource);
-            return false;
-        }
-
-        if (!Array.Exists(supportedModes, m => m == mode))
-        {
-            string msg = string.Format(errorMessages[$"mode_unsupported_{lang}"], userName, mode);
-            SendLocalizedMessage(msg, eventSource);
-            return false;
-        }
-
-        return true;
+    if (!colorLanguageMap.ContainsKey(normalizedColor))
+    {
+        string msg = string.Format(errorMessages[$"color_unsupported_{lang}"], userName, color);
+        SendLocalizedMessage(msg, eventSource);
+        return false;
     }
+
+    if (!Array.Exists(supportedModes, m => m == mode))
+    {
+        string msg = string.Format(errorMessages[$"mode_unsupported_{lang}"], userName, mode);
+        SendLocalizedMessage(msg, eventSource);
+        return false;
+    }
+
+    return true;
+}
+
 
     private void SendLocalizedMessage(string msg, string source)
     {

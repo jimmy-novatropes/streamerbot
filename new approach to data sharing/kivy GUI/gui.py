@@ -18,7 +18,7 @@ from support_functions import (
     reset_arduinos,
     update_timers,
     reset_timer_variables,
-    restart_sculpture,
+    reset_camera,
     sculpture_change_complete
 )
 
@@ -227,14 +227,21 @@ class NovatropeControlApp(App):
                                  # Red background
                                  color=(1, 1, 1, 1)))
         layout.add_widget(Button(text="Change the Sculpture", on_press=lambda x: stop_sculpture(),  background_normal='',
-    background_color=(1, 0, 0, 1),  # Red background
-    color=(1, 1, 1, 1) ))
+            background_color=(1, 0, 0, 1),  # Red background
+            color=(1, 1, 1, 1) ))
         layout.add_widget(Button(text="Reset Arduino", on_press=lambda x: reset_arduinos(),  background_normal='',
-    background_color=(1, 0, 0, 1),  # Red background
-    color=(1, 1, 1, 1) ))
+            background_color=(1, 0, 0, 1),  # Red background
+            color=(1, 1, 1, 1) ))
         layout.add_widget(Button(text="Clear Timer Variables", on_press=lambda x: reset_timer_variables(),  background_normal='',
-    background_color=(1, 0, 0, 1),  # Red background
-    color=(1, 1, 1, 1) ))
+            background_color=(1, 0, 0, 1),  # Red background
+            color=(1, 1, 1, 1) ))
+
+        for _ in range(5):
+            layout.add_widget(Label())
+
+        layout.add_widget(Button(text='Restart HDMI Stream:', on_press=lambda x: reset_camera(),  background_normal='',
+            background_color=(1, 0, 0, 1),  # Red background
+            color=(1, 1, 1, 1) ))
 
         # Console output window
         console_output = TextInput(text='', multiline=True, readonly=True, background_color=(0, 0, 0, 1), foreground_color=(1, 1, 1, 1), size_hint_y=None, height=200)
