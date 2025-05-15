@@ -1,6 +1,5 @@
 import os
 import json
-import subprocess
 import socket
 import tkinter as tk
 import threading
@@ -11,6 +10,7 @@ import serial
 import serial.tools.list_ports
 import time
 import requests
+import subprocess
 
 
 from datetime import datetime
@@ -522,12 +522,17 @@ def find_color_settings(color_name, color_data):
     return results
 
 
-import subprocess
+
 
 def reset_camera():
     subprocess.run([
         'curl',
         '-X', 'POST',
         'http://192.168.4.248:5000/restart_hdmi_service'
+    ], check=True)
+    subprocess.run([
+        'curl',
+        '-X', 'POST',
+        'http://192.168.4.248:5000/set/exposure_dynamic_framerate?value=1'
     ], check=True)
 

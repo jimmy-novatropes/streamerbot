@@ -223,5 +223,41 @@
         "shutter_instructions": null,
         "source": "streamerbot_script",
         "timestamp": "2025-04-28T16:11:13.793477"
+    },
+    "entry_20250514192620": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-14T19:26:20.989788"
+    },
+    "entry_20250514192621": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-14T19:26:21.788106"
+    },
+    "entry_20250514192622": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-14T19:26:22.977196"
+    },
+    "entry_20250514192623": {
+        "color": "480",
+        "rpm": "685",
+        "frequency": 60,
+        "direction": null,
+        "shutter_instructions": null,
+        "source": "admin_script",
+        "timestamp": "2025-05-14T19:26:23.787173"
     }
 }

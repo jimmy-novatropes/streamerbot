@@ -256,3 +256,99 @@
 2025-04-28 16:11:14,760 - INFO - Received response from Shutter Arduino: No response
 2025-05-06 17:10:35,904 - INFO - Server initialized with 3 Arduino connections
 2025-05-06 17:10:35,907 - INFO - Server running on localhost:65432
+2025-05-14 19:25:52,183 - INFO - Server initialized with 3 Arduino connections
+2025-05-14 19:25:52,186 - INFO - Server running on localhost:65432
+2025-05-14 19:26:20,989 - INFO - Connection from ('127.0.0.1', 51189)
+2025-05-14 19:26:20,992 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-05-14 19:26:21,083 - DEBUG - http://192.168.4.248:5000 "POST /set/exposure?value=1 HTTP/1.1" 200 133
+2025-05-14 19:26:21,093 - INFO - Sent to LED Arduino: count480
+
+2025-05-14 19:26:21,193 - INFO - Received response from LED Arduino: No response
+2025-05-14 19:26:21,194 - INFO - Sent to Motor Arduino: rpm685
+
+2025-05-14 19:26:21,294 - INFO - Received response from Motor Arduino: No response
+2025-05-14 19:26:21,294 - INFO - Sent to Shutter Arduino: d.7
+
+2025-05-14 19:26:21,395 - INFO - Received response from Shutter Arduino: No response
+2025-05-14 19:26:21,395 - INFO - Connection from ('127.0.0.1', 51190)
+2025-05-14 19:26:21,405 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-05-14 19:26:21,476 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance_auto?value=0 HTTP/1.1" 200 41
+2025-05-14 19:26:21,485 - INFO - Sent to LED Arduino: count480
+
+2025-05-14 19:26:21,586 - INFO - Received response from LED Arduino: No response
+2025-05-14 19:26:21,586 - INFO - Sent to Motor Arduino: rpm685
+
+2025-05-14 19:26:21,686 - INFO - Received response from Motor Arduino: No response
+2025-05-14 19:26:21,687 - INFO - Sent to Shutter Arduino: d.7
+
+2025-05-14 19:26:21,787 - INFO - Received response from Shutter Arduino: No response
+2025-05-14 19:26:21,788 - INFO - Connection from ('127.0.0.1', 51191)
+2025-05-14 19:26:21,797 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-05-14 19:26:21,869 - DEBUG - http://192.168.4.248:5000 "POST /set/white_balance?value=4500 HTTP/1.1" 200 41
+2025-05-14 19:26:21,880 - INFO - Sent to LED Arduino: count480
+
+2025-05-14 19:26:21,980 - INFO - Received response from LED Arduino: No response
+2025-05-14 19:26:21,980 - INFO - Sent to Motor Arduino: rpm685
+
+2025-05-14 19:26:22,081 - INFO - Received response from Motor Arduino: RPM Received: 685.00
+2025-05-14 19:26:22,081 - INFO - Sent to Shutter Arduino: d.7
+
+2025-05-14 19:26:22,181 - INFO - Received response from Shutter Arduino: No response
+2025-05-14 19:26:22,182 - INFO - Connection from ('127.0.0.1', 51192)
+2025-05-14 19:26:22,191 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-05-14 19:26:22,266 - DEBUG - http://192.168.4.248:5000 "POST /set/brightness?value=-10 HTTP/1.1" 200 41
+2025-05-14 19:26:22,277 - INFO - Sent to LED Arduino: count480
+
+2025-05-14 19:26:22,377 - INFO - Received response from LED Arduino: No response
+2025-05-14 19:26:22,377 - INFO - Sent to Motor Arduino: rpm685
+
+2025-05-14 19:26:22,478 - INFO - Received response from Motor Arduino: No response
+2025-05-14 19:26:22,478 - INFO - Sent to Shutter Arduino: d.7
+
+2025-05-14 19:26:22,579 - INFO - Received response from Shutter Arduino: No response
+2025-05-14 19:26:22,579 - INFO - Connection from ('127.0.0.1', 51194)
+2025-05-14 19:26:22,588 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-05-14 19:26:22,662 - DEBUG - http://192.168.4.248:5000 "POST /set/contrast?value=40 HTTP/1.1" 200 41
+2025-05-14 19:26:22,674 - INFO - Sent to LED Arduino: count480
+
+2025-05-14 19:26:22,775 - INFO - Received response from LED Arduino: No response
+2025-05-14 19:26:22,775 - INFO - Sent to Motor Arduino: rpm685
+
+2025-05-14 19:26:22,875 - INFO - Received response from Motor Arduino: No response
+2025-05-14 19:26:22,876 - INFO - Sent to Shutter Arduino: d.7
+
+2025-05-14 19:26:22,976 - INFO - Received response from Shutter Arduino: No response
+2025-05-14 19:26:22,977 - INFO - Connection from ('127.0.0.1', 51195)
+2025-05-14 19:26:22,986 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-05-14 19:26:23,078 - DEBUG - http://192.168.4.248:5000 "POST /set/saturation?value=90 HTTP/1.1" 200 41
+2025-05-14 19:26:23,089 - INFO - Sent to LED Arduino: count480
+
+2025-05-14 19:26:23,190 - INFO - Received response from LED Arduino: New Counter Value: 480
+2025-05-14 19:26:23,190 - INFO - Sent to Motor Arduino: rpm685
+
+2025-05-14 19:26:23,291 - INFO - Received response from Motor Arduino: No response
+2025-05-14 19:26:23,291 - INFO - Sent to Shutter Arduino: d.7
+
+2025-05-14 19:26:23,391 - INFO - Received response from Shutter Arduino: No response
+2025-05-14 19:26:23,392 - INFO - Connection from ('127.0.0.1', 51196)
+2025-05-14 19:26:23,401 - DEBUG - Starting new HTTP connection (1): 192.168.4.248:5000
+2025-05-14 19:26:23,484 - DEBUG - http://192.168.4.248:5000 "POST /set/hue?value=10 HTTP/1.1" 200 41
+2025-05-14 19:26:23,485 - INFO - Sent to LED Arduino: count480
+
+2025-05-14 19:26:23,585 - INFO - Received response from LED Arduino: No response
+2025-05-14 19:26:23,585 - INFO - Sent to Motor Arduino: rpm685
+
+2025-05-14 19:26:23,686 - INFO - Received response from Motor Arduino: No response
+2025-05-14 19:26:23,686 - INFO - Sent to Shutter Arduino: d.7
+
+2025-05-14 19:26:23,786 - INFO - Received response from Shutter Arduino: No response
+2025-05-14 19:26:23,787 - INFO - Connection from ('127.0.0.1', 51197)
+2025-05-14 19:26:23,797 - INFO - Sent to LED Arduino: count480
+
+2025-05-14 19:26:23,897 - INFO - Received response from LED Arduino: No response
+2025-05-14 19:26:23,897 - INFO - Sent to Motor Arduino: rpm685
+
+2025-05-14 19:26:23,997 - INFO - Received response from Motor Arduino: No response
+2025-05-14 19:26:23,998 - INFO - Sent to Shutter Arduino: d.7
+
+2025-05-14 19:26:24,098 - INFO - Received response from Shutter Arduino: No response
