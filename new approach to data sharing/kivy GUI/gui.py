@@ -79,7 +79,7 @@ class NovatropeControlApp(App):
 
         scroll = ScrollView()
         layout = GridLayout(cols=8, padding=10, spacing=10,
-                            row_default_height=40, size_hint_y=None)
+                            row_default_height=55, size_hint_y=None)
         layout.bind(minimum_height=layout.setter('height'))
 
         def wrap_button(btn):
@@ -139,23 +139,27 @@ class NovatropeControlApp(App):
         comments_entry = TextInput(multiline=True)
         layout.add_widget(comments_entry)
 
-        layout.add_widget(wrap_button(Button(
-            text="Send Command to\nNovatrope",
-            on_press=lambda x: on_send(rpm_entry, color_value_entry,
+        layout.add_widget(wrap_button(
+            Button(
+                text="Send Command to\nNovatrope",
+                on_press=lambda x: on_send(rpm_entry, color_value_entry,
                                        direction_spinner, shutter_entry,
                                        setting_inputs),
-            background_normal='', background_color=(0, 0.5, 0, 1),
-            color=(1, 1, 1, 1)
-        )))
+                background_normal='',
+                background_color=(0, 0.5, 0, 1),
+                color=(1, 1, 1, 1)
+            )))
 
-        layout.add_widget(wrap_button(Button(
-            text="Save Current\nSettings",
-            on_press=lambda x: on_save(color_spinner, color_value_entry,
+        layout.add_widget(wrap_button(
+            Button(
+                text="Save Current\nSettings",
+                on_press=lambda x: on_save(color_spinner, color_value_entry,
                                        rpm_entry, direction_spinner,
                                        shutter_entry, comments_entry,
                                        setting_inputs),
-            background_normal='', background_color=(0, 0.5, 0, 1),
-            color=(1, 1, 1, 1)
+                background_normal='',
+                background_color=(0, 0.5, 0, 1),
+                color=(1, 1, 1, 1)
         )))
 
         for _ in range(12):
@@ -181,14 +185,20 @@ class NovatropeControlApp(App):
             layout.add_widget(Label())
 
         color_spinner.bind(
-            text=lambda instance, value: self.on_color_change(color_spinner,
-                                                              color_value_entry,
-                                                              rpm_entry,
-                                                              direction_spinner,
-                                                              shutter_entry,
-                                                              setting_inputs))
-        self.on_color_change(color_spinner, color_value_entry, rpm_entry,
-                             direction_spinner, shutter_entry, setting_inputs)
+            text=lambda instance, value: self.on_color_change(
+                color_spinner,
+                color_value_entry,
+                rpm_entry,
+                direction_spinner,
+                shutter_entry,
+                setting_inputs))
+        self.on_color_change(
+            color_spinner,
+            color_value_entry,
+            rpm_entry,
+            direction_spinner,
+            shutter_entry,
+            setting_inputs)
 
         layout.add_widget(wrap_button(Button(
             text="Start Twitch/\nYoutube Python Server",
@@ -232,7 +242,7 @@ class NovatropeControlApp(App):
             layout.add_widget(Label())
 
         layout.add_widget(wrap_button(Button(
-            text='Restart HDMI\nStream:', on_press=lambda x: reset_camera(),
+            text='Restart HDMI\nStream', on_press=lambda x: reset_camera(),
             background_normal='', background_color=(1, 0, 0, 1),
             color=(1, 1, 1, 1)
         )))
@@ -270,8 +280,8 @@ class NovatropeControlApp(App):
 
         first_key = list(self.json_sources.keys())[0]
 
-        right_panel = BoxLayout(orientation='vertical', size_hint=(0.4, 1),
-                                spacing=10)
+        right_panel = BoxLayout(
+            orientation='vertical', size_hint=(0.4, 1),spacing=10)
 
         json_selector = Spinner(
             text='',
